@@ -20,12 +20,12 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 // @mui material components
-import MuiLink from "@mui/material/Link";
+import { Link as MuiLink } from "base-ui";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { Box } from "base-ui";
+import { Typography } from "base-ui";
+import { Button } from "base-ui";
 
 function RotatingCard({ color, image, title, description, action }) {
   return (

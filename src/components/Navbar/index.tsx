@@ -2,16 +2,16 @@
 import { Fragment, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Box, Container, Icon, Popper, Grow, Grid, Divider, Link as MuiLink } from "@mui/material";
-import { alpha } from "@mui/material/styles";
+import { Box, Container, Icon, Popper, Grow, Grid, Divider, Link as MuiLink } from "base-ui";
+import { alpha } from "base-ui/styles";
 
 import favicon from "assets/img/header-logo.svg";
 import slash from "assets/img/slash.svg";
 import breakpoints from "assets/theme/base/breakpoints";
 
 import defaultRoutes from "routes";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { Typography } from "base-ui";
+import { Button } from "base-ui";
 
 // Material Kit 2 React example components
 import boxShadows from "assets/theme/base/boxShadows";

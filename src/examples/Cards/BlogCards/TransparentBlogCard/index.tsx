@@ -20,13 +20,13 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Icon from "@mui/material/Icon";
-import MuiLink from "@mui/material/Link";
+import { Card } from "base-ui";
+import { Icon } from "base-ui";
+import { Link as MuiLink } from "base-ui";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box } from "base-ui";
+import { Typography } from "base-ui";
 
 function TransparentBlogCard({ image, title, description, action }) {
   const cardActionStyles = {

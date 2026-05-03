@@ -1,9 +1,9 @@
 // @mui material components
-import Container from "@mui/material/Container";
+import { Container } from "base-ui";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box } from "base-ui";
+import { Typography } from "base-ui";
 
 // Images
 import c0 from "assets/img/moodboard.png";

@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import Stack from "@mui/material/Stack";
+import { Container } from "base-ui";
+import { Grid } from "base-ui";
+import { Link } from "base-ui";
+import { Stack } from "base-ui";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box } from "base-ui";
+import { Typography } from "base-ui";
 
 function Footer() {
   return (

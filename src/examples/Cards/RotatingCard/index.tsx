@@ -19,10 +19,10 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 
 // @mui material components
-import Card from "@mui/material/Card";
+import { Card } from "base-ui";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
+import { Box } from "base-ui";
 
 function RotatingCard({ children }) {
   const [rotate, setRotate] = useState(false);

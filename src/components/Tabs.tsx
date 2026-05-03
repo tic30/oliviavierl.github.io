@@ -1,6 +1,6 @@
 // Or use https://mui.com/components/tabs/
 import * as React from "react";
-import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Box, ToggleButton, ToggleButtonGroup } from "base-ui";
 import PropTypes from "prop-types";
 import colors from "assets/theme/base/colors";
 import borders from "assets/theme/base/borders";

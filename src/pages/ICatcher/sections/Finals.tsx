@@ -1,4 +1,4 @@
-import { Box, Container, IconButton, Typography } from "@mui/material";
+import { Box, Container, IconButton, Typography } from "base-ui";
 import SectionHeader from "components/SectionHeader";
 import colors from "assets/theme/base/colors";
 import f11 from "assets/img/f11.png";

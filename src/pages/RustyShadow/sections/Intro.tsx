@@ -1,10 +1,10 @@
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import { Container } from "base-ui";
+import { Grid } from "base-ui";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box } from "base-ui";
+import { Typography } from "base-ui";
 
 // Images
 import headImg from "assets/img/head.png";

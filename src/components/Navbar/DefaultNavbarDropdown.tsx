@@ -5,12 +5,12 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 // @mui material components
-import Collapse from "@mui/material/Collapse";
-import Icon from "@mui/material/Icon";
+import { Collapse } from "base-ui";
+import { Icon } from "base-ui";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box } from "base-ui";
+import { Typography } from "base-ui";
 
 export const linkComponent = (href) => ({
   component: "a",

@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { keyframes } from "@emotion/react";
 // @mui material components
-import { Box, Container } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import Typography from "@mui/material/Typography";
+import { Box, Container } from "base-ui";
+import { KeyboardArrowDown as KeyboardArrowDownIcon } from "base-ui/icons";
+import { Typography } from "base-ui";
 import colors from "assets/theme/base/colors";
 import wave from "assets/img/wave.svg";
 

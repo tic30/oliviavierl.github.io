@@ -1,7 +1,7 @@
 // @mui material components
 import PropTypes from "prop-types";
-import { Box } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import { Box } from "base-ui";
+import { Typography } from "base-ui";
 import Parallax from "components/Parallax";
 
 // Author page sections

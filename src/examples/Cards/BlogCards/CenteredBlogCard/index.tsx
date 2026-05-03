@@ -20,13 +20,13 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 // @mui material components
-import Card from "@mui/material/Card";
-import MuiLink from "@mui/material/Link";
+import { Card } from "base-ui";
+import { Link as MuiLink } from "base-ui";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { Box } from "base-ui";
+import { Typography } from "base-ui";
+import { Button } from "base-ui";
 
 function CenteredBlogCard({ image, title, description, action }) {
   return (

@@ -20,11 +20,11 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 // @mui material components
-import MuiBreadcrumbs from "@mui/material/Breadcrumbs";
+import { Breadcrumbs as MuiBreadcrumbs } from "base-ui";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box } from "base-ui";
+import { Typography } from "base-ui";
 
 function Breadcrumbs({ routes, ...rest }) {
   return (

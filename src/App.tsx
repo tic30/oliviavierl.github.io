@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 // @mui material components
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "base-ui/styles";
+import { CssBaseline } from "base-ui";
 
 // Material Kit 2 React themes
 import theme from "assets/theme";
@@ -23,7 +23,9 @@ export default function App() {
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
     document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
+    if (document.scrollingElement) {
+      document.scrollingElement.scrollTop = 0;
+    }
   }, [pathname]);
 
   const getRoutes = (allRoutes) =>

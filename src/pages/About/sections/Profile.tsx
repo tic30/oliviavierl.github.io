@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 // @mui material components
-import { Container, Tooltip, Button, Zoom, Link } from "@mui/material";
-import EmailIcon from "@mui/icons-material/Email";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
+import { Container, Tooltip, Button, Zoom, Link } from "base-ui";
+import { Email as EmailIcon } from "base-ui/icons";
+import { LinkedIn as LinkedInIcon } from "base-ui/icons";
+import { Instagram as InstagramIcon } from "base-ui/icons";
+import { HistoryEdu as HistoryEduIcon } from "base-ui/icons";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
+import { Box } from "base-ui";
+import { Avatar } from "base-ui";
 // import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { Typography } from "base-ui";
 
 // Images
 import profilePicture from "assets/img/avatar.png";

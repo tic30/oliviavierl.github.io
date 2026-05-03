@@ -17,8 +17,8 @@ Coded by www.creative-tim.com
 import PropTypes from "prop-types";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box } from "base-ui";
+import { Typography } from "base-ui";
 
 function DefaultCounterCard({ color, count, title, description, ...rest }) {
   return (

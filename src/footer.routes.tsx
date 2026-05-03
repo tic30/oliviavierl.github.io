@@ -1,11 +1,11 @@
 // @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+import { Facebook as FacebookIcon } from "base-ui/icons";
+import { Twitter as TwitterIcon } from "base-ui/icons";
+import { GitHub as GitHubIcon } from "base-ui/icons";
+import { YouTube as YouTubeIcon } from "base-ui/icons";
 
 // Material Kit 2 React components
-import Typography from "@mui/material/Typography";
+import { Typography } from "base-ui";
 
 // Images
 import logoCT from "assets/img/logo.svg";

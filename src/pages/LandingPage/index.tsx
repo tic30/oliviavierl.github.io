@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box } from "base-ui";
 import colors from "assets/theme/base/colors";
 import Greeting from "./sections/Greeting";
 import Showcases from "./sections/Showcases";

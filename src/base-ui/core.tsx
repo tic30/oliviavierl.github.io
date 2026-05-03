@@ -1,0 +1,572 @@
+import React, {
+  Children,
+  cloneElement,
+  createContext,
+  forwardRef,
+  isValidElement,
+  useContext,
+  useEffect,
+} from "react";
+import fallbackTheme from "assets/theme";
+
+const ThemeContext = createContext<any>(fallbackTheme);
+const ToggleGroupContext = createContext<any>(null);
+
+const STYLE_PROPS = new Set([
+  "m",
+  "mt",
+  "mr",
+  "mb",
+  "ml",
+  "mx",
+  "my",
+  "p",
+  "pt",
+  "pr",
+  "pb",
+  "pl",
+  "px",
+  "py",
+  "display",
+  "flexDirection",
+  "justifyContent",
+  "alignItems",
+  "flexWrap",
+  "gap",
+  "rowGap",
+  "columnGap",
+  "width",
+  "height",
+  "minWidth",
+  "minHeight",
+  "maxWidth",
+  "maxHeight",
+  "overflow",
+  "overflowX",
+  "overflowY",
+  "position",
+  "top",
+  "right",
+  "bottom",
+  "left",
+  "zIndex",
+  "border",
+  "borderTop",
+  "borderRight",
+  "borderBottom",
+  "borderLeft",
+  "borderColor",
+  "borderRadius",
+  "boxShadow",
+  "opacity",
+  "transform",
+  "transition",
+  "cursor",
+  "fontSize",
+  "fontWeight",
+  "lineHeight",
+  "textAlign",
+  "textTransform",
+  "whiteSpace",
+  "listStyle",
+  "background",
+  "backgroundColor",
+  "bgcolor",
+  "bgColor",
+  "color",
+  "mx",
+  "my",
+  "mt",
+  "mb",
+  "ml",
+  "mr",
+  "px",
+  "py",
+  "pt",
+  "pb",
+  "pl",
+  "pr",
+]);
+
+const SPACING_MAP: Record<string, string> = {
+  m: "margin",
+  mt: "marginTop",
+  mr: "marginRight",
+  mb: "marginBottom",
+  ml: "marginLeft",
+  mx: "marginInline",
+  my: "marginBlock",
+  p: "padding",
+  pt: "paddingTop",
+  pr: "paddingRight",
+  pb: "paddingBottom",
+  pl: "paddingLeft",
+  px: "paddingInline",
+  py: "paddingBlock",
+  bgcolor: "backgroundColor",
+  bgColor: "backgroundColor",
+};
+
+const VARIANT_TAGS: Record<string, keyof React.JSX.IntrinsicElements> = {
+  h1: "h1",
+  h2: "h2",
+  h3: "h3",
+  h4: "h4",
+  h5: "h5",
+  h6: "h6",
+  body1: "p",
+  body2: "p",
+  button: "span",
+};
+
+const toArray = (value: any) => (Array.isArray(value) ? value : [value]);
+
+const getValue = (obj: any, path: string) =>
+  path.split(".").reduce((acc, key) => (acc == null ? acc : acc[key]), obj);
+
+const pickResponsiveValue = (value: any) => {
+  if (Array.isArray(value)) {
+    return [...value].reverse().find((item) => item != null);
+  }
+
+  if (value && typeof value === "object" && !isValidElement(value)) {
+    return value.xl ?? value.lg ?? value.md ?? value.sm ?? value.xs ?? Object.values(value)[0];
+  }
+
+  return value;
+};
+
+const normalizeFontWeight = (value: any) => {
+  if (value === "regular") return 400;
+  if (value === "medium") return 500;
+  if (value === "bold") return 700;
+  return value;
+};
+
+const toSpacing = (value: any) => {
+  const resolved = pickResponsiveValue(value);
+  return typeof resolved === "number" ? `${resolved * 8}px` : resolved;
+};
+
+const resolvePaletteValue = (theme: any, value: any) => {
+  if (typeof value !== "string") return value;
+  if (value === "white") return theme.palette?.common?.white ?? "#fff";
+  if (value === "black") return theme.palette?.common?.black ?? "#000";
+  if (value === "text") return theme.palette?.text?.primary ?? "#1f2937";
+  if (value === "primary") return theme.palette?.primary?.main ?? "#2563eb";
+  if (value === "dark") return theme.palette?.dark?.main ?? "#111827";
+  if (value.includes(".")) {
+    return getValue(theme.palette, value) ?? getValue(theme.colors, value) ?? value;
+  }
+
+  return (
+    getValue(theme.palette, `${value}.main`) ?? getValue(theme.colors, `${value}.main`) ?? value
+  );
+};
+
+const resolveShadow = (theme: any, value: any) => {
+  if (typeof value === "number")
+    return theme.shadows?.[value] ?? `0 ${value}px ${value * 4}px rgba(15,23,42,0.16)`;
+  if (typeof value === "string" && value.includes(".")) return getValue(theme, value) ?? value;
+  return value;
+};
+
+const normalizeStyleValue = (theme: any, key: string, value: any) => {
+  const resolved = pickResponsiveValue(value);
+
+  if (
+    [
+      "margin",
+      "marginTop",
+      "marginRight",
+      "marginBottom",
+      "marginLeft",
+      "marginInline",
+      "marginBlock",
+      "padding",
+      "paddingTop",
+      "paddingRight",
+      "paddingBottom",
+      "paddingLeft",
+      "paddingInline",
+      "paddingBlock",
+      "gap",
+      "rowGap",
+      "columnGap",
+    ].includes(key)
+  ) {
+    return toSpacing(resolved);
+  }
+
+  if (["color", "backgroundColor", "borderColor"].includes(key)) {
+    return resolvePaletteValue(theme, resolved);
+  }
+
+  if (key === "boxShadow") return resolveShadow(theme, resolved);
+  if (key === "borderRadius" && typeof resolved === "number") return `${resolved * 4}px`;
+  if (key === "fontWeight") return normalizeFontWeight(resolved);
+  if (
+    [
+      "width",
+      "height",
+      "minWidth",
+      "minHeight",
+      "maxWidth",
+      "maxHeight",
+      "top",
+      "right",
+      "bottom",
+      "left",
+    ].includes(key) &&
+    typeof resolved === "number"
+  ) {
+    return `${resolved}px`;
+  }
+
+  return resolved;
+};
+
+const sxToStyle = (theme: any, sx: any) => {
+  const collected = toArray(typeof sx === "function" ? sx(theme) : sx).filter(Boolean);
+
+  return collected.reduce((acc, item) => {
+    Object.entries(item).forEach(([key, value]) => {
+      if (key.startsWith("&") || key.startsWith("@")) return;
+      const cssKey = SPACING_MAP[key] ?? key;
+      acc[cssKey] = normalizeStyleValue(theme, cssKey, value);
+    });
+    return acc;
+  }, {} as React.CSSProperties);
+};
+
+const extractPropStyles = (theme: any, props: Record<string, any>) => {
+  const style: React.CSSProperties = {};
+
+  Object.entries(props).forEach(([key, value]) => {
+    if (!STYLE_PROPS.has(key)) return;
+    const cssKey = SPACING_MAP[key] ?? key;
+    style[cssKey as keyof React.CSSProperties] = normalizeStyleValue(theme, cssKey, value) as never;
+  });
+
+  return style;
+};
+
+const stripProps = (props: Record<string, any>, extra: string[] = []) => {
+  const blocked = new Set([
+    "sx",
+    "component",
+    "container",
+    "item",
+    "spacing",
+    "xs",
+    "sm",
+    "md",
+    "lg",
+    "xl",
+    "exclusive",
+    "orientation",
+    "separator",
+    "in",
+    "open",
+    "timeout",
+    "anchorEl",
+    "placement",
+    "TransitionComponent",
+    "fullWidth",
+    "maxWidth",
+    ...extra,
+  ]);
+  return Object.fromEntries(
+    Object.entries(props).filter(([key]) => !STYLE_PROPS.has(key) && !blocked.has(key))
+  );
+};
+
+const renderPrimitive = (
+  defaultTag: React.ElementType,
+  props: Record<string, any>,
+  ref: React.Ref<any>,
+  extraStyle: React.CSSProperties = {},
+  extraOmissions: string[] = []
+) => {
+  const theme = useTheme();
+  const { component, sx, style, children, ...rest } = props;
+  const Comp = component ?? defaultTag;
+  const mergedStyle = {
+    ...extraStyle,
+    ...extractPropStyles(theme, props),
+    ...sxToStyle(theme, sx),
+    ...style,
+  };
+  return (
+    <Comp ref={ref} style={mergedStyle} {...stripProps(rest, extraOmissions)}>
+      {children}
+    </Comp>
+  );
+};
+
+const createPrimitive = (defaultTag: React.ElementType, extraStyle: React.CSSProperties = {}) =>
+  forwardRef<any, any>((props, ref) => renderPrimitive(defaultTag, props, ref, extraStyle));
+
+export const ThemeProvider = ({ theme, children }: any) => (
+  <ThemeContext.Provider value={theme ?? fallbackTheme}>{children}</ThemeContext.Provider>
+);
+
+export const useTheme = () => useContext(ThemeContext) ?? fallbackTheme;
+
+export const CssBaseline = () => {
+  const theme = useTheme();
+
+  useEffect(() => {
+    document.body.style.margin = "0";
+    document.body.style.fontFamily = theme.typography?.fontFamily ?? "Inter, sans-serif";
+    document.body.style.color = theme.palette?.text?.primary ?? "#1f2937";
+    document.body.style.backgroundColor = theme.palette?.background?.default ?? "#ffffff";
+  }, [theme]);
+
+  return null;
+};
+
+export const alpha = (color: string, value: number) => {
+  const normalized = color.replace("#", "");
+  const chunk =
+    normalized.length === 3
+      ? normalized.split("").map((c) => `${c}${c}`)
+      : normalized.match(/.{1,2}/g);
+  if (!chunk || chunk.length < 3) return color;
+  const [r, g, b] = chunk.map((part) => parseInt(part, 16));
+  return `rgba(${r}, ${g}, ${b}, ${value})`;
+};
+
+export const Box = createPrimitive("div");
+
+export const Container = forwardRef<any, any>((props, ref) =>
+  renderPrimitive("div", props, ref, {
+    width: "100%",
+    maxWidth: "1200px",
+    marginInline: "auto",
+    paddingInline: "24px",
+    boxSizing: "border-box",
+  })
+);
+
+export const Typography = forwardRef<any, any>(
+  ({ variant = "body1", gutterBottom, ...props }, ref) => {
+    const theme = useTheme();
+    const variantStyle = theme.typography?.[variant] ?? {};
+    const tag = props.component ?? VARIANT_TAGS[variant] ?? "p";
+
+    return renderPrimitive(
+      tag,
+      {
+        ...props,
+        style: {
+          margin: 0,
+          ...(gutterBottom ? { marginBottom: "0.35em" } : {}),
+          ...variantStyle,
+          ...props.style,
+        },
+      },
+      ref
+    );
+  }
+);
+
+export const Link = forwardRef<any, any>((props, ref) =>
+  renderPrimitive("a", { ...props, href: props.href ?? props.to }, ref, {
+    color: "inherit",
+    textDecoration: "none",
+  })
+);
+
+export const Button = forwardRef<any, any>((props, ref) =>
+  renderPrimitive("button", { type: props.type ?? "button", ...props }, ref, {
+    border: "none",
+    borderRadius: "999px",
+    padding: "10px 18px",
+    cursor: "pointer",
+  })
+);
+
+export const Card = createPrimitive("div", {
+  borderRadius: "16px",
+  backgroundColor: "#fff",
+  overflow: "hidden",
+});
+
+export const CardMedia = forwardRef<any, any>(({ image, src, alt, ...props }, ref) =>
+  renderPrimitive("img", { src: src ?? image, alt, ...props }, ref, {
+    display: "block",
+    width: "100%",
+  })
+);
+
+export const Avatar = forwardRef<any, any>(({ src, alt, children, ...props }, ref) =>
+  renderPrimitive(src ? "img" : "div", { src, alt, children, ...props }, ref, {
+    width: "56px",
+    height: "56px",
+    borderRadius: "999px",
+    objectFit: "cover",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+  })
+);
+
+export const Icon = forwardRef<any, any>(({ children, ...props }, ref) =>
+  renderPrimitive(
+    "span",
+    { ...props, className: ["material-icons", props.className].filter(Boolean).join(" ") },
+    ref,
+    { lineHeight: 1, display: "inline-flex", alignItems: "center" }
+  )
+);
+
+export const IconButton = forwardRef<any, any>((props, ref) =>
+  renderPrimitive("button", { type: "button", ...props }, ref, {
+    border: "none",
+    background: "transparent",
+    cursor: "pointer",
+    padding: "8px",
+  })
+);
+
+export const Divider = forwardRef<any, any>(({ orientation = "horizontal", ...props }, ref) =>
+  renderPrimitive(
+    "div",
+    props,
+    ref,
+    orientation === "vertical"
+      ? { width: "1px", height: "100%", backgroundColor: "rgba(15,23,42,0.12)" }
+      : { height: "1px", width: "100%", backgroundColor: "rgba(15,23,42,0.12)" },
+    ["orientation"]
+  )
+);
+
+export const Stack = forwardRef<any, any>(({ spacing = 0, direction = "column", ...props }, ref) =>
+  renderPrimitive(
+    "div",
+    props,
+    ref,
+    { display: "flex", flexDirection: direction, gap: toSpacing(spacing) },
+    ["spacing", "direction"]
+  )
+);
+
+export const Grid = forwardRef<any, any>(
+  ({ container, item, spacing = 0, xs, sm, md, lg, xl, ...props }, ref) => {
+    const span = xl ?? lg ?? md ?? sm ?? xs;
+    const width = item && typeof span === "number" ? `${(span / 12) * 100}%` : undefined;
+
+    return renderPrimitive(
+      "div",
+      props,
+      ref,
+      {
+        ...(container ? { display: "flex", flexWrap: "wrap", gap: toSpacing(spacing) } : {}),
+        ...(width ? { width, flex: `0 0 ${width}` } : {}),
+      },
+      ["container", "item", "spacing", "xs", "sm", "md", "lg", "xl"]
+    );
+  }
+);
+
+export const Popper = ({ open = true, children }: any) => (open ? <>{children}</> : null);
+export const Grow = ({ in: visible = true, children }: any) => (visible ? <>{children}</> : null);
+export const Fade = ({ in: visible = true, children }: any) => (visible ? <>{children}</> : null);
+export const Zoom = ({ in: visible = true, children }: any) => (visible ? <>{children}</> : null);
+export const Collapse = ({ in: visible = true, children }: any) =>
+  visible ? <>{children}</> : null;
+
+export const Dialog = ({ open, children, ...props }: any) => {
+  if (!open) return null;
+  return (
+    <Box
+      {...props}
+      sx={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 1400,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "rgba(15,23,42,0.48)",
+        ...(props.sx || {}),
+      }}
+    >
+      <Box
+        sx={{
+          backgroundColor: "common.white",
+          borderRadius: 4,
+          minWidth: "min(90vw, 640px)",
+          maxHeight: "90vh",
+          overflow: "auto",
+        }}
+      >
+        {children}
+      </Box>
+    </Box>
+  );
+};
+
+export const DialogTitle = createPrimitive("div", { padding: "16px 20px", fontWeight: 700 });
+
+export const Tooltip = ({ title, children }: any) => {
+  if (!title) return children;
+  if (isValidElement(children)) return cloneElement(children as any, { title } as any);
+  return <span title={title}>{children}</span>;
+};
+
+export const Breadcrumbs = ({ children, separator = "/", ...props }: any) => {
+  const items = Children.toArray(children);
+  return (
+    <Box
+      {...props}
+      sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 1, ...(props.sx || {}) }}
+    >
+      {items.map((child, index) => (
+        <React.Fragment key={index}>
+          {index > 0 ? <span>{separator}</span> : null}
+          {child}
+        </React.Fragment>
+      ))}
+    </Box>
+  );
+};
+
+export const TextField = forwardRef<any, any>((props, ref) =>
+  renderPrimitive("input", props, ref, {
+    width: "100%",
+    border: "1px solid rgba(15,23,42,0.16)",
+    borderRadius: "12px",
+    padding: "12px 14px",
+  })
+);
+
+export const ToggleButtonGroup = ({ value, onChange, exclusive, children, ...props }: any) => (
+  <ToggleGroupContext.Provider value={{ value, onChange, exclusive }}>
+    <Box {...props} sx={{ display: "flex", ...(props.sx || {}) }}>
+      {children}
+    </Box>
+  </ToggleGroupContext.Provider>
+);
+
+export const ToggleButton = ({ value, children, ...props }: any) => {
+  const group = useContext(ToggleGroupContext);
+  const selected = group?.value === value;
+
+  return (
+    <Button
+      {...props}
+      onClick={(event: any) => group?.onChange?.(event, selected && group.exclusive ? null : value)}
+      sx={{
+        backgroundColor: selected ? "primary.main" : "common.white",
+        color: selected ? "common.white" : "text.primary",
+        borderRadius: 4,
+        ...(props.sx || {}),
+      }}
+    >
+      {children}
+    </Button>
+  );
+};

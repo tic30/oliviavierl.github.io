@@ -20,12 +20,12 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 // @mui material components
-import Icon from "@mui/material/Icon";
-import MuiLink from "@mui/material/Link";
+import { Icon } from "base-ui";
+import { Link as MuiLink } from "base-ui";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box } from "base-ui";
+import { Typography } from "base-ui";
 
 function FilledInfoCard({ variant, color, icon, title, description, action }) {
   const buttonStyles = {

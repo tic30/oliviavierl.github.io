@@ -17,20 +17,20 @@ Coded by www.creative-tim.com
 import PropTypes from "prop-types";
 
 // @mui material components
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
+import { Link } from "base-ui";
+import { Grid } from "base-ui";
+import { Stack } from "base-ui";
 
 // @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import PinterestIcon from "@mui/icons-material/Pinterest";
-import GitHubIcon from "@mui/icons-material/GitHub";
+import { Facebook as FacebookIcon } from "base-ui/icons";
+import { Twitter as TwitterIcon } from "base-ui/icons";
+import { Instagram as InstagramIcon } from "base-ui/icons";
+import { Pinterest as PinterestIcon } from "base-ui/icons";
+import { GitHub as GitHubIcon } from "base-ui/icons";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box } from "base-ui";
+import { Typography } from "base-ui";
 
 function CenteredFooter({ company, links, socials, light }) {
   const { href, name } = company;

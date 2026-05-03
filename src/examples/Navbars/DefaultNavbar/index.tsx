@@ -8,18 +8,18 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Icon from "@mui/material/Icon";
-import Popper from "@mui/material/Popper";
-import Grow from "@mui/material/Grow";
-import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
-import MuiLink from "@mui/material/Link";
+import { Container } from "base-ui";
+import { Icon } from "base-ui";
+import { Popper } from "base-ui";
+import { Grow } from "base-ui";
+import { Grid } from "base-ui";
+import { Divider } from "base-ui";
+import { Link as MuiLink } from "base-ui";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { Box } from "base-ui";
+import { Typography } from "base-ui";
+import { Button } from "base-ui";
 
 // Material Kit 2 React example components
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";

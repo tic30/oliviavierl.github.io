@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Container, Card, Box, Link as MuiLink, Fade } from "@mui/material";
+import { Container, Card, Box, Link as MuiLink, Fade } from "base-ui";
 import PropTypes from "prop-types";
-import Typography from "@mui/material/Typography";
+import { Typography } from "base-ui";
 import showCasesRoutes from "showcases.routes";
 import containerSx from "assets/theme/components/container";
 import useIntersectionObserver from "hooks/useIntersectionObserver";

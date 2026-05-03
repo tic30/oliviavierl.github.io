@@ -1,7 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { Box, Dialog, DialogTitle, IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { Box, Dialog, DialogTitle, IconButton } from "base-ui";
+import { Close as CloseIcon } from "base-ui/icons";
 import colors from "assets/theme/base/colors";
 
 function SimpleDialog({ open, onClose, src, alt }) {

@@ -1,14 +1,14 @@
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { Container } from "base-ui";
+import { Grid } from "base-ui";
+import { LinkedIn as LinkedInIcon } from "base-ui/icons";
+import { LocationOn as LocationOnIcon } from "base-ui/icons";
 
 // Material Kit 2 React components
-import Box from "@mui/material/Box";
+import { Box } from "base-ui";
 // import TextField from "@mui/material/TextField";
 // import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { Typography } from "base-ui";
 
 import bgImage from "assets/img/me.jpeg";
 import { linkedinUrl } from "../../../constants";

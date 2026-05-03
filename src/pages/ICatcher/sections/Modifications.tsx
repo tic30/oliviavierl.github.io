@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "base-ui";
 import SectionHeader from "components/SectionHeader";
 import colors from "assets/theme/base/colors";
 import change11 from "assets/img/change11.png";
