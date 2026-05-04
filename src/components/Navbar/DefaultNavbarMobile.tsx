@@ -22,20 +22,20 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 // @mui material components
-import { Collapse } from "base-ui";
-import { Link as MuiLink } from "base-ui";
+import { Collapse } from "ui/system";
+import { Link as MuiLink } from "ui/system";
 
 // Material Kit 2 React components
-import { Box } from "base-ui";
-import { Typography } from "base-ui";
+import { Box } from "ui/system";
+import { Typography } from "ui/system";
 
 // Material Kit 2 React example components
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
 
-function DefaultNavbarMobile({ routes, open, onClose }) {
-  const [collapse, setCollapse] = useState("");
+function DefaultNavbarMobile({ routes, open, onClose = () => {} }) {
+  const [collapse, setCollapse] = useState<string | null>(null);
 
-  const handleSetCollapse = (name) => (collapse === name ? setCollapse(false) : setCollapse(name));
+  const handleSetCollapse = (name) => (collapse === name ? setCollapse(null) : setCollapse(name));
 
   const renderNavbarItems = routes.map(({ name, icon, collapse: routeCollapses, href, route }) =>
     routeCollapses ? (
@@ -44,6 +44,7 @@ function DefaultNavbarMobile({ routes, open, onClose }) {
         name={name}
         icon={icon}
         collapseStatus={name === collapse}
+        light={false}
         onClick={() => handleSetCollapse(name)}
         href={href}
         route={route}

@@ -5,12 +5,12 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 // @mui material components
-import { Collapse } from "base-ui";
-import { Icon } from "base-ui";
+import { Collapse } from "ui/system";
+import { Icon } from "ui/system";
 
 // Material Kit 2 React components
-import { Box } from "base-ui";
-import { Typography } from "base-ui";
+import { Box } from "ui/system";
+import { Typography } from "ui/system";
 
 export const linkComponent = (href) => ({
   component: "a",
@@ -27,14 +27,14 @@ export const routeComponent = (route) => ({
 function DefaultNavbarDropdown({
   name,
   icon,
-  children,
-  collapseStatus,
-  light,
-  href,
-  route,
-  collapse,
+  children = null,
+  collapseStatus = false,
+  light = false,
+  href = "",
+  route = "",
+  collapse = false,
   ...rest
-}) {
+}: any) {
   return (
     <>
       <Box
@@ -88,16 +88,6 @@ function DefaultNavbarDropdown({
     </>
   );
 }
-
-// Setting default values for the props of DefaultNavbarDropdown
-DefaultNavbarDropdown.defaultProps = {
-  icon: undefined,
-  children: false,
-  collapseStatus: false,
-  light: false,
-  href: "",
-  route: "",
-};
 
 // Typechecking props for the DefaultNavbarDropdown
 DefaultNavbarDropdown.propTypes = {

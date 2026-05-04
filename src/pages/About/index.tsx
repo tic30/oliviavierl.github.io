@@ -1,8 +1,8 @@
 // @mui material components
-import { Card } from "base-ui";
+import { Card } from "ui/system";
 
 // Material Kit 2 React components
-import { Box } from "base-ui";
+import { Box } from "ui/system";
 // Images
 import bgImage from "assets/img/about_bg.jpeg";
 

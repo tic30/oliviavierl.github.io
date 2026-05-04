@@ -8,9 +8,8 @@
     "skipLibCheck": true,
     "baseUrl": "src",
     "paths": {
-      "base-ui": ["base-ui/index.tsx"],
-      "base-ui/styles": ["base-ui/styles.tsx"],
-      "base-ui/icons": ["base-ui/icons.tsx"],
+      "ui/*": ["ui/*"],
+      "prop-types": ["vendor/prop-types.ts"],
       "assets/*": ["assets/*"],
       "components/*": ["components/*"],
       "pages/*": ["pages/*"],

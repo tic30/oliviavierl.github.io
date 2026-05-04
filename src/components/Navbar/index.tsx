@@ -2,16 +2,16 @@
 import { Fragment, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Box, Container, Icon, Popper, Grow, Grid, Divider, Link as MuiLink } from "base-ui";
-import { alpha } from "base-ui/styles";
+import { Box, Container, Icon, Popper, Grow, Grid, Divider, Link as MuiLink } from "ui/system";
+import { alpha } from "ui/system";
 
 import favicon from "assets/img/header-logo.svg";
 import slash from "assets/img/slash.svg";
 import breakpoints from "assets/theme/base/breakpoints";
 
 import defaultRoutes from "routes";
-import { Typography } from "base-ui";
-import { Button } from "base-ui";
+import { Typography } from "ui/system";
+import { Button } from "ui/system";
 
 // Material Kit 2 React example components
 import boxShadows from "assets/theme/base/boxShadows";
@@ -19,7 +19,16 @@ import borders from "assets/theme/base/borders";
 import DefaultNavbarDropdown, { linkComponent, routeComponent } from "./DefaultNavbarDropdown";
 import DefaultNavbarMobile from "./DefaultNavbarMobile";
 
-function DefaultNavbar({ brand, title, routes, transparent, light, action, sticky, center }) {
+function DefaultNavbar({
+  brand = "Yifan Li",
+  title = "Product Designer",
+  routes = defaultRoutes,
+  transparent = false,
+  light = false,
+  action = false,
+  sticky = false,
+  center = false,
+}: any) {
   const [dropdown, setDropdown] = useState<HTMLElement | null>(null);
   const [dropdownEl, setDropdownEl] = useState<HTMLElement | null>(null);
   const [dropdownName, setDropdownName] = useState("");
@@ -144,8 +153,8 @@ function DefaultNavbar({ brand, title, routes, transparent, light, action, stick
                         {...(item.route
                           ? { to: item.route }
                           : item.href
-                          ? { href: item.href, target: "_blank", rel: "noreferrer" }
-                          : {})}
+                            ? { href: item.href, target: "_blank", rel: "noreferrer" }
+                            : {})}
                         display="block"
                         variant="button"
                         sx={({ palette: { grey } }) => ({
@@ -293,9 +302,7 @@ function DefaultNavbar({ brand, title, routes, transparent, light, action, stick
                 arrow_drop_up
               </Icon>
             </Typography>
-            <Box sx={{ boxShadow: 3, borderRadius: 3, p: 2, mt: 2 }}>
-              {renderRoutes}
-            </Box>
+            <Box sx={{ boxShadow: 3, borderRadius: 3, p: 2, mt: 2 }}>{renderRoutes}</Box>
           </Box>
         </Grow>
       )}
@@ -314,7 +321,11 @@ function DefaultNavbar({ brand, title, routes, transparent, light, action, stick
               nestedCollapse.map((item) => (
                 <Typography
                   key={item.name}
-                  {...(item.route ? routeComponent(item.route) : item.href ? linkComponent(item.href) : {})}
+                  {...(item.route
+                    ? routeComponent(item.route)
+                    : item.href
+                      ? linkComponent(item.href)
+                      : {})}
                   display="flex"
                   justifyContent="space-between"
                   alignItems="center"

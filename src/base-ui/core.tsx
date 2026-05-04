@@ -1,16 +1,22 @@
 import React, {
   Children,
-  cloneElement,
   createContext,
   forwardRef,
   isValidElement,
   useContext,
   useEffect,
 } from "react";
+import {
+  Avatar as BaseAvatar,
+  Button as BaseButton,
+  Dialog as BaseDialog,
+  Toggle as BaseToggle,
+  ToggleGroup as BaseToggleGroup,
+  Tooltip as BaseTooltip,
+} from "@base-ui/react";
 import fallbackTheme from "assets/theme";
 
 const ThemeContext = createContext<any>(fallbackTheme);
-const ToggleGroupContext = createContext<any>(null);
 
 const STYLE_PROPS = new Set([
   "m",
@@ -116,6 +122,7 @@ const VARIANT_TAGS: Record<string, keyof React.JSX.IntrinsicElements> = {
   h6: "h6",
   body1: "p",
   body2: "p",
+  caption: "span",
   button: "span",
 };
 
@@ -137,6 +144,7 @@ const pickResponsiveValue = (value: any) => {
 };
 
 const normalizeFontWeight = (value: any) => {
+  if (value === "light") return 300;
   if (value === "regular") return 400;
   if (value === "medium") return 500;
   if (value === "bold") return 700;
@@ -150,10 +158,17 @@ const toSpacing = (value: any) => {
 
 const resolvePaletteValue = (theme: any, value: any) => {
   if (typeof value !== "string") return value;
+  if (value === "inherit") return "inherit";
   if (value === "white") return theme.palette?.common?.white ?? "#fff";
   if (value === "black") return theme.palette?.common?.black ?? "#000";
   if (value === "text") return theme.palette?.text?.primary ?? "#1f2937";
+  if (value === "secondary")
+    return theme.palette?.secondary?.main ?? theme.palette?.text?.secondary ?? "#6b7280";
   if (value === "primary") return theme.palette?.primary?.main ?? "#2563eb";
+  if (value === "info") return theme.palette?.info?.main ?? "#0ea5e9";
+  if (value === "success") return theme.palette?.success?.main ?? "#10b981";
+  if (value === "warning") return theme.palette?.warning?.main ?? "#f59e0b";
+  if (value === "error") return theme.palette?.error?.main ?? "#ef4444";
   if (value === "dark") return theme.palette?.dark?.main ?? "#111827";
   if (value.includes(".")) {
     return getValue(theme.palette, value) ?? getValue(theme.colors, value) ?? value;
@@ -378,13 +393,75 @@ export const Link = forwardRef<any, any>((props, ref) =>
   })
 );
 
-export const Button = forwardRef<any, any>((props, ref) =>
-  renderPrimitive("button", { type: props.type ?? "button", ...props }, ref, {
-    border: "none",
-    borderRadius: "999px",
-    padding: "10px 18px",
-    cursor: "pointer",
-  })
+export const Button = forwardRef<any, any>(
+  (
+    {
+      component,
+      variant = "contained",
+      color = "primary",
+      size = "medium",
+      fullWidth,
+      sx,
+      style,
+      children,
+      ...rest
+    },
+    ref
+  ) => {
+    const theme = useTheme();
+    const resolvedColor = resolvePaletteValue(theme, color);
+    const textColor = variant === "text" ? resolvedColor : (theme.palette?.common?.white ?? "#fff");
+    const backgroundColor = variant === "text" ? "transparent" : resolvedColor;
+    const padding = size === "small" ? "8px 14px" : size === "large" ? "12px 22px" : "10px 18px";
+    const render = component
+      ? React.createElement(component, component === "a" ? { href: rest.href } : undefined)
+      : undefined;
+    const mergedStyle = {
+      border: "none",
+      borderRadius: "999px",
+      padding,
+      cursor: "pointer",
+      background:
+        variant === "gradient"
+          ? `linear-gradient(135deg, ${resolvedColor}, ${alpha(String(resolvedColor), 0.8)})`
+          : backgroundColor,
+      color: textColor,
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "0.5rem",
+      textDecoration: "none",
+      width: fullWidth ? "100%" : undefined,
+      ...extractPropStyles(theme, { ...rest, fullWidth: undefined }),
+      ...sxToStyle(theme, sx),
+      ...style,
+    };
+
+    return (
+      <BaseButton
+        ref={ref}
+        render={render}
+        type={rest.type ?? "button"}
+        style={mergedStyle}
+        {...stripProps(rest, [
+          "variant",
+          "color",
+          "size",
+          "fullWidth",
+          "to",
+          "href",
+          "target",
+          "rel",
+        ])}
+        {...(rest.to ? { to: rest.to } : {})}
+        {...(rest.href ? { href: rest.href } : {})}
+        {...(rest.target ? { target: rest.target } : {})}
+        {...(rest.rel ? { rel: rest.rel } : {})}
+      >
+        {children}
+      </BaseButton>
+    );
+  }
 );
 
 export const Card = createPrimitive("div", {
@@ -400,17 +477,49 @@ export const CardMedia = forwardRef<any, any>(({ image, src, alt, ...props }, re
   })
 );
 
-export const Avatar = forwardRef<any, any>(({ src, alt, children, ...props }, ref) =>
-  renderPrimitive(src ? "img" : "div", { src, alt, children, ...props }, ref, {
-    width: "56px",
-    height: "56px",
-    borderRadius: "999px",
-    objectFit: "cover",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-  })
+export const Avatar = forwardRef<any, any>(
+  ({ src, alt, children, size = "md", shadow, variant, sx, style, ...props }, ref) => {
+    const theme = useTheme();
+    const sizeMap: Record<string, string> = {
+      sm: "40px",
+      md: "56px",
+      lg: "72px",
+      xl: "96px",
+      xxl: "120px",
+    };
+    const dimension = sizeMap[size] ?? (typeof size === "number" ? `${size}px` : size);
+    const mergedStyle = {
+      width: dimension,
+      height: dimension,
+      borderRadius: variant === "rounded" ? "16px" : "999px",
+      objectFit: "cover",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "hidden",
+      boxShadow: shadow ? resolveShadow(theme, `boxShadows.${shadow}`) : undefined,
+      ...extractPropStyles(theme, props),
+      ...sxToStyle(theme, sx),
+      ...style,
+    } as React.CSSProperties;
+
+    return (
+      <BaseAvatar.Root
+        ref={ref}
+        style={mergedStyle}
+        {...stripProps(props, ["size", "shadow", "variant"])}
+      >
+        {src ? (
+          <BaseAvatar.Image
+            src={src}
+            alt={alt}
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        ) : null}
+        <BaseAvatar.Fallback>{children ?? alt?.charAt(0) ?? "?"}</BaseAvatar.Fallback>
+      </BaseAvatar.Root>
+    );
+  }
 );
 
 export const Icon = forwardRef<any, any>(({ children, ...props }, ref) =>
@@ -479,33 +588,47 @@ export const Collapse = ({ in: visible = true, children }: any) =>
   visible ? <>{children}</> : null;
 
 export const Dialog = ({ open, children, ...props }: any) => {
-  if (!open) return null;
+  const theme = useTheme();
   return (
-    <Box
-      {...props}
-      sx={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 1400,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "rgba(15,23,42,0.48)",
-        ...(props.sx || {}),
-      }}
-    >
-      <Box
-        sx={{
-          backgroundColor: "common.white",
-          borderRadius: 4,
-          minWidth: "min(90vw, 640px)",
-          maxHeight: "90vh",
-          overflow: "auto",
-        }}
-      >
-        {children}
-      </Box>
-    </Box>
+    <BaseDialog.Root open={open} onOpenChange={(nextOpen) => !nextOpen && props.onClose?.()}>
+      <BaseDialog.Portal>
+        <BaseDialog.Backdrop
+          style={{
+            position: "fixed",
+            inset: 0,
+            backgroundColor: "rgba(15,23,42,0.48)",
+            zIndex: 1400,
+          }}
+        />
+        <BaseDialog.Popup
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 1401,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "24px",
+          }}
+        >
+          <Box
+            {...props}
+            sx={{
+              backgroundColor: "common.white",
+              borderRadius: 4,
+              minWidth: "min(90vw, 640px)",
+              maxHeight: "90vh",
+              overflow: "auto",
+              boxShadow: theme.boxShadows?.lg,
+              ...(props.PaperProps?.sx || {}),
+              ...(props.sx || {}),
+            }}
+          >
+            {children}
+          </Box>
+        </BaseDialog.Popup>
+      </BaseDialog.Portal>
+    </BaseDialog.Root>
   );
 };
 
@@ -513,8 +636,29 @@ export const DialogTitle = createPrimitive("div", { padding: "16px 20px", fontWe
 
 export const Tooltip = ({ title, children }: any) => {
   if (!title) return children;
-  if (isValidElement(children)) return cloneElement(children as any, { title } as any);
-  return <span title={title}>{children}</span>;
+  const trigger = isValidElement(children) ? children : <span>{children}</span>;
+
+  return (
+    <BaseTooltip.Root>
+      <BaseTooltip.Trigger render={trigger} />
+      <BaseTooltip.Portal>
+        <BaseTooltip.Positioner sideOffset={8}>
+          <BaseTooltip.Popup
+            style={{
+              backgroundColor: "#111827",
+              color: "#ffffff",
+              padding: "6px 10px",
+              borderRadius: "8px",
+              fontSize: "0.75rem",
+              zIndex: 1500,
+            }}
+          >
+            {title}
+          </BaseTooltip.Popup>
+        </BaseTooltip.Positioner>
+      </BaseTooltip.Portal>
+    </BaseTooltip.Root>
+  );
 };
 
 export const Breadcrumbs = ({ children, separator = "/", ...props }: any) => {
@@ -543,30 +687,74 @@ export const TextField = forwardRef<any, any>((props, ref) =>
   })
 );
 
-export const ToggleButtonGroup = ({ value, onChange, exclusive, children, ...props }: any) => (
-  <ToggleGroupContext.Provider value={{ value, onChange, exclusive }}>
-    <Box {...props} sx={{ display: "flex", ...(props.sx || {}) }}>
-      {children}
-    </Box>
-  </ToggleGroupContext.Provider>
-);
-
-export const ToggleButton = ({ value, children, ...props }: any) => {
-  const group = useContext(ToggleGroupContext);
-  const selected = group?.value === value;
+export const ToggleButtonGroup = ({
+  value,
+  onChange,
+  exclusive,
+  children,
+  sx,
+  style,
+  ...props
+}: any) => {
+  const theme = useTheme();
+  const groupValue =
+    value == null ? [] : Array.isArray(value) ? value.map(String) : [String(value)];
 
   return (
-    <Button
-      {...props}
-      onClick={(event: any) => group?.onChange?.(event, selected && group.exclusive ? null : value)}
-      sx={{
-        backgroundColor: selected ? "primary.main" : "common.white",
-        color: selected ? "common.white" : "text.primary",
-        borderRadius: 4,
-        ...(props.sx || {}),
+    <BaseToggleGroup
+      value={groupValue}
+      multiple={!exclusive}
+      onValueChange={(values) => {
+        const next = exclusive
+          ? values[0] == null
+            ? null
+            : /^[0-9]+$/.test(values[0])
+              ? Number(values[0])
+              : values[0]
+          : values;
+        onChange?.(undefined, next);
       }}
+      style={{
+        display: "flex",
+        ...extractPropStyles(theme, props),
+        ...sxToStyle(theme, sx),
+        ...style,
+      }}
+      {...stripProps(props, ["exclusive", "onChange"])}
     >
       {children}
-    </Button>
+    </BaseToggleGroup>
+  );
+};
+
+export const ToggleButton = ({ value, children, sx, style, ...props }: any) => {
+  const theme = useTheme();
+  const borderColor = theme.palette?.grey?.[200] ?? "#e5e7eb";
+  const resolvedStyle = {
+    borderRadius: "16px 16px 0 0",
+    border: `1px solid ${borderColor}`,
+    padding: "10px 16px",
+    cursor: "pointer",
+    ...extractPropStyles(theme, props),
+    ...sxToStyle(theme, sx),
+    ...style,
+  };
+
+  return (
+    <BaseToggle
+      value={String(value)}
+      style={(state) => ({
+        ...resolvedStyle,
+        backgroundColor: state.pressed
+          ? (theme.palette?.primary?.main ?? "#fb7e00")
+          : (theme.palette?.common?.white ?? "#fff"),
+        color: state.pressed
+          ? (theme.palette?.common?.white ?? "#fff")
+          : (theme.palette?.text?.primary ?? "#111827"),
+      })}
+      {...stripProps(props)}
+    >
+      {children}
+    </BaseToggle>
   );
 };

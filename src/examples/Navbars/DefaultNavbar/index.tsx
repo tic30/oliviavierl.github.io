@@ -8,18 +8,18 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 // @mui material components
-import { Container } from "base-ui";
-import { Icon } from "base-ui";
-import { Popper } from "base-ui";
-import { Grow } from "base-ui";
-import { Grid } from "base-ui";
-import { Divider } from "base-ui";
-import { Link as MuiLink } from "base-ui";
+import { Container } from "ui/system";
+import { Icon } from "ui/system";
+import { Popper } from "ui/system";
+import { Grow } from "ui/system";
+import { Grid } from "ui/system";
+import { Divider } from "ui/system";
+import { Link as MuiLink } from "ui/system";
 
 // Material Kit 2 React components
-import { Box } from "base-ui";
-import { Typography } from "base-ui";
-import { Button } from "base-ui";
+import { Box } from "ui/system";
+import { Typography } from "ui/system";
+import { Button } from "ui/system";
 
 // Material Kit 2 React example components
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
@@ -32,7 +32,16 @@ import defaultRoutes from "routes";
 
 import favicon from "assets/img/logo.svg";
 
-function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
+function DefaultNavbar({
+  brand = "Yifan Li",
+  routes = defaultRoutes,
+  transparent = false,
+  light = false,
+  action = false,
+  sticky = false,
+  relative = false,
+  center = false,
+}: any) {
   const [dropdown, setDropdown] = useState<HTMLElement | null>(null);
   const [dropdownEl, setDropdownEl] = useState<HTMLElement | null>(null);
   const [dropdownName, setDropdownName] = useState("");
@@ -135,8 +144,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                         {...(item.route
                           ? { to: item.route }
                           : item.href
-                          ? { href: item.href, target: "_blank", rel: "noreferrer" }
-                          : {})}
+                            ? { href: item.href, target: "_blank", rel: "noreferrer" }
+                            : {})}
                         minWidth="11.25rem"
                         display="block"
                         variant="button"
@@ -363,7 +372,11 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                         <Typography
                           display="block"
                           variant="button"
-                          sx={{ color: "text.primary", fontWeight: 400, transition: "all 300ms linear" }}
+                          sx={{
+                            color: "text.primary",
+                            fontWeight: 400,
+                            transition: "all 300ms linear",
+                          }}
                         >
                           {item.description}
                         </Typography>
@@ -449,7 +462,10 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             alignItems="center"
           >
             <Box component="img" src={favicon} alt="logo" width="37.5px" mr={2} />
-            <Typography variant="button" sx={{ fontWeight: 700, color: light ? "common.white" : "text.primary" }}>
+            <Typography
+              variant="button"
+              sx={{ fontWeight: 700, color: light ? "common.white" : "text.primary" }}
+            >
               {brand}
             </Typography>
           </Box>

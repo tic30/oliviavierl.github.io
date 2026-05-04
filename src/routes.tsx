@@ -22,7 +22,7 @@
 */
 
 // @mui material components
-import { Icon } from "base-ui";
+import { Icon } from "ui/system";
 
 // Pages
 import About from "pages/About";

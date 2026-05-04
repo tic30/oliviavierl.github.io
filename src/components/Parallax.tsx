@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Box } from "base-ui";
+import { Box } from "ui/system";
 
 const parallaxLayer = {
   position: "absolute",

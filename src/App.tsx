@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 // @mui material components
-import { ThemeProvider } from "base-ui/styles";
-import { CssBaseline } from "base-ui";
+import { ThemeProvider } from "ui/system";
+import { CssBaseline } from "ui/system";
 
 // Material Kit 2 React themes
 import theme from "assets/theme";

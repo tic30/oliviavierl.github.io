@@ -22,12 +22,12 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 // @mui material components
-import { Collapse } from "base-ui";
-import { Link as MuiLink } from "base-ui";
+import { Collapse } from "ui/system";
+import { Link as MuiLink } from "ui/system";
 
 // Material Kit 2 React components
-import { Box } from "base-ui";
-import { Typography } from "base-ui";
+import { Box } from "ui/system";
+import { Typography } from "ui/system";
 
 // Material Kit 2 React example components
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
@@ -44,6 +44,7 @@ function DefaultNavbarMobile({ routes, open }) {
         name={name}
         icon={icon}
         collapseStatus={name === collapse}
+        light={false}
         onClick={() => handleSetCollapse(name)}
         href={href}
         route={route}
@@ -69,8 +70,8 @@ function DefaultNavbarMobile({ routes, open }) {
                         {...(el.route
                           ? { to: el.route }
                           : el.href
-                          ? { href: el.href, target: "_blank", rel: "noreferrer" }
-                          : {})}
+                            ? { href: el.href, target: "_blank", rel: "noreferrer" }
+                            : {})}
                         display="block"
                         variant="button"
                         sx={{
@@ -101,8 +102,8 @@ function DefaultNavbarMobile({ routes, open }) {
                     {...(item.route
                       ? { to: item.route }
                       : item.href
-                      ? { href: item.href, target: "_blank", rel: "noreferrer" }
-                      : {})}
+                        ? { href: item.href, target: "_blank", rel: "noreferrer" }
+                        : {})}
                     sx={{
                       borderRadius: 2,
                       cursor: "pointer",
@@ -128,7 +129,11 @@ function DefaultNavbarMobile({ routes, open }) {
                     <Typography
                       display="block"
                       variant="button"
-                      sx={{ color: "text.primary", fontWeight: 400, transition: "all 300ms linear" }}
+                      sx={{
+                        color: "text.primary",
+                        fontWeight: 400,
+                        transition: "all 300ms linear",
+                      }}
                     >
                       {item.description}
                     </Typography>

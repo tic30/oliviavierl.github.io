@@ -2,16 +2,16 @@
 import PropTypes from "prop-types";
 
 // @mui material components
-import { Container } from "base-ui";
+import { Container } from "ui/system";
 
 // Material Kit 2 React components
-import { Box } from "base-ui";
-import { Typography } from "base-ui";
+import { Box } from "ui/system";
+import { Typography } from "ui/system";
 
 // Material Kit 2 React base styles
 import colors from "assets/theme/base/colors";
 
-function SectionHeader({ title, bgColor, sx, ...props }) {
+function SectionHeader({ title, bgColor = colors.primary.main, sx = {}, ...props }) {
   return (
     <Box
       sx={{
@@ -29,11 +29,6 @@ function SectionHeader({ title, bgColor, sx, ...props }) {
     </Box>
   );
 }
-
-SectionHeader.defaultProps = {
-  bgColor: colors.primary.main,
-  sx: {},
-};
 
 SectionHeader.propTypes = {
   title: PropTypes.string.isRequired,

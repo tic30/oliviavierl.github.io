@@ -1,4 +1,4 @@
-import { Box } from "base-ui";
+import { Box } from "ui/system";
 import colors from "assets/theme/base/colors";
 import Greeting from "./sections/Greeting";
 import Showcases from "./sections/Showcases";

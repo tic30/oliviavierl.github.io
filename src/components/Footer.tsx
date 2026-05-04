@@ -2,26 +2,29 @@
 import PropTypes from "prop-types";
 
 // @mui material components
-import { Container } from "base-ui";
-import { Link } from "base-ui";
+import { Container } from "ui/system";
+import { Link } from "ui/system";
 
 // Material Kit 2 React components
-import { Box } from "base-ui";
-import { Typography } from "base-ui";
+import { Box } from "ui/system";
+import { Typography } from "ui/system";
 
 // Material Kit 2 React base styles
 import typography from "assets/theme/base/typography";
 
-function SimpleFooter({ links, light }) {
+function SimpleFooter({ links = [], light = false, content }) {
   const { size } = typography;
+  const resolvedLinks = links.length
+    ? links
+    : (content?.menus?.flatMap((menu) => menu.items ?? []) ?? []);
 
   const renderLinks = () =>
-    links.map((link, key) => (
+    resolvedLinks.map((link, key) => (
       <Box
         key={link.name}
         component="li"
         pl={key === 0 ? 0 : 2}
-        pr={key === links.length - 1 ? 0 : 2}
+        pr={key === resolvedLinks.length - 1 ? 0 : 2}
         lineHeight={1}
       >
         <Link href={link.href} target="_blank">
@@ -85,6 +88,7 @@ SimpleFooter.defaultProps = {
 SimpleFooter.propTypes = {
   links: PropTypes.arrayOf(PropTypes.object),
   light: PropTypes.bool,
+  content: PropTypes.object,
 };
 
 export default SimpleFooter;

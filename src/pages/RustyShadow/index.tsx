@@ -1,6 +1,6 @@
 // Material Kit 2 React components
-import { Box } from "base-ui";
-import { Typography } from "base-ui";
+import { Box } from "ui/system";
+import { Typography } from "ui/system";
 
 // Author page sections
 import bgImage from "assets/img/cover2.jpg";

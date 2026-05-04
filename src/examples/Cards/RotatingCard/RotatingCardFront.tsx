@@ -17,13 +17,13 @@ Coded by www.creative-tim.com
 import PropTypes from "prop-types";
 
 // @mui material components
-import { Icon } from "base-ui";
+import { Icon } from "ui/system";
 
 // Material Kit 2 React components
-import { Box } from "base-ui";
-import { Typography } from "base-ui";
+import { Box } from "ui/system";
+import { Typography } from "ui/system";
 
-function RotatingCardFront({ color, image, icon, title, description }) {
+function RotatingCardFront({ image, icon, title, description }) {
   return (
     <Box
       sx={{

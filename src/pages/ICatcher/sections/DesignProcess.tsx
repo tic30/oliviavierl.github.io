@@ -1,8 +1,8 @@
-import { Card, CardMedia, Container, Grid } from "base-ui";
+import { Card, CardMedia, Container, Grid } from "ui/system";
 import PreviewableImg from "components/PreviewableImg";
 import Tabs from "components/Tabs";
-import { Box } from "base-ui";
-import { Typography } from "base-ui";
+import { Box } from "ui/system";
+import { Typography } from "ui/system";
 import SectionHeader from "components/SectionHeader";
 import borders from "assets/theme/base/borders";
 

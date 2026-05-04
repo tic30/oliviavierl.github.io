@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { keyframes } from "@emotion/react";
 // @mui material components
-import { Box, Container } from "base-ui";
-import { KeyboardArrowDown as KeyboardArrowDownIcon } from "base-ui/icons";
-import { Typography } from "base-ui";
+import { Box, Container } from "ui/system";
+import { KeyboardArrowDown as KeyboardArrowDownIcon } from "ui/icons";
+import { Typography } from "ui/system";
 import colors from "assets/theme/base/colors";
 import wave from "assets/img/wave.svg";
 
@@ -44,11 +44,11 @@ function Greeting() {
         <Box component="img" src={wave} alt="" sx={{ width: "120px", ml: "-40px" }} />
         <Typography
           variant="h1"
-          sx={({ breakpoints, typography: { size } }) => ({
-            [breakpoints.down("md")]: {
-              fontSize: size["3xl"],
-            },
-          })}
+          // sx={({ breakpoints, typography: { size } }) => ({
+          //   [breakpoints.down("md")]: {
+          //     fontSize: size["3xl"],
+          //   },
+          // })}
         >
           I'm <span style={{ color: colors.primary.main }}>Yifan!</span>
         </Typography>

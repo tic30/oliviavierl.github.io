@@ -17,10 +17,10 @@ Coded by www.creative-tim.com
 import PropTypes from "prop-types";
 
 // Material Kit 2 React components
-import { Box } from "base-ui";
-import { Typography } from "base-ui";
+import { Box } from "ui/system";
+import { Typography } from "ui/system";
 
-function DefaultCounterCard({ color, count, title, description, ...rest }) {
+function DefaultCounterCard({ color, count, title, description }) {
   return (
     <Box p={2} textAlign="center" lineHeight={1}>
       <Typography

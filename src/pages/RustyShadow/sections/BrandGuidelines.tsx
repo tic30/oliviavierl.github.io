@@ -1,8 +1,8 @@
 // @mui material components
-import { Container } from "base-ui";
+import { Container } from "ui/system";
 
 // Material Kit 2 React components
-import { Box } from "base-ui";
+import { Box } from "ui/system";
 import SectionHeader from "components/SectionHeader";
 
 // Images
