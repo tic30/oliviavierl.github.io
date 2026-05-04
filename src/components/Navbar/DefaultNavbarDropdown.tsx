@@ -1,5 +1,4 @@
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import type { ReactNode } from "react";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -11,15 +10,26 @@ import { Icon } from "ui/system";
 // Material Kit 2 React components
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
+interface DefaultNavbarDropdownProps {
+  name: string;
+  icon?: ReactNode;
+  children?: ReactNode;
+  collapseStatus?: boolean;
+  light?: boolean;
+  href?: string;
+  route?: string;
+  collapse: boolean;
+  [key: string]: unknown;
+}
 
-export const linkComponent = (href) => ({
+export const linkComponent = (href: string) => ({
   component: "a",
   href,
   target: "_blank",
   rel: "noreferrer",
 });
 
-export const routeComponent = (route) => ({
+export const routeComponent = (route: string) => ({
   component: Link,
   to: route,
 });
@@ -34,7 +44,7 @@ function DefaultNavbarDropdown({
   route = "",
   collapse = false,
   ...rest
-}: any) {
+}: DefaultNavbarDropdownProps) {
   return (
     <>
       <Box
@@ -88,17 +98,5 @@ function DefaultNavbarDropdown({
     </>
   );
 }
-
-// Typechecking props for the DefaultNavbarDropdown
-DefaultNavbarDropdown.propTypes = {
-  name: PropTypes.string.isRequired,
-  icon: PropTypes.node,
-  children: PropTypes.node,
-  collapseStatus: PropTypes.bool,
-  light: PropTypes.bool,
-  href: PropTypes.string,
-  route: PropTypes.string,
-  collapse: PropTypes.bool.isRequired,
-};
 
 export default DefaultNavbarDropdown;

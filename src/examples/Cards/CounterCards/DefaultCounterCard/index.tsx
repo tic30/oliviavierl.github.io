@@ -13,14 +13,24 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
-
 // Material Kit 2 React components
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
+import type { ThemeColor } from "types/site";
 
-function DefaultCounterCard({ color, count, title, description }) {
+interface DefaultCounterCardProps {
+  color?: ThemeColor;
+  count: number;
+  title?: string;
+  description?: string;
+}
+
+function DefaultCounterCard({
+  color = "info",
+  count,
+  title = "",
+  description = "",
+}: DefaultCounterCardProps) {
   return (
     <Box p={2} textAlign="center" lineHeight={1}>
       <Typography
@@ -42,29 +52,5 @@ function DefaultCounterCard({ color, count, title, description }) {
     </Box>
   );
 }
-
-// Setting default props for the DefaultCounterCard
-DefaultCounterCard.defaultProps = {
-  color: "info",
-  description: "",
-  title: "",
-};
-
-// Typechecking props for the DefaultCounterCard
-DefaultCounterCard.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "light",
-    "dark",
-  ]),
-  count: PropTypes.number.isRequired,
-  title: PropTypes.string,
-  description: PropTypes.string,
-};
 
 export default DefaultCounterCard;

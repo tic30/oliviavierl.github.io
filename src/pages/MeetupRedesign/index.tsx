@@ -1,5 +1,4 @@
-// @mui material components
-import PropTypes from "prop-types";
+import type { ReactNode } from "react";
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
 import Parallax from "components/Parallax";
@@ -13,7 +12,11 @@ import Personas from "./sections/Personas";
 import DesignUpdates from "./sections/DesignUpdates";
 import FinalWireframes from "./sections/FinalWireframes";
 
-const HighlightedText = ({ children }) => (
+interface HighlightedTextProps {
+  children: ReactNode;
+}
+
+const HighlightedText = ({ children }: HighlightedTextProps) => (
   <span
     style={{
       color: colors.showcaseColors.yellow,
@@ -23,10 +26,6 @@ const HighlightedText = ({ children }) => (
     {children}
   </span>
 );
-
-HighlightedText.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 function MeetupRedesign() {
   return (

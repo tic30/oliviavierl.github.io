@@ -2,12 +2,13 @@
 import RustyShadow from "pages/RustyShadow";
 import ICatcher from "pages/ICatcher";
 import colors from "assets/theme/base/colors";
+import type { ShowcaseItem } from "types/site";
 
 // import cover1 from "assets/img/cover1.jpg";
 import cover2 from "assets/img/cover2.jpg";
 import cover3 from "assets/img/cover3.jpg";
 
-export default [
+const showcases: ShowcaseItem[] = [
   // {
   //   name: "Meetup Redesign",
   //   description: "Polished UI and better experience",
@@ -39,3 +40,5 @@ export default [
     bgColor: colors.showcaseColors.dark,
   },
 ];
+
+export default showcases;

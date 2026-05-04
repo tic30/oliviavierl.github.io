@@ -13,9 +13,6 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
 // react-router-dom components
 import { Link } from "react-router-dom";
 
@@ -26,8 +23,28 @@ import { Link as MuiLink } from "ui/system";
 // Material Kit 2 React components
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
+import type { ReactNode } from "react";
+import type { AccentColor, MaybeCardAction, ThemeColor } from "types/site";
 
-function FilledInfoCard({ variant, color, icon, title, description, action }) {
+type FilledInfoCardVariant = "contained" | "gradient";
+
+interface FilledInfoCardProps {
+  variant?: FilledInfoCardVariant;
+  color?: ThemeColor;
+  icon: ReactNode;
+  title: string;
+  description: string;
+  action?: MaybeCardAction;
+}
+
+function FilledInfoCard({
+  variant = "contained",
+  color = "info",
+  icon,
+  title,
+  description,
+  action = false,
+}: FilledInfoCardProps) {
   const buttonStyles = {
     width: "max-content",
     display: "flex",
@@ -44,7 +61,7 @@ function FilledInfoCard({ variant, color, icon, title, description, action }) {
     },
   };
 
-  let iconColor = color;
+  let iconColor: AccentColor = color;
 
   if (variant === "gradient" && color !== "light") {
     iconColor = "white";
@@ -82,20 +99,10 @@ function FilledInfoCard({ variant, color, icon, title, description, action }) {
         {typeof icon === "string" ? <Icon>{icon}</Icon> : icon}
       </Typography>
       <Box pt={{ xs: 3, md: 0 }} pl={{ xs: 0, md: 2 }} lineHeight={1}>
-        <Typography
-          display="block"
-          variant="h5"
-          sx={{ color: textColor, fontWeight: 700 }}
-          mb={1}
-        >
+        <Typography display="block" variant="h5" sx={{ color: textColor, fontWeight: 700 }} mb={1}>
           {title}
         </Typography>
-        <Typography
-          display="block"
-          variant="body2"
-          sx={{ color: textColor }}
-          mb={2}
-        >
+        <Typography display="block" variant="body2" sx={{ color: textColor }} mb={2}>
           {description}
         </Typography>
         {action && action.type === "external" ? (
@@ -132,38 +139,5 @@ function FilledInfoCard({ variant, color, icon, title, description, action }) {
     </Box>
   );
 }
-
-// Setting default props for the FilledInfoCard
-FilledInfoCard.defaultProps = {
-  variant: "contained",
-  color: "info",
-  action: false,
-};
-
-// Typechecking props for the FilledInfoCard
-FilledInfoCard.propTypes = {
-  variant: PropTypes.oneOf(["contained", "gradient"]),
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "light",
-    "dark",
-  ]),
-  icon: PropTypes.node.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  action: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.shape({
-      type: PropTypes.oneOf(["external", "internal"]).isRequired,
-      route: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    }),
-  ]),
-};
 
 export default FilledInfoCard;

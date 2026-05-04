@@ -13,8 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
+import type { ReactNode } from "react";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -26,8 +25,17 @@ import { Link as MuiLink } from "ui/system";
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
 import { Button } from "ui/system";
+import type { MaybeCardAction, ThemeColor } from "types/site";
 
-function RotatingCard({ image, title, description, action }) {
+interface RotatingCardBackProps {
+  color?: ThemeColor;
+  image: string;
+  title: ReactNode;
+  description: ReactNode;
+  action?: MaybeCardAction;
+}
+
+function RotatingCard({ image, title, description, action = false }: RotatingCardBackProps) {
   return (
     <Box
       display="flex"
@@ -87,35 +95,5 @@ function RotatingCard({ image, title, description, action }) {
     </Box>
   );
 }
-
-// Setting default props for the RotatingCard
-RotatingCard.defaultProps = {
-  color: "info",
-};
-
-// Typechecking props for the RotatingCard
-RotatingCard.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "dark",
-    "light",
-  ]),
-  image: PropTypes.string.isRequired,
-  title: PropTypes.node.isRequired,
-  description: PropTypes.node.isRequired,
-  action: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.shape({
-      type: PropTypes.oneOf(["external", "internal"]).isRequired,
-      route: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    }),
-  ]).isRequired,
-};
 
 export default RotatingCard;

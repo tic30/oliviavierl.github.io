@@ -1,13 +1,23 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Container, Card, Box, Link as MuiLink, Fade } from "ui/system";
-import PropTypes from "prop-types";
 import { Typography } from "ui/system";
 import showCasesRoutes from "showcases.routes";
 import containerSx from "assets/theme/components/container";
 import useIntersectionObserver from "hooks/useIntersectionObserver";
+import type { ShowcaseItem } from "types/site";
 
-function ShowCaseCardContent({ item, target }) {
+interface ShowCaseCardContentProps {
+  item: ShowcaseItem;
+  target: Element | null;
+}
+
+interface ShowCaseCardProps {
+  item: ShowcaseItem;
+  [key: string]: unknown;
+}
+
+function ShowCaseCardContent({ item, target }: ShowCaseCardContentProps) {
   const isElementInViewport = useIntersectionObserver(target);
 
   return (
@@ -58,19 +68,9 @@ function ShowCaseCardContent({ item, target }) {
   );
 }
 
-ShowCaseCardContent.defaultProps = {
-  item: {},
-  target: <></>,
-};
-
-ShowCaseCardContent.propTypes = {
-  item: PropTypes.objectOf(PropTypes.any),
-  target: PropTypes.instanceOf(Element),
-};
-
-function ShowCaseCard({ item, ...props }) {
-  const targetRef = useRef(null);
-  const [target, setTarget] = useState(null);
+function ShowCaseCard({ item, ...props }: ShowCaseCardProps) {
+  const targetRef = useRef<HTMLDivElement | null>(null);
+  const [target, setTarget] = useState<Element | null>(null);
 
   useEffect(() => {
     setTarget(targetRef.current);
@@ -82,14 +82,6 @@ function ShowCaseCard({ item, ...props }) {
     </Container>
   );
 }
-
-ShowCaseCard.defaultProps = {
-  item: {},
-};
-
-ShowCaseCard.propTypes = {
-  item: PropTypes.objectOf(PropTypes.any),
-};
 
 function ShowCases() {
   return (

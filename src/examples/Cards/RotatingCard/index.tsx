@@ -14,9 +14,7 @@ Coded by www.creative-tim.com
 */
 
 import { useState } from "react";
-
-// prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
+import type { ReactNode } from "react";
 
 // @mui material components
 import { Card } from "ui/system";
@@ -24,7 +22,11 @@ import { Card } from "ui/system";
 // Material Kit 2 React components
 import { Box } from "ui/system";
 
-function RotatingCard({ children }) {
+interface RotatingCardProps {
+  children: ReactNode;
+}
+
+function RotatingCard({ children }: RotatingCardProps) {
   const [rotate, setRotate] = useState(false);
 
   const rotate0 = () => setRotate(false);
@@ -47,10 +49,5 @@ function RotatingCard({ children }) {
     </Box>
   );
 }
-
-// Typechecking props for the RotatingCard
-RotatingCard.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export default RotatingCard;

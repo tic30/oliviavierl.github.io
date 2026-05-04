@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import type { ReactNode } from "react";
 import { keyframes } from "@emotion/react";
 // @mui material components
 import { Box, Container } from "ui/system";
@@ -7,7 +7,11 @@ import { Typography } from "ui/system";
 import colors from "assets/theme/base/colors";
 import wave from "assets/img/wave.svg";
 
-const HighlightedText = ({ children }) => (
+interface HighlightedTextProps {
+  children: ReactNode;
+}
+
+const HighlightedText = ({ children }: HighlightedTextProps) => (
   <span
     style={{
       color: colors.primary.main,
@@ -18,10 +22,6 @@ const HighlightedText = ({ children }) => (
     {children}
   </span>
 );
-
-HighlightedText.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 const bounce = keyframes`
     0% {transform: translateY(0)}

@@ -29,7 +29,6 @@
       }
     ],
     "react/jsx-curly-spacing": [2, "never"],
-    "react/forbid-prop-types": "warn",
     "react/no-unescaped-entities": "off"
   },
   "settings": { "import/resolver": { "node": { "paths": ["src"] } } }

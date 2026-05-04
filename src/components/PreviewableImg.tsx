@@ -1,10 +1,22 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import { Box, Dialog, DialogTitle, IconButton } from "ui/system";
 import { Close as CloseIcon } from "ui/icons";
 import colors from "assets/theme/base/colors";
 
-function SimpleDialog({ open, onClose, src, alt }) {
+interface SimpleDialogProps {
+  open: boolean;
+  onClose: () => void;
+  src: string;
+  alt: string;
+}
+
+interface PreviewableImgProps {
+  src: string;
+  alt: string;
+  [key: string]: unknown;
+}
+
+function SimpleDialog({ open, onClose, src, alt }: SimpleDialogProps) {
   return (
     <Dialog
       fullScreen
@@ -39,14 +51,7 @@ function SimpleDialog({ open, onClose, src, alt }) {
   );
 }
 
-SimpleDialog.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-};
-
-export default function PreviewableImg({ src, alt, ...props }) {
+export default function PreviewableImg({ src, alt, ...props }: PreviewableImgProps) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -75,8 +80,3 @@ export default function PreviewableImg({ src, alt, ...props }) {
     </Box>
   );
 }
-
-PreviewableImg.propTypes = {
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-};

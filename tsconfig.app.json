@@ -9,7 +9,6 @@
     "baseUrl": "src",
     "paths": {
       "ui/*": ["ui/*"],
-      "prop-types": ["vendor/prop-types.ts"],
       "assets/*": ["assets/*"],
       "components/*": ["components/*"],
       "pages/*": ["pages/*"],

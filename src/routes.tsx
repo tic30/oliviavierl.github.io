@@ -23,6 +23,7 @@
 
 // @mui material components
 import { Icon } from "ui/system";
+import type { NavigationRoute } from "types/site";
 
 // Pages
 import About from "pages/About";
@@ -30,7 +31,7 @@ import LandingPage from "pages/LandingPage";
 
 import showCases from "showcases.routes";
 
-const routes = [
+const routes: NavigationRoute[] = [
   {
     name: "home",
     route: "/",

@@ -1,11 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, type ReactNode } from "react";
 
 // react-router components
 import { Link } from "react-router-dom";
-
-// prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
 
 // @mui material components
 import { Container } from "ui/system";
@@ -31,6 +28,18 @@ import breakpoints from "assets/theme/base/breakpoints";
 import defaultRoutes from "routes";
 
 import favicon from "assets/img/logo.svg";
+import type { MaybeCardAction, NavigationRoute } from "types/site";
+
+interface DefaultNavbarProps {
+  brand?: string;
+  routes?: NavigationRoute[];
+  transparent?: boolean;
+  light?: boolean;
+  action?: MaybeCardAction;
+  sticky?: boolean;
+  relative?: boolean;
+  center?: boolean;
+}
 
 function DefaultNavbar({
   brand = "Yifan Li",
@@ -41,7 +50,7 @@ function DefaultNavbar({
   sticky = false,
   relative = false,
   center = false,
-}: any) {
+}: DefaultNavbarProps) {
   const [dropdown, setDropdown] = useState<HTMLElement | null>(null);
   const [dropdownEl, setDropdownEl] = useState<HTMLElement | null>(null);
   const [dropdownName, setDropdownName] = useState("");
@@ -101,12 +110,13 @@ function DefaultNavbar({
 
   // Render the routes on the dropdown menu
   const renderRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {
-    let template;
+    let template: ReactNode = null;
 
     // Render the dropdown menu that should be display as columns
     if (collapse && columns && name === dropdownName) {
-      const calculateColumns = collapse.reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / rowsPerColumn);
+      const itemsPerColumn = Math.max(rowsPerColumn ?? collapse.length, 1);
+      const calculateColumns = collapse.reduce<NavigationRoute[][]>((resultArray, item, index) => {
+        const chunkIndex = Math.floor(index / itemsPerColumn);
 
         if (!resultArray[chunkIndex]) {
           resultArray[chunkIndex] = [];
@@ -137,7 +147,7 @@ function DefaultNavbar({
                     >
                       {col.name}
                     </Typography>
-                    {col.collapse.map((item) => (
+                    {col.collapse?.map((item) => (
                       <Typography
                         key={item.name}
                         component={item.route ? Link : MuiLink}
@@ -319,7 +329,7 @@ function DefaultNavbar({
   const renderNestedRoutes = routes.map(({ collapse, columns }) =>
     collapse && !columns
       ? collapse.map(({ name: parentName, collapse: nestedCollapse }) => {
-          let template;
+          let template: ReactNode = null;
 
           if (parentName === nestedDropdownName) {
             template =
@@ -549,48 +559,5 @@ function DefaultNavbar({
     </Container>
   );
 }
-
-// Setting default values for the props of DefaultNavbar
-DefaultNavbar.defaultProps = {
-  brand: "Yifan Li",
-  routes: defaultRoutes,
-  transparent: false,
-  light: false,
-  action: false,
-  sticky: false,
-  relative: false,
-  center: false,
-};
-
-// Typechecking props for the DefaultNavbar
-DefaultNavbar.propTypes = {
-  brand: PropTypes.string,
-  routes: PropTypes.arrayOf(PropTypes.object),
-  transparent: PropTypes.bool,
-  light: PropTypes.bool,
-  action: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.shape({
-      type: PropTypes.oneOf(["external", "internal"]).isRequired,
-      route: PropTypes.string.isRequired,
-      color: PropTypes.oneOf([
-        "primary",
-        "secondary",
-        "info",
-        "success",
-        "warning",
-        "error",
-        "dark",
-        "light",
-        "default",
-        "white",
-      ]),
-      label: PropTypes.string.isRequired,
-    }),
-  ]),
-  sticky: PropTypes.bool,
-  relative: PropTypes.bool,
-  center: PropTypes.bool,
-};
 
 export default DefaultNavbar;

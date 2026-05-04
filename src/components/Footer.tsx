@@ -1,6 +1,3 @@
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
 // @mui material components
 import { Container } from "ui/system";
 import { Link } from "ui/system";
@@ -11,8 +8,15 @@ import { Typography } from "ui/system";
 
 // Material Kit 2 React base styles
 import typography from "assets/theme/base/typography";
+import type { FooterContent, FooterLinkItem } from "types/site";
 
-function SimpleFooter({ links = [], light = false, content }) {
+interface SimpleFooterProps {
+  links?: FooterLinkItem[];
+  light?: boolean;
+  content?: Partial<FooterContent>;
+}
+
+function SimpleFooter({ links = [], light = false, content }: SimpleFooterProps) {
   const { size } = typography;
   const resolvedLinks = links.length
     ? links
@@ -77,18 +81,5 @@ function SimpleFooter({ links = [], light = false, content }) {
     </Container>
   );
 }
-
-// Setting default values for the props of SimpleFooter
-SimpleFooter.defaultProps = {
-  links: [],
-  light: false,
-};
-
-// Typechecking props for the SimpleFooter
-SimpleFooter.propTypes = {
-  links: PropTypes.arrayOf(PropTypes.object),
-  light: PropTypes.bool,
-  content: PropTypes.object,
-};
 
 export default SimpleFooter;

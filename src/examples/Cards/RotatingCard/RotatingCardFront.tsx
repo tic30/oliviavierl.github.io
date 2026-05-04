@@ -13,8 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
+import type { ReactNode } from "react";
 
 // @mui material components
 import { Icon } from "ui/system";
@@ -22,8 +21,17 @@ import { Icon } from "ui/system";
 // Material Kit 2 React components
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
+import type { ThemeColor } from "types/site";
 
-function RotatingCardFront({ image, icon, title, description }) {
+interface RotatingCardFrontProps {
+  color?: ThemeColor;
+  image: string;
+  icon?: ReactNode;
+  title: ReactNode;
+  description: ReactNode;
+}
+
+function RotatingCardFront({ image, icon = "", title, description }: RotatingCardFrontProps) {
   return (
     <Box
       sx={{
@@ -56,29 +64,5 @@ function RotatingCardFront({ image, icon, title, description }) {
     </Box>
   );
 }
-
-// Setting default props for the RotatingCardFront
-RotatingCardFront.defaultProps = {
-  color: "info",
-  icon: "",
-};
-
-// Typechecking props for the RotatingCardFront
-RotatingCardFront.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "dark",
-    "light",
-  ]),
-  image: PropTypes.string.isRequired,
-  icon: PropTypes.node,
-  title: PropTypes.node.isRequired,
-  description: PropTypes.node.isRequired,
-};
 
 export default RotatingCardFront;

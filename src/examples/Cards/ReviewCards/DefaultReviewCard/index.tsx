@@ -13,9 +13,6 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// prop-types is library for typechecking of props
-import PropTypes from "prop-types";
-
 // @mui material components
 import { Icon } from "ui/system";
 
@@ -23,9 +20,29 @@ import { Icon } from "ui/system";
 import { Box } from "ui/system";
 import { Avatar } from "ui/system";
 import { Typography } from "ui/system";
+import type { ReactNode } from "react";
+import type { SurfaceColor } from "types/site";
 
-function DefaultReviewCard({ color, image, name, date, review, rating }) {
-  const ratings = {
+type ReviewRating = 1 | 2 | 3 | 4 | 5;
+
+interface DefaultReviewCardProps {
+  color?: SurfaceColor;
+  image?: string;
+  name: string;
+  date: string;
+  review: string;
+  rating: ReviewRating;
+}
+
+function DefaultReviewCard({
+  color = "transparent",
+  image = "",
+  name,
+  date,
+  review,
+  rating,
+}: DefaultReviewCardProps) {
+  const ratings: Record<number, ReactNode[]> = {
     0.5: [
       <Icon key={1}>star_outline</Icon>,
       <Icon key={2}>star_outline</Icon>,
@@ -98,8 +115,10 @@ function DefaultReviewCard({ color, image, name, date, review, rating }) {
     ],
   };
 
-  const cardBgColor = color === "transparent" ? "transparent" : color === "light" ? "grey.100" : color;
-  const cardTextColor = color === "transparent" || color === "light" ? "text.primary" : "common.white";
+  const cardBgColor =
+    color === "transparent" ? "transparent" : color === "light" ? "grey.100" : color;
+  const cardTextColor =
+    color === "transparent" || color === "light" ? "text.primary" : "common.white";
 
   return (
     <Box
@@ -166,31 +185,5 @@ function DefaultReviewCard({ color, image, name, date, review, rating }) {
     </Box>
   );
 }
-
-// Setting default values for the props of DefaultReviewCard
-DefaultReviewCard.defaultProps = {
-  color: "transparent",
-  image: "",
-};
-
-// Typechecking props for the DefaultReviewCard
-DefaultReviewCard.propTypes = {
-  color: PropTypes.oneOf([
-    "transparent",
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "dark",
-    "light",
-  ]),
-  image: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  review: PropTypes.string.isRequired,
-  rating: PropTypes.oneOf([1, 2, 3, 4, 5]).isRequired,
-};
 
 export default DefaultReviewCard;

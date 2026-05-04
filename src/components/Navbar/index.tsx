@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { Fragment, useState, useEffect, useRef } from "react";
+import { Fragment, useState, useEffect, useRef, type MouseEvent, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import { Box, Container, Icon, Popper, Grow, Grid, Divider, Link as MuiLink } from "ui/system";
 import { alpha } from "ui/system";
 
@@ -18,6 +17,18 @@ import boxShadows from "assets/theme/base/boxShadows";
 import borders from "assets/theme/base/borders";
 import DefaultNavbarDropdown, { linkComponent, routeComponent } from "./DefaultNavbarDropdown";
 import DefaultNavbarMobile from "./DefaultNavbarMobile";
+import type { MaybeCardAction, NavigationRoute } from "types/site";
+
+interface DefaultNavbarProps {
+  brand?: string;
+  title?: string;
+  routes?: NavigationRoute[];
+  transparent?: boolean;
+  light?: boolean;
+  action?: MaybeCardAction;
+  sticky?: boolean;
+  center?: boolean;
+}
 
 function DefaultNavbar({
   brand = "Yifan Li",
@@ -28,7 +39,7 @@ function DefaultNavbar({
   action = false,
   sticky = false,
   center = false,
-}: any) {
+}: DefaultNavbarProps) {
   const [dropdown, setDropdown] = useState<HTMLElement | null>(null);
   const [dropdownEl, setDropdownEl] = useState<HTMLElement | null>(null);
   const [dropdownName, setDropdownName] = useState("");
@@ -92,7 +103,7 @@ function DefaultNavbar({
       href={href}
       route={route}
       collapse={Boolean(collapse)}
-      onMouseEnter={(event) => {
+      onMouseEnter={(event: MouseEvent<HTMLElement>) => {
         const currentTarget = event.currentTarget as HTMLElement;
         if (collapse) {
           setDropdown(currentTarget);
@@ -107,12 +118,13 @@ function DefaultNavbar({
 
   // Render the routes on the dropdown menu
   const renderRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {
-    let template;
+    let template: ReactNode = null;
 
     // Render the dropdown menu that should be display as columns
     if (collapse && columns && name === dropdownName) {
-      const calculateColumns = collapse.reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / rowsPerColumn);
+      const itemsPerColumn = Math.max(rowsPerColumn ?? collapse.length, 1);
+      const calculateColumns = collapse.reduce<NavigationRoute[][]>((resultArray, item, index) => {
+        const chunkIndex = Math.floor(index / itemsPerColumn);
 
         if (!resultArray[chunkIndex]) {
           resultArray[chunkIndex] = [];
@@ -146,7 +158,7 @@ function DefaultNavbar({
                     >
                       {col.name}
                     </Typography>
-                    {col.collapse.map((item) => (
+                    {col.collapse?.map((item) => (
                       <Typography
                         key={item.name}
                         component={item.route ? Link : MuiLink}
@@ -225,7 +237,7 @@ function DefaultNavbar({
               },
             },
           })}
-          onMouseEnter={(event) => {
+          onMouseEnter={(event: MouseEvent<HTMLElement>) => {
             const currentTarget = event.currentTarget as HTMLElement;
             if (item.dropdown) {
               setNestedDropdown(currentTarget);
@@ -313,7 +325,7 @@ function DefaultNavbar({
   const renderNestedRoutes = routes.map(({ collapse, columns }) =>
     collapse && !columns
       ? collapse.map(({ name: parentName, collapse: nestedCollapse }) => {
-          let template;
+          let template: ReactNode = null;
 
           if (parentName === nestedDropdownName) {
             template =
@@ -532,48 +544,5 @@ function DefaultNavbar({
     </Box>
   );
 }
-
-// Setting default values for the props of DefaultNavbar
-DefaultNavbar.defaultProps = {
-  brand: "Yifan Li",
-  title: "Product Designer",
-  routes: defaultRoutes,
-  transparent: false,
-  light: false,
-  action: false,
-  sticky: false,
-  center: false,
-};
-
-// Typechecking props for the DefaultNavbar
-DefaultNavbar.propTypes = {
-  brand: PropTypes.string,
-  title: PropTypes.string,
-  routes: PropTypes.arrayOf(PropTypes.object),
-  transparent: PropTypes.bool,
-  light: PropTypes.bool,
-  action: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.shape({
-      type: PropTypes.oneOf(["external", "internal"]).isRequired,
-      route: PropTypes.string.isRequired,
-      color: PropTypes.oneOf([
-        "primary",
-        "secondary",
-        "info",
-        "success",
-        "warning",
-        "error",
-        "dark",
-        "light",
-        "default",
-        "white",
-      ]),
-      label: PropTypes.string.isRequired,
-    }),
-  ]),
-  sticky: PropTypes.bool,
-  center: PropTypes.bool,
-};
 
 export default DefaultNavbar;

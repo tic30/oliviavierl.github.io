@@ -13,17 +13,34 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
 // @mui material components
 import { Icon } from "ui/system";
 
 // Material Kit 2 React components
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
+import type { ReactNode } from "react";
+import type { ThemeColor } from "types/site";
 
-function DefaultInfoCard({ color, icon, title, description, direction, small }) {
+type InfoCardDirection = "left" | "right" | "center";
+
+interface DefaultInfoCardProps {
+  color?: ThemeColor;
+  icon: ReactNode;
+  title: string;
+  description: string;
+  direction?: InfoCardDirection;
+  small?: boolean;
+}
+
+function DefaultInfoCard({
+  color = "info",
+  icon,
+  title,
+  description,
+  direction = "left",
+  small = false,
+}: DefaultInfoCardProps) {
   return (
     <Box lineHeight={1} p={direction === "center" ? 2 : 0} textAlign={direction}>
       {typeof icon === "string" ? (
@@ -59,31 +76,5 @@ function DefaultInfoCard({ color, icon, title, description, direction, small }) 
     </Box>
   );
 }
-
-// Setting default props for the DefaultInfoCard
-DefaultInfoCard.defaultProps = {
-  color: "info",
-  direction: "left",
-  small: false,
-};
-
-// Typechecking props for the DefaultInfoCard
-DefaultInfoCard.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "light",
-    "dark",
-  ]),
-  icon: PropTypes.node.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  direction: PropTypes.oneOf(["left", "right", "center"]),
-  small: PropTypes.bool,
-};
 
 export default DefaultInfoCard;

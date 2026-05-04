@@ -6,13 +6,14 @@ import { YouTube as YouTubeIcon } from "ui/icons";
 
 // Material Kit 2 React components
 import { Typography } from "ui/system";
+import type { FooterContent } from "types/site";
 
 // Images
 import logoCT from "assets/img/logo.svg";
 
 const date = new Date().getFullYear();
 
-export default {
+const footerRoutes: FooterContent = {
   brand: {
     name: "Material Kit 2",
     image: logoCT,
@@ -89,3 +90,5 @@ export default {
     </Typography>
   ),
 };
+
+export default footerRoutes;

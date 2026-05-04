@@ -13,9 +13,6 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
 // @mui material components
 import { Container } from "ui/system";
 import { Link } from "ui/system";
@@ -27,8 +24,27 @@ import { Typography } from "ui/system";
 
 // Material Kit 2 React base styles
 import typography from "assets/theme/base/typography";
+import type { CompanyInfo } from "types/site";
 
-function SimpleFooter({ company, links, light }) {
+interface SimpleFooterProps {
+  company?: CompanyInfo;
+  links?: CompanyInfo[];
+  light?: boolean;
+}
+
+const defaultCompany: CompanyInfo = { href: "https://www.creative-tim.com/", name: "Creative Tim" };
+const defaultLinks: CompanyInfo[] = [
+  { href: "https://www.creative-tim.com/", name: "Creative Tim" },
+  { href: "https://www.creative-tim.com/presentation", name: "About Us" },
+  { href: "https://www.creative-tim.com/blog", name: "Blog" },
+  { href: "https://www.creative-tim.com/license", name: "License" },
+];
+
+function SimpleFooter({
+  company = defaultCompany,
+  links = defaultLinks,
+  light = false,
+}: SimpleFooterProps) {
   const { href, name } = company;
   const { size } = typography;
 
@@ -103,24 +119,5 @@ function SimpleFooter({ company, links, light }) {
     </Container>
   );
 }
-
-// Setting default values for the props of SimpleFooter
-SimpleFooter.defaultProps = {
-  company: { href: "https://www.creative-tim.com/", name: "Creative Tim" },
-  links: [
-    { href: "https://www.creative-tim.com/", name: "Creative Tim" },
-    { href: "https://www.creative-tim.com/presentation", name: "About Us" },
-    { href: "https://www.creative-tim.com/blog", name: "Blog" },
-    { href: "https://www.creative-tim.com/license", name: "License" },
-  ],
-  light: false,
-};
-
-// Typechecking props for the SimpleFooter
-SimpleFooter.propTypes = {
-  company: PropTypes.objectOf(PropTypes.string),
-  links: PropTypes.arrayOf(PropTypes.object),
-  light: PropTypes.bool,
-};
 
 export default SimpleFooter;

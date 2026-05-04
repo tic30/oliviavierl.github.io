@@ -16,9 +16,6 @@ Coded by www.creative-tim.com
 // react-router-dom components
 import { Link } from "react-router-dom";
 
-// prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
-
 // @mui material components
 import { Container } from "ui/system";
 import { Grid } from "ui/system";
@@ -26,8 +23,13 @@ import { Grid } from "ui/system";
 // Material Kit 2 React components
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
+import type { FooterContent } from "types/site";
 
-function DefaultFooter({ content }) {
+interface DefaultFooterProps {
+  content: FooterContent;
+}
+
+function DefaultFooter({ content }: DefaultFooterProps) {
   const { brand, socials, menus, copyright } = content;
 
   return (
@@ -50,7 +52,11 @@ function DefaultFooter({ content }) {
                   target="_blank"
                   rel="noreferrer"
                   variant="h5"
-                  sx={{ color: "text.primary", opacity: 0.8, mr: key === socials.length - 1 ? 0 : 2.5 }}
+                  sx={{
+                    color: "text.primary",
+                    opacity: 0.8,
+                    mr: key === socials.length - 1 ? 0 : 2.5,
+                  }}
                 >
                   {icon}
                 </Typography>
@@ -105,10 +111,5 @@ function DefaultFooter({ content }) {
     </Box>
   );
 }
-
-// Typechecking props for the DefaultFooter
-DefaultFooter.propTypes = {
-  content: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.object, PropTypes.array])).isRequired,
-};
 
 export default DefaultFooter;

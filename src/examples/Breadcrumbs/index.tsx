@@ -13,9 +13,6 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
 // react-router-dom components
 import { Link } from "react-router-dom";
 
@@ -26,7 +23,17 @@ import { Breadcrumbs as MuiBreadcrumbs } from "ui/system";
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
 
-function Breadcrumbs({ routes, ...rest }) {
+interface BreadcrumbRoute {
+  label: string;
+  route?: string;
+}
+
+interface BreadcrumbsProps {
+  routes: BreadcrumbRoute[];
+  [key: string]: unknown;
+}
+
+function Breadcrumbs({ routes, ...rest }: BreadcrumbsProps) {
   return (
     <Box sx={{ bgcolor: "background.paper", borderRadius: 2, py: 1, px: 2, width: "100%" }}>
       <MuiBreadcrumbs {...rest}>
@@ -50,11 +57,7 @@ function Breadcrumbs({ routes, ...rest }) {
               {label}
             </Typography>
           ) : (
-            <Typography
-              key={label}
-              variant="button"
-              sx={{ fontWeight: 400 }}
-            >
+            <Typography key={label} variant="button" sx={{ fontWeight: 400 }}>
               {label}
             </Typography>
           )
@@ -63,10 +66,5 @@ function Breadcrumbs({ routes, ...rest }) {
     </Box>
   );
 }
-
-// Typechecking props for the Breadcrumbs
-Breadcrumbs.propTypes = {
-  routes: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default Breadcrumbs;

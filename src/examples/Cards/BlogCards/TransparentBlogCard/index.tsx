@@ -16,9 +16,6 @@ Coded by www.creative-tim.com
 // react-router components
 import { Link } from "react-router-dom";
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
 // @mui material components
 import { Card } from "ui/system";
 import { Icon } from "ui/system";
@@ -27,8 +24,16 @@ import { Link as MuiLink } from "ui/system";
 // Material Kit 2 React components
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
+import type { AccentColor, CardAction } from "types/site";
 
-function TransparentBlogCard({ image, title, description, action }) {
+interface TransparentBlogCardProps {
+  image: string;
+  title: string;
+  description: string;
+  action: CardAction & { color: AccentColor };
+}
+
+function TransparentBlogCard({ image, title, description, action }: TransparentBlogCardProps) {
   const cardActionStyles = {
     display: "flex",
     alignItems: "center",
@@ -142,29 +147,5 @@ function TransparentBlogCard({ image, title, description, action }) {
     </Card>
   );
 }
-
-// Typechecking props for the TransparentBlogCard
-TransparentBlogCard.propTypes = {
-  image: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  action: PropTypes.shape({
-    type: PropTypes.oneOf(["external", "internal"]),
-    route: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    color: PropTypes.oneOf([
-      "inherit",
-      "primary",
-      "secondary",
-      "info",
-      "success",
-      "warning",
-      "error",
-      "light",
-      "dark",
-      "text",
-    ]).isRequired,
-  }).isRequired,
-};
 
 export default TransparentBlogCard;

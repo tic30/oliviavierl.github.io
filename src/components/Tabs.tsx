@@ -1,8 +1,8 @@
 // Or use https://mui.com/components/tabs/
 import * as React from "react";
 import { Box, ToggleButton, ToggleButtonGroup } from "ui/system";
-import PropTypes from "prop-types";
 import borders from "assets/theme/base/borders";
+import type { StyleObject } from "types/site";
 // import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // const theme = createTheme({
@@ -13,7 +13,14 @@ import borders from "assets/theme/base/borders";
 //   },
 // });
 
-const Tabs = ({ items, buttons, buttonSx, sx }) => {
+interface TabsProps {
+  items: React.ReactNode[];
+  buttons: React.ReactNode[];
+  buttonSx?: StyleObject;
+  sx?: StyleObject;
+}
+
+const Tabs = ({ items, buttons, buttonSx = {}, sx = {} }: TabsProps) => {
   const [active, setActive] = React.useState(0);
 
   return (
@@ -46,18 +53,6 @@ const Tabs = ({ items, buttons, buttonSx, sx }) => {
       {items[active]}
     </Box>
   );
-};
-
-Tabs.defaultProps = {
-  buttonSx: {},
-  sx: {},
-};
-
-Tabs.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.any).isRequired,
-  buttons: PropTypes.arrayOf(PropTypes.any).isRequired,
-  buttonSx: PropTypes.objectOf(PropTypes.any),
-  sx: PropTypes.objectOf(PropTypes.any),
 };
 
 export default Tabs;

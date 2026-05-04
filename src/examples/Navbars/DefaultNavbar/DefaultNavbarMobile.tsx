@@ -18,9 +18,6 @@ import { useState } from "react";
 // react-router components
 import { Link } from "react-router-dom";
 
-// prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
-
 // @mui material components
 import { Collapse } from "ui/system";
 import { Link as MuiLink } from "ui/system";
@@ -28,14 +25,21 @@ import { Link as MuiLink } from "ui/system";
 // Material Kit 2 React components
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
+import type { NavigationRoute } from "types/site";
 
 // Material Kit 2 React example components
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
 
-function DefaultNavbarMobile({ routes, open }) {
+interface DefaultNavbarMobileProps {
+  routes: NavigationRoute[];
+  open: boolean;
+}
+
+function DefaultNavbarMobile({ routes, open }: DefaultNavbarMobileProps) {
   const [collapse, setCollapse] = useState<string | null>(null);
 
-  const handleSetCollapse = (name) => (collapse === name ? setCollapse(null) : setCollapse(name));
+  const handleSetCollapse = (name: string) =>
+    collapse === name ? setCollapse(null) : setCollapse(name);
 
   const renderNavbarItems = routes.map(
     ({ name, icon, collapse: routeCollapses, href, route, collapse: navCollapse }) => (
@@ -154,11 +158,5 @@ function DefaultNavbarMobile({ routes, open }) {
     </Collapse>
   );
 }
-
-// Typechecking props for the DefaultNavbarMobile
-DefaultNavbarMobile.propTypes = {
-  routes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  open: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
-};
 
 export default DefaultNavbarMobile;

@@ -16,9 +16,6 @@ Coded by www.creative-tim.com
 // react-router components
 import { Link } from "react-router-dom";
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
 // @mui material components
 import { Card } from "ui/system";
 import { Link as MuiLink } from "ui/system";
@@ -27,8 +24,16 @@ import { Link as MuiLink } from "ui/system";
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
 import { Button } from "ui/system";
+import type { CardAction } from "types/site";
 
-function CenteredBlogCard({ image, title, description, action }) {
+interface CenteredBlogCardProps {
+  image: string;
+  title: string;
+  description: string;
+  action: CardAction;
+}
+
+function CenteredBlogCard({ image, title, description, action }: CenteredBlogCardProps) {
   return (
     <Card>
       <Box sx={{ position: "relative", borderRadius: 3, mx: 2, mt: -3 }}>
@@ -55,7 +60,10 @@ function CenteredBlogCard({ image, title, description, action }) {
         />
       </Box>
       <Box p={3} mt={-1} textAlign="center">
-        <Typography sx={{ display: "inline", textTransform: "capitalize", fontWeight: 400 }} variant="h5">
+        <Typography
+          sx={{ display: "inline", textTransform: "capitalize", fontWeight: 400 }}
+          variant="h5"
+        >
           {title}
         </Typography>
         <Box mt={1} mb={3}>
@@ -90,27 +98,5 @@ function CenteredBlogCard({ image, title, description, action }) {
     </Card>
   );
 }
-
-// Typechecking props for the CenteredBlogCard
-CenteredBlogCard.propTypes = {
-  image: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  action: PropTypes.shape({
-    type: PropTypes.oneOf(["external", "internal"]).isRequired,
-    route: PropTypes.string.isRequired,
-    color: PropTypes.oneOf([
-      "primary",
-      "secondary",
-      "info",
-      "success",
-      "warning",
-      "error",
-      "dark",
-      "light",
-    ]),
-    label: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default CenteredBlogCard;

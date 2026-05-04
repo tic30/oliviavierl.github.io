@@ -13,9 +13,6 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
 // @mui material components
 import { Link } from "ui/system";
 import { Grid } from "ui/system";
@@ -31,8 +28,41 @@ import { GitHub as GitHubIcon } from "ui/icons";
 // Material Kit 2 React components
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
+import type { CompanyInfo, FooterSocial } from "types/site";
 
-function CenteredFooter({ company, links, socials, light }) {
+interface CenteredFooterProps {
+  company?: CompanyInfo;
+  links?: CompanyInfo[];
+  socials?: FooterSocial[];
+  light?: boolean;
+}
+
+const defaultCompany: CompanyInfo = { href: "https://www.creative-tim.com/", name: "Creative Tim" };
+const defaultLinks: CompanyInfo[] = [
+  { href: "https://www.creative-tim.com/", name: "Company" },
+  { href: "https://www.creative-tim.com/presentation", name: "About Us" },
+  { href: "https://www.creative-tim.com/presentation", name: "Team" },
+  { href: "https://www.creative-tim.com/templates/react", name: "Products" },
+  { href: "https://www.creative-tim.com/blog", name: "Blog" },
+  { href: "https://www.creative-tim.com/license", name: "License" },
+];
+const defaultSocials: FooterSocial[] = [
+  { icon: <FacebookIcon fontSize="small" />, link: "https://www.facebook.com/CreativeTim/" },
+  { icon: <TwitterIcon fontSize="small" />, link: "https://twitter.com/creativetim" },
+  {
+    icon: <InstagramIcon fontSize="small" />,
+    link: "https://www.instagram.com/creativetimofficial/",
+  },
+  { icon: <PinterestIcon fontSize="small" />, link: "https://ro.pinterest.com/thecreativetim/" },
+  { icon: <GitHubIcon fontSize="small" />, link: "https://github.com/creativetimofficial" },
+];
+
+function CenteredFooter({
+  company = defaultCompany,
+  links = defaultLinks,
+  socials = defaultSocials,
+  light = false,
+}: CenteredFooterProps) {
   const { href, name } = company;
 
   const year = new Date().getFullYear();
@@ -102,43 +132,5 @@ function CenteredFooter({ company, links, socials, light }) {
     </Box>
   );
 }
-
-// Setting default values for the props of CenteredFooter
-CenteredFooter.defaultProps = {
-  company: { href: "https://www.creative-tim.com/", name: "Creative Tim" },
-  links: [
-    { href: "https://www.creative-tim.com/", name: "Company" },
-    { href: "https://www.creative-tim.com/presentation", name: "About Us" },
-    { href: "https://www.creative-tim.com/presentation", name: "Team" },
-    { href: "https://www.creative-tim.com/templates/react", name: "Products" },
-    { href: "https://www.creative-tim.com/blog", name: "Blog" },
-    { href: "https://www.creative-tim.com/license", name: "License" },
-  ],
-  socials: [
-    { icon: <FacebookIcon fontSize="small" />, link: "https://www.facebook.com/CreativeTim/" },
-    {
-      icon: <TwitterIcon fontSize="small" />,
-      link: "https://twitter.com/creativetim",
-    },
-    {
-      icon: <InstagramIcon fontSize="small" />,
-      link: "https://www.instagram.com/creativetimofficial/",
-    },
-    {
-      icon: <PinterestIcon fontSize="small" />,
-      link: "https://ro.pinterest.com/thecreativetim/",
-    },
-    { icon: <GitHubIcon fontSize="small" />, link: "https://github.com/creativetimofficial" },
-  ],
-  light: false,
-};
-
-// Typechecking props for the CenteredFooter
-CenteredFooter.propTypes = {
-  company: PropTypes.objectOf(PropTypes.string),
-  links: PropTypes.arrayOf(PropTypes.object),
-  socials: PropTypes.arrayOf(PropTypes.object),
-  light: PropTypes.bool,
-};
 
 export default CenteredFooter;

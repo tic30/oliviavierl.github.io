@@ -13,9 +13,6 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
 // @mui material components
 import { Card } from "ui/system";
 import { Grid } from "ui/system";
@@ -23,8 +20,21 @@ import { Grid } from "ui/system";
 // Material Kit 2 React components
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
+import type { ThemeColor } from "types/site";
 
-function HorizontalTeamCard({ image, name, position, description }) {
+interface TeamCardPosition {
+  color?: ThemeColor;
+  label: string;
+}
+
+interface HorizontalTeamCardProps {
+  image: string;
+  name: string;
+  position: TeamCardPosition;
+  description: string;
+}
+
+function HorizontalTeamCard({ image, name, position, description }: HorizontalTeamCardProps) {
   return (
     <Card sx={{ mt: 3 }}>
       <Grid container>
@@ -50,8 +60,8 @@ function HorizontalTeamCard({ image, name, position, description }) {
                   position.color === "dark"
                     ? "text.primary"
                     : position.color === "light"
-                    ? "text.secondary"
-                    : position.color,
+                      ? "text.secondary"
+                      : position.color,
               }}
               mb={1}
             >
@@ -66,25 +76,5 @@ function HorizontalTeamCard({ image, name, position, description }) {
     </Card>
   );
 }
-
-// Typechecking props for the HorizontalTeamCard
-HorizontalTeamCard.propTypes = {
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  position: PropTypes.shape({
-    color: PropTypes.oneOf([
-      "primary",
-      "secondary",
-      "info",
-      "success",
-      "warning",
-      "error",
-      "dark",
-      "light",
-    ]),
-    label: PropTypes.string.isRequired,
-  }).isRequired,
-  description: PropTypes.string.isRequired,
-};
 
 export default HorizontalTeamCard;

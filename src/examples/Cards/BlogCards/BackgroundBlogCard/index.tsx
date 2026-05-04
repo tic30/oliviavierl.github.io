@@ -16,9 +16,6 @@ Coded by www.creative-tim.com
 // react-router components
 import { Link } from "react-router-dom";
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
 // @mui material components
 import { Card } from "ui/system";
 import { Link as MuiLink } from "ui/system";
@@ -27,8 +24,16 @@ import { Icon } from "ui/system";
 // Material Kit 2 React components
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
+import type { CardAction } from "types/site";
 
-function BackgroundBlogCard({ image, title, description, action }) {
+interface BackgroundBlogCardProps {
+  image: string;
+  title: string;
+  description: string;
+  action: CardAction;
+}
+
+function BackgroundBlogCard({ image, title, description, action }: BackgroundBlogCardProps) {
   const cardActionStyles = {
     display: "flex",
     alignItems: "center",
@@ -107,17 +112,5 @@ function BackgroundBlogCard({ image, title, description, action }) {
     </Card>
   );
 }
-
-// Typechecking props for the BackgroundBlogCard
-BackgroundBlogCard.propTypes = {
-  image: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  action: PropTypes.shape({
-    type: PropTypes.oneOf(["external", "internal"]).isRequired,
-    route: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default BackgroundBlogCard;

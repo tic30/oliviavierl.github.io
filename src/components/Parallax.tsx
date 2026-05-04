@@ -1,5 +1,6 @@
-import PropTypes from "prop-types";
+import type { HTMLAttributes, ReactNode } from "react";
 import { Box } from "ui/system";
+import type { StyleObject } from "types/site";
 
 const parallaxLayer = {
   position: "absolute",
@@ -9,7 +10,20 @@ const parallaxLayer = {
   left: 0,
 };
 
-const Parallax = ({ bgImage, bgImageSx, sx, children, ...props }) => (
+interface ParallaxProps extends HTMLAttributes<HTMLDivElement> {
+  bgImage: string;
+  bgImageSx?: StyleObject;
+  sx?: StyleObject;
+  children?: ReactNode;
+}
+
+const Parallax = ({
+  bgImage,
+  bgImageSx = {},
+  sx = {},
+  children = null,
+  ...props
+}: ParallaxProps) => (
   <Box
     sx={{
       perspective: "1px",
@@ -40,18 +54,5 @@ const Parallax = ({ bgImage, bgImageSx, sx, children, ...props }) => (
     </Box>
   </Box>
 );
-
-Parallax.defaultProps = {
-  bgImageSx: {},
-  sx: {},
-  children: false,
-};
-
-Parallax.propTypes = {
-  bgImage: PropTypes.string.isRequired,
-  bgImageSx: PropTypes.objectOf(PropTypes.any),
-  sx: PropTypes.objectOf(PropTypes.any),
-  children: PropTypes.node,
-};
 
 export default Parallax;
