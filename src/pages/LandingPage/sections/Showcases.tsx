@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Container, Card, Box, Link as MuiLink, Fade } from "ui/system";
+import { Container, Card, Box, Link as MuiLink, Fade, useTheme } from "ui/system";
 import { Typography } from "ui/system";
-import showCasesRoutes from "showcases.routes";
+import getShowcases from "showcases.routes";
 import containerSx from "assets/theme/components/container";
 import useIntersectionObserver from "hooks/useIntersectionObserver";
 import type { ShowcaseItem } from "types/site";
@@ -84,6 +84,8 @@ function ShowCaseCard({ item, ...props }: ShowCaseCardProps) {
 }
 
 function ShowCases() {
+  const theme = useTheme();
+  const showCasesRoutes = getShowcases(theme);
   return (
     <Box sx={{ ...containerSx, pb: 4 }}>
       {showCasesRoutes.map((item) => (

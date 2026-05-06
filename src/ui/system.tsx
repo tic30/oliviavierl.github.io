@@ -26,5 +26,6 @@ export {
   ToggleButtonGroup,
   Tooltip,
   Typography,
+  useTheme,
   Zoom,
 } from "../base-ui/core";

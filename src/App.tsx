@@ -14,10 +14,10 @@ import Footer from "components/Footer";
 import footerRoutes from "footer.routes";
 
 // Material Kit 2 React routes
-import routes from "routes";
+import getRoutes from "routes";
 import { resumeUrl } from "./constants";
 
-export default function App() {
+function AppRoutes() {
   const { pathname } = useLocation();
 
   // Setting page scroll to 0 when changing the route
@@ -28,10 +28,10 @@ export default function App() {
     }
   }, [pathname]);
 
-  const getRoutes = (allRoutes) =>
+  const renderRoutes = (allRoutes) =>
     allRoutes.map((route) => {
       if (route.collapse) {
-        return getRoutes(route.collapse);
+        return renderRoutes(route.collapse);
       }
 
       if (route.route) {
@@ -42,8 +42,7 @@ export default function App() {
     });
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <>
       <Navbar
         sticky
         action={{
@@ -54,10 +53,19 @@ export default function App() {
         }}
       />
       <Routes>
-        {getRoutes(routes)}
+        {renderRoutes(getRoutes(theme))}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Footer content={footerRoutes} />
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppRoutes />
     </ThemeProvider>
   );
 }

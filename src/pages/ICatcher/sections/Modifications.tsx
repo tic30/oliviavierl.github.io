@@ -1,6 +1,5 @@
-import { Box, Container, Typography } from "ui/system";
+import { Box, Container, Typography, useTheme } from "ui/system";
 import SectionHeader from "components/SectionHeader";
-import colors from "assets/theme/base/colors";
 import change11 from "assets/img/change11.png";
 import change12 from "assets/img/change12.png";
 import change13 from "assets/img/change13.png";
@@ -46,11 +45,12 @@ const sections = [
 ];
 
 function Modifications() {
+  const theme = useTheme();
   return (
     <Box component="section">
       <SectionHeader
         title="Modifications"
-        bgColor={`linear-gradient(160deg, ${colors.showcaseColors.grey}, ${colors.black.main})`}
+        bgColor={`linear-gradient(160deg, ${theme.palette.showcase.grey}, ${theme.palette.common.black})`}
         sx={{ mb: 6 }}
       />
       {sections.map((section, i) => (

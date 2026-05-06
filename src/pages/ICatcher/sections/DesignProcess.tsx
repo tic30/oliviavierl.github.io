@@ -1,4 +1,4 @@
-import { Card, CardMedia, Container, Grid } from "ui/system";
+import { Card, CardMedia, Container, Grid, useTheme } from "ui/system";
 import PreviewableImg from "components/PreviewableImg";
 import Tabs from "components/Tabs";
 import { Box } from "ui/system";
@@ -17,16 +17,16 @@ import persona1 from "assets/img/persona1.png";
 import persona2 from "assets/img/persona2.png";
 import sticker from "assets/img/stickers.png";
 import first1 from "assets/img/first1.png";
-import colors from "assets/theme/base/colors";
 
 const imgs = [dp1, dp2, dp3, dp4];
 
 function DesignProcess() {
+  const theme = useTheme();
   return (
     <Box component="section">
       <SectionHeader
         title="Design Process"
-        bgColor={`linear-gradient(160deg, ${colors.showcaseColors.grey}, ${colors.black.main})`}
+        bgColor={`linear-gradient(160deg, ${theme.palette.showcase.grey}, ${theme.palette.common.black})`}
       />
       <Container
         sx={{
@@ -50,11 +50,11 @@ function DesignProcess() {
           inspirations and manage them in thier daily life to better understand these learning
           goals.
         </Typography>
-        <Typography variant="body2" sx={{ color: colors.primary.main, alignSelf: "flex-start" }}>
+        <Typography variant="body2" sx={{ color: "primary.main", alignSelf: "flex-start" }}>
           Learning Goal 1 To understand what habits people have when they are searching for
           inspirations online.
         </Typography>
-        <Typography variant="body2" sx={{ color: colors.primary.main, alignSelf: "flex-start" }}>
+        <Typography variant="body2" sx={{ color: "primary.main", alignSelf: "flex-start" }}>
           Learning Goal 2 To understand how people save thier inspirations in the daily life.
         </Typography>
         <Box sx={{ width: "100%", display: "flex" }}>
@@ -109,7 +109,7 @@ function DesignProcess() {
                 variant="body1"
                 sx={{
                   textAlign: "center",
-                  color: colors.primary.main,
+                  color: "primary.main",
                 }}
               >
                 Adventages
@@ -130,7 +130,7 @@ function DesignProcess() {
                 variant="body1"
                 sx={{
                   textAlign: "center",
-                  color: colors.primary.main,
+                  color: "primary.main",
                 }}
               >
                 Disadventages
@@ -178,7 +178,7 @@ function DesignProcess() {
             <Typography
               variant="body1"
               sx={{
-                color: colors.primary.main,
+                color: "primary.main",
               }}
             >
               Save inspirations of different forms
@@ -188,7 +188,7 @@ function DesignProcess() {
             <Typography
               variant="body1"
               sx={{
-                color: colors.primary.main,
+                color: "primary.main",
               }}
             >
               Community for sharing works and make friends
@@ -198,7 +198,7 @@ function DesignProcess() {
             <Typography
               variant="body1"
               sx={{
-                color: colors.primary.main,
+                color: "primary.main",
               }}
             >
               Manage folders of other apps

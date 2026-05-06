@@ -9,10 +9,9 @@ import { Typography } from "ui/system";
 // Images
 import headImg from "assets/img/head.png";
 import mindmapImg from "assets/img/mindmap.png";
-import colors from "assets/theme/base/colors";
 
 const sectionTextSx = {
-  color: colors.white.main,
+  color: "common.white",
   mb: 3,
 };
 
@@ -45,7 +44,7 @@ function Intro() {
       </Container>
       <Box
         sx={{
-          backgroundColor: colors.showcaseColors.dark,
+          backgroundColor: "showcase.dark",
           py: 10,
         }}
       >

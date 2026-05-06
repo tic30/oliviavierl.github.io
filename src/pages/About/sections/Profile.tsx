@@ -14,7 +14,6 @@ import { Typography } from "ui/system";
 
 // Images
 import profilePicture from "assets/img/avatar.png";
-import colors from "assets/theme/base/colors";
 import { linkedinUrl, email, instagramUrl, resumeUrl } from "../../../constants";
 
 function Profile() {
@@ -48,9 +47,9 @@ function Profile() {
               p: 0,
               minWidth: 0,
               minHeight: 0,
-              color: colors.dark.main,
+              color: "dark.main",
               "&:hover, &:active, &:focus": {
-                color: colors.dark.main,
+                color: "dark.main",
               },
             }}
             onClick={() => {

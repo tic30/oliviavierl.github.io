@@ -22,6 +22,7 @@
 */
 
 // @mui material components
+import type { Theme } from "@mui/material/styles";
 import { Icon } from "ui/system";
 import type { NavigationRoute } from "types/site";
 
@@ -29,9 +30,9 @@ import type { NavigationRoute } from "types/site";
 import About from "pages/About";
 import LandingPage from "pages/LandingPage";
 
-import showCases from "showcases.routes";
+import getShowcases from "showcases.routes";
 
-const routes: NavigationRoute[] = [
+const getRoutes = (theme: Theme): NavigationRoute[] => [
   {
     name: "home",
     route: "/",
@@ -41,7 +42,7 @@ const routes: NavigationRoute[] = [
   {
     name: "projects",
     icon: <Icon>dashboard</Icon>,
-    collapse: showCases,
+    collapse: getShowcases(theme),
   },
   {
     name: "about",
@@ -51,4 +52,4 @@ const routes: NavigationRoute[] = [
   },
 ];
 
-export default routes;
+export default getRoutes;

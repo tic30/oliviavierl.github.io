@@ -1,14 +1,24 @@
 /* eslint-disable no-param-reassign */
 import { Fragment, useState, useEffect, useRef, type MouseEvent, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Box, Container, Icon, Popper, Grow, Grid, Divider, Link as MuiLink } from "ui/system";
+import {
+  Box,
+  Container,
+  Icon,
+  Popper,
+  Grow,
+  Grid,
+  Divider,
+  Link as MuiLink,
+  useTheme,
+} from "ui/system";
 import { alpha } from "ui/system";
 
 import favicon from "assets/img/header-logo.svg";
 import slash from "assets/img/slash.svg";
 import breakpoints from "assets/theme/base/breakpoints";
 
-import defaultRoutes from "routes";
+import getDefaultRoutes from "routes";
 import { Typography } from "ui/system";
 import { Button } from "ui/system";
 
@@ -33,13 +43,15 @@ interface DefaultNavbarProps {
 function DefaultNavbar({
   brand = "Yifan Li",
   title = "Product Designer",
-  routes = defaultRoutes,
+  routes,
   transparent = false,
   light = false,
   action = false,
   sticky = false,
   center = false,
 }: DefaultNavbarProps) {
+  const theme = useTheme();
+  const resolvedRoutes = routes ?? getDefaultRoutes(theme);
   const [dropdown, setDropdown] = useState<HTMLElement | null>(null);
   const [dropdownEl, setDropdownEl] = useState<HTMLElement | null>(null);
   const [dropdownName, setDropdownName] = useState("");
@@ -95,7 +107,7 @@ function DefaultNavbar({
     };
   }, []);
 
-  const renderNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
+  const renderNavbarItems = resolvedRoutes.map(({ name, icon, href, route, collapse }) => (
     <DefaultNavbarDropdown
       key={name}
       name={name}
@@ -117,7 +129,7 @@ function DefaultNavbar({
   ));
 
   // Render the routes on the dropdown menu
-  const renderRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {
+  const renderRoutes = resolvedRoutes.map(({ name, collapse, columns, rowsPerColumn }) => {
     let template: ReactNode = null;
 
     // Render the dropdown menu that should be display as columns
@@ -322,7 +334,7 @@ function DefaultNavbar({
   );
 
   // Render routes that are nested inside the dropdown menu routes
-  const renderNestedRoutes = routes.map(({ collapse, columns }) =>
+  const renderNestedRoutes = resolvedRoutes.map(({ collapse, columns }) =>
     collapse && !columns
       ? collapse.map(({ name: parentName, collapse: nestedCollapse }) => {
           let template: ReactNode = null;
@@ -534,7 +546,11 @@ function DefaultNavbar({
             }}
           >
             {mobileView && (
-              <DefaultNavbarMobile routes={routes} open={mobileNavbar} onClose={openMobileNavbar} />
+              <DefaultNavbarMobile
+                routes={resolvedRoutes}
+                open={mobileNavbar}
+                onClose={openMobileNavbar}
+              />
             )}
           </Box>
         </Box>

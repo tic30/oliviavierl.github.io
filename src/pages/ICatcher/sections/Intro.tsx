@@ -5,7 +5,6 @@ import { Grid } from "ui/system";
 // Material Kit 2 React components
 import { Box } from "ui/system";
 import { Typography } from "ui/system";
-import colors from "assets/theme/base/colors";
 
 function Intro() {
   return (
@@ -28,7 +27,7 @@ function Intro() {
             mb: 12,
             border: "2px dashed",
             borderRadius: "10px",
-            borderColor: colors.primary.main,
+            borderColor: "primary.main",
           }}
         >
           <Grid item xs={4}>

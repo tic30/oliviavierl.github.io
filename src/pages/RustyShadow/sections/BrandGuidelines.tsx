@@ -1,5 +1,5 @@
 // @mui material components
-import { Container } from "ui/system";
+import { Container, useTheme } from "ui/system";
 
 // Material Kit 2 React components
 import { Box } from "ui/system";
@@ -8,7 +8,6 @@ import SectionHeader from "components/SectionHeader";
 // Images
 import rs1 from "assets/img/rs-typo.png";
 import rs2 from "assets/img/rs-logo.png";
-import colors from "assets/theme/base/colors";
 
 const imgSx = {
   mb: 3,
@@ -17,9 +16,10 @@ const imgSx = {
 const imgs = [rs1, rs2];
 
 function BrandGuidelines() {
+  const theme = useTheme();
   return (
     <Box component="section">
-      <SectionHeader title="Brand Guidelines" bgColor={colors.showcaseColors.dark} />
+      <SectionHeader title="Brand Guidelines" bgColor={theme.palette.showcase.dark} />
       <Container sx={{ py: 12 }}>
         <>
           {imgs.map((img, i) => (

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Box, Dialog, DialogTitle, IconButton } from "ui/system";
 import { Close as CloseIcon } from "ui/icons";
-import colors from "assets/theme/base/colors";
 
 interface SimpleDialogProps {
   open: boolean;
@@ -33,7 +32,7 @@ function SimpleDialog({ open, onClose, src, alt }: SimpleDialogProps) {
             position: "absolute",
             right: 8,
             top: 8,
-            color: colors.white.main,
+            color: "common.white",
           }}
         >
           <CloseIcon />

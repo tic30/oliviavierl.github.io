@@ -1,11 +1,10 @@
 import type { ReactNode } from "react";
-import { Box } from "ui/system";
+import { Box, useTheme } from "ui/system";
 import { Typography } from "ui/system";
 import Parallax from "components/Parallax";
 
 // Author page sections
 import bgImage from "assets/img/cover1.jpg";
-import colors from "assets/theme/base/colors";
 import Intro from "./sections/Intro";
 import Research from "./sections/Research";
 import Personas from "./sections/Personas";
@@ -16,23 +15,26 @@ interface HighlightedTextProps {
   children: ReactNode;
 }
 
-const HighlightedText = ({ children }: HighlightedTextProps) => (
-  <span
-    style={{
-      color: colors.showcaseColors.yellow,
-      borderColor: colors.showcaseColors.yellow,
-    }}
-  >
-    {children}
-  </span>
-);
+const HighlightedText = ({ children }: HighlightedTextProps) => {
+  const theme = useTheme();
+  return (
+    <span
+      style={{
+        color: theme.palette.showcase.yellow,
+        borderColor: theme.palette.showcase.yellow,
+      }}
+    >
+      {children}
+    </span>
+  );
+};
 
 function MeetupRedesign() {
   return (
     <Parallax
       bgImage={bgImage}
       sx={{
-        backgroundColor: colors.white.main,
+        backgroundColor: "common.white",
       }}
       bgImageSx={{
         top: "100vh",
@@ -47,7 +49,7 @@ function MeetupRedesign() {
           textAlign: "center",
           pt: { xs: "15vh", lg: "30vh" },
           pb: { xs: "5vh", lg: "20vh" },
-          backgroundColor: colors.white.main,
+          backgroundColor: "common.white",
         }}
       >
         <Typography variant="h1">
@@ -64,7 +66,7 @@ function MeetupRedesign() {
       />
       <Box
         sx={{
-          backgroundColor: colors.white.main,
+          backgroundColor: "common.white",
         }}
       >
         <Intro />

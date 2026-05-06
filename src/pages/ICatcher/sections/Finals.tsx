@@ -1,6 +1,5 @@
-import { Box, Container, IconButton, Typography } from "ui/system";
+import { Box, Container, IconButton, Typography, useTheme } from "ui/system";
 import SectionHeader from "components/SectionHeader";
-import colors from "assets/theme/base/colors";
 import f11 from "assets/img/f11.png";
 import f12 from "assets/img/f12.png";
 import f13 from "assets/img/f13.png";
@@ -37,11 +36,12 @@ const sections = [
 ];
 
 function Finals() {
+  const theme = useTheme();
   return (
     <Box component="section">
       <SectionHeader
         title="Finalized Design"
-        bgColor={`linear-gradient(160deg, ${colors.showcaseColors.grey}, ${colors.black.main})`}
+        bgColor={`linear-gradient(160deg, ${theme.palette.showcase.grey}, ${theme.palette.common.black})`}
         sx={{ mb: 6 }}
       />
       {sections.map((section, i) => (
@@ -82,7 +82,7 @@ function Finals() {
                     mx: 1,
                   }}
                 />
-                <Typography variant="body2" color={colors.primary.main}>
+                <Typography variant="body2" color="primary.main">
                   Go to prototype
                 </Typography>
               </IconButton>

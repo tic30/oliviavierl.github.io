@@ -1,5 +1,5 @@
 // @mui material components
-import { Container } from "ui/system";
+import { Container, useTheme } from "ui/system";
 
 // Material Kit 2 React components
 import { Box } from "ui/system";
@@ -9,15 +9,15 @@ import SectionHeader from "components/SectionHeader";
 // Images
 import users from "assets/img/users.png";
 import abtest from "assets/img/abtest.png";
-import colors from "assets/theme/base/colors";
 import PreviewableImg from "components/PreviewableImg";
 
 function UserTest() {
+  const theme = useTheme();
   return (
     <Box component="section">
       <SectionHeader
         title="User Test"
-        bgColor={`linear-gradient(160deg, ${colors.showcaseColors.grey}, ${colors.black.main})`}
+        bgColor={`linear-gradient(160deg, ${theme.palette.showcase.grey}, ${theme.palette.common.black})`}
       />
       <Container sx={{ py: 12, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <Typography

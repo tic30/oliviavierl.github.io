@@ -1,22 +1,12 @@
-import React, {
-  Children,
-  createContext,
-  forwardRef,
-  isValidElement,
-  useContext,
-  useEffect,
-} from "react";
-import {
-  Avatar as BaseAvatar,
-  Button as BaseButton,
-  Dialog as BaseDialog,
-  Toggle as BaseToggle,
-  ToggleGroup as BaseToggleGroup,
-  Tooltip as BaseTooltip,
-} from "@base-ui/react";
+import React, { Children, forwardRef, isValidElement, useEffect } from "react";
+import MuiAvatar from "@mui/material/Avatar";
+import ButtonBase from "@mui/material/ButtonBase";
+import Modal from "@mui/material/Modal";
+import MuiToggleButton from "@mui/material/ToggleButton";
+import MuiToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import MuiTooltip from "@mui/material/Tooltip";
+import { ThemeProvider as MuiThemeProvider, useTheme as useMuiTheme } from "@mui/material/styles";
 import fallbackTheme from "assets/theme";
-
-const ThemeContext = createContext<any>(fallbackTheme);
 
 const STYLE_PROPS = new Set([
   "m",
@@ -323,10 +313,10 @@ const createPrimitive = (defaultTag: React.ElementType, extraStyle: React.CSSPro
   forwardRef<any, any>((props, ref) => renderPrimitive(defaultTag, props, ref, extraStyle));
 
 export const ThemeProvider = ({ theme, children }: any) => (
-  <ThemeContext.Provider value={theme ?? fallbackTheme}>{children}</ThemeContext.Provider>
+  <MuiThemeProvider theme={theme ?? fallbackTheme}>{children}</MuiThemeProvider>
 );
 
-export const useTheme = () => useContext(ThemeContext) ?? fallbackTheme;
+export const useTheme = () => useMuiTheme() ?? fallbackTheme;
 
 export const CssBaseline = () => {
   const theme = useTheme();
@@ -413,9 +403,6 @@ export const Button = forwardRef<any, any>(
     const textColor = variant === "text" ? resolvedColor : (theme.palette?.common?.white ?? "#fff");
     const backgroundColor = variant === "text" ? "transparent" : resolvedColor;
     const padding = size === "small" ? "8px 14px" : size === "large" ? "12px 22px" : "10px 18px";
-    const render = component
-      ? React.createElement(component, component === "a" ? { href: rest.href } : undefined)
-      : undefined;
     const mergedStyle = {
       border: "none",
       borderRadius: "999px",
@@ -437,12 +424,18 @@ export const Button = forwardRef<any, any>(
       ...style,
     };
 
+    const componentProps: Record<string, any> = component
+      ? { component }
+      : rest.href
+        ? { component: "a" }
+        : { type: rest.type ?? "button" };
+
     return (
-      <BaseButton
+      <ButtonBase
         ref={ref}
-        render={render}
-        type={rest.type ?? "button"}
+        disableRipple
         style={mergedStyle}
+        {...componentProps}
         {...stripProps(rest, [
           "variant",
           "color",
@@ -459,7 +452,7 @@ export const Button = forwardRef<any, any>(
         {...(rest.rel ? { rel: rest.rel } : {})}
       >
         {children}
-      </BaseButton>
+      </ButtonBase>
     );
   }
 );
@@ -504,20 +497,15 @@ export const Avatar = forwardRef<any, any>(
     } as React.CSSProperties;
 
     return (
-      <BaseAvatar.Root
+      <MuiAvatar
         ref={ref}
+        src={src}
+        alt={alt}
         style={mergedStyle}
         {...stripProps(props, ["size", "shadow", "variant"])}
       >
-        {src ? (
-          <BaseAvatar.Image
-            src={src}
-            alt={alt}
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-        ) : null}
-        <BaseAvatar.Fallback>{children ?? alt?.charAt(0) ?? "?"}</BaseAvatar.Fallback>
-      </BaseAvatar.Root>
+        {src ? null : (children ?? alt?.charAt(0) ?? "?")}
+      </MuiAvatar>
     );
   }
 );
@@ -590,45 +578,39 @@ export const Collapse = ({ in: visible = true, children }: any) =>
 export const Dialog = ({ open, children, ...props }: any) => {
   const theme = useTheme();
   return (
-    <BaseDialog.Root open={open} onOpenChange={(nextOpen) => !nextOpen && props.onClose?.()}>
-      <BaseDialog.Portal>
-        <BaseDialog.Backdrop
-          style={{
-            position: "fixed",
-            inset: 0,
-            backgroundColor: "rgba(15,23,42,0.48)",
-            zIndex: 1400,
-          }}
-        />
-        <BaseDialog.Popup
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 1401,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "24px",
-          }}
-        >
-          <Box
-            {...props}
-            sx={{
-              backgroundColor: "common.white",
-              borderRadius: 4,
-              minWidth: "min(90vw, 640px)",
-              maxHeight: "90vh",
-              overflow: "auto",
-              boxShadow: theme.boxShadows?.lg,
-              ...(props.PaperProps?.sx || {}),
-              ...(props.sx || {}),
-            }}
-          >
-            {children}
-          </Box>
-        </BaseDialog.Popup>
-      </BaseDialog.Portal>
-    </BaseDialog.Root>
+    <Modal
+      open={!!open}
+      onClose={() => props.onClose?.()}
+      slotProps={{
+        backdrop: {
+          style: { backgroundColor: "rgba(15,23,42,0.48)", zIndex: 1400 },
+        },
+      }}
+      style={{
+        zIndex: 1401,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "24px",
+      }}
+    >
+      <Box
+        {...props}
+        sx={{
+          backgroundColor: "common.white",
+          borderRadius: 4,
+          minWidth: "min(90vw, 640px)",
+          maxHeight: "90vh",
+          overflow: "auto",
+          boxShadow: theme.boxShadows?.lg,
+          outline: "none",
+          ...(props.PaperProps?.sx || {}),
+          ...(props.sx || {}),
+        }}
+      >
+        {children}
+      </Box>
+    </Modal>
   );
 };
 
@@ -639,25 +621,23 @@ export const Tooltip = ({ title, children }: any) => {
   const trigger = isValidElement(children) ? children : <span>{children}</span>;
 
   return (
-    <BaseTooltip.Root>
-      <BaseTooltip.Trigger render={trigger} />
-      <BaseTooltip.Portal>
-        <BaseTooltip.Positioner sideOffset={8}>
-          <BaseTooltip.Popup
-            style={{
-              backgroundColor: "#111827",
-              color: "#ffffff",
-              padding: "6px 10px",
-              borderRadius: "8px",
-              fontSize: "0.75rem",
-              zIndex: 1500,
-            }}
-          >
-            {title}
-          </BaseTooltip.Popup>
-        </BaseTooltip.Positioner>
-      </BaseTooltip.Portal>
-    </BaseTooltip.Root>
+    <MuiTooltip
+      title={title}
+      slotProps={{
+        tooltip: {
+          style: {
+            backgroundColor: "#111827",
+            color: "#ffffff",
+            padding: "6px 10px",
+            borderRadius: "8px",
+            fontSize: "0.75rem",
+            zIndex: 1500,
+          },
+        },
+      }}
+    >
+      {trigger}
+    </MuiTooltip>
   );
 };
 
@@ -697,23 +677,12 @@ export const ToggleButtonGroup = ({
   ...props
 }: any) => {
   const theme = useTheme();
-  const groupValue =
-    value == null ? [] : Array.isArray(value) ? value.map(String) : [String(value)];
 
   return (
-    <BaseToggleGroup
-      value={groupValue}
-      multiple={!exclusive}
-      onValueChange={(values) => {
-        const next = exclusive
-          ? values[0] == null
-            ? null
-            : /^[0-9]+$/.test(values[0])
-              ? Number(values[0])
-              : values[0]
-          : values;
-        onChange?.(undefined, next);
-      }}
+    <MuiToggleButtonGroup
+      value={value ?? (exclusive ? null : [])}
+      exclusive={!!exclusive}
+      onChange={(event, next) => onChange?.(event, next)}
       style={{
         display: "flex",
         ...extractPropStyles(theme, props),
@@ -723,38 +692,42 @@ export const ToggleButtonGroup = ({
       {...stripProps(props, ["exclusive", "onChange"])}
     >
       {children}
-    </BaseToggleGroup>
+    </MuiToggleButtonGroup>
   );
 };
 
 export const ToggleButton = ({ value, children, sx, style, ...props }: any) => {
   const theme = useTheme();
   const borderColor = theme.palette?.grey?.[200] ?? "#e5e7eb";
+  const primary = theme.palette?.primary?.main ?? "#fb7e00";
+  const white = theme.palette?.common?.white ?? "#fff";
+  const textPrimary = theme.palette?.text?.primary ?? "#111827";
   const resolvedStyle = {
     borderRadius: "16px 16px 0 0",
     border: `1px solid ${borderColor}`,
     padding: "10px 16px",
     cursor: "pointer",
+    backgroundColor: white,
+    color: textPrimary,
     ...extractPropStyles(theme, props),
     ...sxToStyle(theme, sx),
     ...style,
   };
 
   return (
-    <BaseToggle
-      value={String(value)}
-      style={(state) => ({
-        ...resolvedStyle,
-        backgroundColor: state.pressed
-          ? (theme.palette?.primary?.main ?? "#fb7e00")
-          : (theme.palette?.common?.white ?? "#fff"),
-        color: state.pressed
-          ? (theme.palette?.common?.white ?? "#fff")
-          : (theme.palette?.text?.primary ?? "#111827"),
-      })}
+    <MuiToggleButton
+      value={value}
+      disableRipple
+      style={resolvedStyle}
+      sx={{
+        "&.Mui-selected": {
+          backgroundColor: `${primary} !important`,
+          color: `${white} !important`,
+        },
+      }}
       {...stripProps(props)}
     >
       {children}
-    </BaseToggle>
+    </MuiToggleButton>
   );
 };

@@ -26,5 +26,6 @@ export {
   ToggleButtonGroup,
   Tooltip,
   Typography,
+  useTheme,
   Zoom,
 } from "./core";

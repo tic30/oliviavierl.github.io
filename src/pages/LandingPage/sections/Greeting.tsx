@@ -1,27 +1,29 @@
 import type { ReactNode } from "react";
 import { keyframes } from "@emotion/react";
 // @mui material components
-import { Box, Container } from "ui/system";
+import { Box, Container, useTheme } from "ui/system";
 import { KeyboardArrowDown as KeyboardArrowDownIcon } from "ui/icons";
 import { Typography } from "ui/system";
-import colors from "assets/theme/base/colors";
 import wave from "assets/img/wave.svg";
 
 interface HighlightedTextProps {
   children: ReactNode;
 }
 
-const HighlightedText = ({ children }: HighlightedTextProps) => (
-  <span
-    style={{
-      color: colors.primary.main,
-      borderBottom: "2px solid",
-      borderColor: colors.primary.main,
-    }}
-  >
-    {children}
-  </span>
-);
+const HighlightedText = ({ children }: HighlightedTextProps) => {
+  const theme = useTheme();
+  return (
+    <span
+      style={{
+        color: theme.palette.primary.main,
+        borderBottom: "2px solid",
+        borderColor: theme.palette.primary.main,
+      }}
+    >
+      {children}
+    </span>
+  );
+};
 
 const bounce = keyframes`
     0% {transform: translateY(0)}
@@ -30,6 +32,7 @@ const bounce = keyframes`
 `;
 
 function Greeting() {
+  const theme = useTheme();
   return (
     <Container
       sx={{
@@ -50,7 +53,7 @@ function Greeting() {
           //   },
           // })}
         >
-          I'm <span style={{ color: colors.primary.main }}>Yifan!</span>
+          I'm <span style={{ color: theme.palette.primary.main }}>Yifan!</span>
         </Typography>
         <Typography variant="h4" sx={{ mt: "12px", lineHeight: "40px", maxWidth: "980px" }}>
           I'm a passionate <HighlightedText>product designer</HighlightedText> from San Francisco,

@@ -1,5 +1,5 @@
 // @mui material components
-import { Container } from "ui/system";
+import { Container, useTheme } from "ui/system";
 import { Grid } from "ui/system";
 
 // Material Kit 2 React components
@@ -13,7 +13,6 @@ import rs2 from "assets/img/rs2.png";
 import rs3 from "assets/img/rs3.png";
 import rs4 from "assets/img/rs4.png";
 import rs5 from "assets/img/rs5.png";
-import colors from "assets/theme/base/colors";
 import boxShadows from "assets/theme/base/boxShadows";
 import PreviewableImg from "components/PreviewableImg";
 
@@ -37,9 +36,10 @@ const sections = [
 ];
 
 function Finals() {
+  const theme = useTheme();
   return (
     <Box component="section">
-      <SectionHeader title="Website" bgColor={colors.showcaseColors.dark} />
+      <SectionHeader title="Website" bgColor={theme.palette.showcase.dark} />
       <Container sx={{ py: 12 }}>
         <Grid
           container
