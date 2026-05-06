@@ -41,7 +41,7 @@ function Contact() {
           <Box
             width="100%"
             sx={{
-              bgcolor: "common.white",
+              bgcolor: "background.default",
               borderRadius: 4,
               boxShadow: 3,
               overflow: "hidden",

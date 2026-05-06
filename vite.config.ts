@@ -12,7 +12,6 @@ export default defineConfig({
       { find: /^components\/(.*)/, replacement: resolve(__dirname, "src/components/$1") },
       { find: /^pages\/(.*)/, replacement: resolve(__dirname, "src/pages/$1") },
       { find: /^hooks\/(.*)/, replacement: resolve(__dirname, "src/hooks/$1") },
-      { find: /^examples\/(.*)/, replacement: resolve(__dirname, "src/examples/$1") },
       { find: /^footer\.routes$/, replacement: resolve(__dirname, "src/footer.routes.tsx") },
       { find: /^routes$/, replacement: resolve(__dirname, "src/routes.tsx") },
       { find: /^showcases\.routes$/, replacement: resolve(__dirname, "src/showcases.routes.tsx") },

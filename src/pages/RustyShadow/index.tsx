@@ -13,7 +13,7 @@ import Finals from "./sections/Finals";
 function RustyShadow() {
   return (
     <>
-      <Box bgColor="white">
+      <Box sx={{ bgcolor: "background.default" }}>
         <Box
           sx={{
             display: "flex",

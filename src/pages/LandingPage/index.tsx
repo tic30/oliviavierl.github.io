@@ -6,7 +6,7 @@ function LandingPage() {
   return (
     <Box
       sx={{
-        backgroundColor: "common.white",
+        backgroundColor: "background.default",
       }}
     >
       <Greeting />

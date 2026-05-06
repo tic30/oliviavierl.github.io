@@ -11,7 +11,7 @@ import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { alpha, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 
 import favicon from "assets/img/header-logo.svg";
 import { resumeUrl } from "../../constants";
@@ -94,7 +94,7 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
       sx={{
         top: hidden ? "-6rem" : 0,
         transition: "top 200ms ease",
-        backgroundColor: alpha(theme.palette.common.white, 0.85),
+        backgroundColor: "rgba(var(--mui-palette-background-defaultChannel) / 0.85)",
         backdropFilter: "saturate(200%) blur(30px)",
         color: "text.primary",
         boxShadow: 1,

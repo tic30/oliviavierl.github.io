@@ -149,24 +149,27 @@ const toSpacing = (value: any) => {
 const resolvePaletteValue = (theme: any, value: any) => {
   if (typeof value !== "string") return value;
   if (value === "inherit") return "inherit";
-  if (value === "white") return theme.palette?.common?.white ?? "#fff";
-  if (value === "black") return theme.palette?.common?.black ?? "#000";
-  if (value === "text") return theme.palette?.text?.primary ?? "#1f2937";
+  // When MUI's cssVariables is enabled, palette tokens that flip with the
+  // active color scheme live on `theme.vars.palette` as `var(--mui-palette-*)`
+  // strings. Prefer those so values like "background.default" actually adapt
+  // to dark mode instead of being baked to a single scheme's color.
+  const palette = theme.vars?.palette ?? theme.palette;
+  if (value === "white") return palette?.common?.white ?? "#fff";
+  if (value === "black") return palette?.common?.black ?? "#000";
+  if (value === "text") return palette?.text?.primary ?? "#1f2937";
   if (value === "secondary")
-    return theme.palette?.secondary?.main ?? theme.palette?.text?.secondary ?? "#6b7280";
-  if (value === "primary") return theme.palette?.primary?.main ?? "#2563eb";
-  if (value === "info") return theme.palette?.info?.main ?? "#0ea5e9";
-  if (value === "success") return theme.palette?.success?.main ?? "#10b981";
-  if (value === "warning") return theme.palette?.warning?.main ?? "#f59e0b";
-  if (value === "error") return theme.palette?.error?.main ?? "#ef4444";
-  if (value === "dark") return theme.palette?.dark?.main ?? "#111827";
+    return palette?.secondary?.main ?? palette?.text?.secondary ?? "#6b7280";
+  if (value === "primary") return palette?.primary?.main ?? "#2563eb";
+  if (value === "info") return palette?.info?.main ?? "#0ea5e9";
+  if (value === "success") return palette?.success?.main ?? "#10b981";
+  if (value === "warning") return palette?.warning?.main ?? "#f59e0b";
+  if (value === "error") return palette?.error?.main ?? "#ef4444";
+  if (value === "dark") return palette?.dark?.main ?? "#111827";
   if (value.includes(".")) {
-    return getValue(theme.palette, value) ?? getValue(theme.colors, value) ?? value;
+    return getValue(palette, value) ?? getValue(theme.colors, value) ?? value;
   }
 
-  return (
-    getValue(theme.palette, `${value}.main`) ?? getValue(theme.colors, `${value}.main`) ?? value
-  );
+  return getValue(palette, `${value}.main`) ?? getValue(theme.colors, `${value}.main`) ?? value;
 };
 
 const resolveShadow = (theme: any, value: any) => {
@@ -541,19 +544,35 @@ export const Stack = forwardRef<any, any>(({ spacing = 0, direction = "column", 
 );
 
 export const Grid = forwardRef<any, any>(
-  ({ container, item, spacing = 0, xs, sm, md, lg, xl, ...props }, ref) => {
+  (
+    { container, item, spacing = 0, rowSpacing, columnSpacing, xs, sm, md, lg, xl, ...props },
+    ref
+  ) => {
     const span = xl ?? lg ?? md ?? sm ?? xs;
     const width = item && typeof span === "number" ? `${(span / 12) * 100}%` : undefined;
+    const rowGap = rowSpacing != null ? toSpacing(rowSpacing) : undefined;
+    const columnGap = columnSpacing != null ? toSpacing(columnSpacing) : undefined;
 
     return renderPrimitive(
       "div",
       props,
       ref,
       {
-        ...(container ? { display: "flex", flexWrap: "wrap", gap: toSpacing(spacing) } : {}),
+        ...(container
+          ? {
+              display: "flex",
+              flexWrap: "wrap",
+              ...(rowGap != null || columnGap != null
+                ? {
+                    rowGap: rowGap ?? toSpacing(spacing),
+                    columnGap: columnGap ?? toSpacing(spacing),
+                  }
+                : { gap: toSpacing(spacing) }),
+            }
+          : {}),
         ...(width ? { width, flex: `0 0 ${width}` } : {}),
       },
-      ["container", "item", "spacing", "xs", "sm", "md", "lg", "xl"]
+      ["container", "item", "spacing", "rowSpacing", "columnSpacing", "xs", "sm", "md", "lg", "xl"]
     );
   }
 );

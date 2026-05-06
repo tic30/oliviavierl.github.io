@@ -15,7 +15,7 @@ import Contact from "./sections/Contact";
 function About() {
   return (
     <>
-      <Box sx={{ bgcolor: "common.white" }}>
+      <Box sx={{ bgcolor: "background.default" }}>
         <Box
           minHeight="25rem"
           width="100%"
@@ -33,7 +33,7 @@ function About() {
             mx: { xs: 2, lg: 3 },
             mt: -8,
             mb: 4,
-            backgroundColor: "rgba(255,255,255,0.8)",
+            backgroundColor: "rgba(var(--mui-palette-background-paperChannel) / 0.8)",
             backdropFilter: "saturate(200%) blur(30px)",
             boxShadow: "none",
           }}

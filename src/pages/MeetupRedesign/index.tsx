@@ -34,7 +34,7 @@ function MeetupRedesign() {
     <Parallax
       bgImage={bgImage}
       sx={{
-        backgroundColor: "common.white",
+        backgroundColor: "background.default",
       }}
       bgImageSx={{
         top: "100vh",
@@ -49,7 +49,7 @@ function MeetupRedesign() {
           textAlign: "center",
           pt: { xs: "15vh", lg: "30vh" },
           pb: { xs: "5vh", lg: "20vh" },
-          backgroundColor: "common.white",
+          backgroundColor: "background.default",
         }}
       >
         <Typography variant="h1">
@@ -66,7 +66,7 @@ function MeetupRedesign() {
       />
       <Box
         sx={{
-          backgroundColor: "common.white",
+          backgroundColor: "background.default",
         }}
       >
         <Intro />

@@ -248,7 +248,7 @@ function DesignProcess() {
             <Card
               key={`persona-img-${i}`}
               sx={{
-                border: "1px solid rgba(0, 0, 0, 0.12)",
+                border: "1px solid var(--mui-palette-divider)",
                 borderTop: "none",
                 p: 3,
                 borderTopRightRadius: 0,

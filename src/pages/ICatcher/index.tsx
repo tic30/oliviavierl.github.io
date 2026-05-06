@@ -14,7 +14,7 @@ import Modifications from "./sections/Modifications";
 function ICatcher() {
   return (
     <>
-      <Box bgColor="white">
+      <Box sx={{ bgcolor: "background.default" }}>
         <Box
           sx={{
             display: "flex",
