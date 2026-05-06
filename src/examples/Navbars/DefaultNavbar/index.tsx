@@ -5,10 +5,9 @@ import { Fragment, useState, useEffect, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 
 // @mui material components
+import Popover from "@mui/material/Popover";
 import { Container } from "ui/system";
 import { Icon } from "ui/system";
-import { Popper } from "ui/system";
-import { Grow } from "ui/system";
 import { Grid } from "ui/system";
 import { Divider } from "ui/system";
 import { Link as MuiLink } from "ui/system";
@@ -55,12 +54,10 @@ function DefaultNavbar({
   const theme = useTheme();
   const resolvedRoutes = routes ?? getDefaultRoutes(theme);
   const [dropdown, setDropdown] = useState<HTMLElement | null>(null);
-  const [dropdownEl, setDropdownEl] = useState<HTMLElement | null>(null);
   const [dropdownName, setDropdownName] = useState("");
   const [nestedDropdown, setNestedDropdown] = useState<HTMLElement | null>(null);
   const [nestedDropdownEl, setNestedDropdownEl] = useState<HTMLElement | null>(null);
   const [nestedDropdownName, setNestedDropdownName] = useState("");
-  const [arrowRef, setArrowRef] = useState<HTMLElement | null>(null);
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [mobileView, setMobileView] = useState(false);
 
@@ -102,7 +99,6 @@ function DefaultNavbar({
       onMouseEnter={({ currentTarget }) => {
         if (collapse) {
           setDropdown(currentTarget);
-          setDropdownEl(currentTarget);
           setDropdownName(name);
         }
       }}
@@ -287,45 +283,40 @@ function DefaultNavbar({
 
   // Routes dropdown menu
   const dropdownMenu = (
-    <Popper
-      anchorEl={dropdown}
-      popperRef={null}
+    <Popover
+      // anchorEl={dropdown}
       open={Boolean(dropdown)}
-      placement="top-start"
-      transition
-      style={{ zIndex: 10 }}
-      modifiers={[
-        {
-          name: "arrow",
-          enabled: true,
-          options: {
-            element: arrowRef,
-          },
-        },
-      ]}
-      onMouseEnter={() => setDropdown(dropdownEl)}
-      onMouseLeave={() => {
-        if (!nestedDropdown) {
-          setDropdown(null);
-          setDropdownName("");
-        }
-      }}
+      // anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      // transformOrigin={{ vertical: "top", horizontal: "left" }}
+      // sx={{ zIndex: 10 }}
+      // disableAutoFocus
+      // disableEnforceFocus
+      // disableRestoreFocus
+      // disableScrollLock
+      // hideBackdrop
+      // slotProps={{
+      //   paper: {
+      //     elevation: 0,
+      //     onMouseEnter: () => setDropdown(dropdownEl),
+      //     onMouseLeave: () => {
+      //       if (!nestedDropdown) {
+      //         setDropdown(null);
+      //         setDropdownName("");
+      //       }
+      //     },
+      //     sx: { backgroundColor: "transparent", overflow: "visible" },
+      //   },
+      // }}
     >
-      {({ TransitionProps }) => (
-        <Grow {...TransitionProps}>
-          <Box sx={{ transformOrigin: "left top", bgcolor: "common.white" }}>
-            <Typography variant="h1" sx={{ color: "text.primary" }}>
-              <Icon ref={setArrowRef} sx={{ mt: -3, color: "text.primary" }}>
-                arrow_drop_up
-              </Icon>
-            </Typography>
-            <Box sx={{ boxShadow: 3, borderRadius: 3 }} p={2} mt={2}>
-              {renderRoutes}
-            </Box>
-          </Box>
-        </Grow>
-      )}
-    </Popper>
+      <Box sx={{ bgcolor: "common.white" }}>
+        <Typography variant="h1" sx={{ color: "text.primary" }}>
+          <Icon sx={{ mt: -3, color: "text.primary" }}>arrow_drop_up</Icon>
+        </Typography>
+        <Box sx={{ boxShadow: 3, borderRadius: 3 }} p={2} mt={2}>
+          {renderRoutes}
+        </Box>
+      </Box>
+    </Popover>
   );
 
   // Render routes that are nested inside the dropdown menu routes
@@ -417,32 +408,36 @@ function DefaultNavbar({
 
   // Dropdown menu for the nested dropdowns
   const nestedDropdownMenu = (
-    <Popper
+    <Popover
       anchorEl={nestedDropdown}
-      popperRef={null}
       open={Boolean(nestedDropdown)}
-      placement="right-start"
-      transition
-      style={{ zIndex: 10 }}
-      onMouseEnter={() => {
-        setNestedDropdown(nestedDropdownEl);
-      }}
-      onMouseLeave={() => {
-        setNestedDropdown(null);
-        setNestedDropdownName("");
-        setDropdown(null);
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      transformOrigin={{ vertical: "top", horizontal: "left" }}
+      sx={{ zIndex: 10 }}
+      disableAutoFocus
+      disableEnforceFocus
+      disableRestoreFocus
+      disableScrollLock
+      hideBackdrop
+      slotProps={{
+        paper: {
+          elevation: 0,
+          onMouseEnter: () => setNestedDropdown(nestedDropdownEl),
+          onMouseLeave: () => {
+            setNestedDropdown(null);
+            setNestedDropdownName("");
+            setDropdown(null);
+          },
+          sx: { backgroundColor: "transparent", overflow: "visible" },
+        },
       }}
     >
-      {({ TransitionProps }) => (
-        <Grow {...TransitionProps}>
-          <Box sx={{ ml: 2.5, mt: -2.5, borderRadius: 3 }}>
-            <Box sx={{ boxShadow: 3, borderRadius: 3 }} py={1.5} px={1} mt={2}>
-              {renderNestedRoutes}
-            </Box>
-          </Box>
-        </Grow>
-      )}
-    </Popper>
+      <Box sx={{ ml: 2.5, mt: -2.5, borderRadius: 3 }}>
+        <Box sx={{ boxShadow: 3, borderRadius: 3 }} py={1.5} px={1} mt={2}>
+          {renderNestedRoutes}
+        </Box>
+      </Box>
+    </Popover>
   );
 
   return (

@@ -15,7 +15,6 @@ import footerRoutes from "footer.routes";
 
 // Material Kit 2 React routes
 import getRoutes from "routes";
-import { resumeUrl } from "./constants";
 
 function AppRoutes() {
   const { pathname } = useLocation();
@@ -43,15 +42,7 @@ function AppRoutes() {
 
   return (
     <>
-      <Navbar
-        sticky
-        action={{
-          type: "external",
-          route: resumeUrl,
-          label: "resume",
-          color: "primary",
-        }}
-      />
+      <Navbar sticky />
       <Routes>
         {renderRoutes(getRoutes(theme))}
         <Route path="*" element={<Navigate to="/" />} />
