@@ -11,7 +11,6 @@ import { CssBaseline } from "ui/system";
 import theme from "assets/theme";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
-import footerRoutes from "footer.routes";
 
 // Material Kit 2 React routes
 import getRoutes from "routes";
@@ -47,7 +46,7 @@ function AppRoutes() {
         {renderRoutes(getRoutes(theme))}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      <Footer content={footerRoutes} />
+      <Footer />
     </>
   );
 }

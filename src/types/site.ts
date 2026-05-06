@@ -38,35 +38,6 @@ export interface NavigationRoute {
   rowsPerColumn?: number;
 }
 
-export interface FooterLinkItem {
-  name: string;
-  route?: string;
-  href?: string;
-}
-
-export interface FooterMenuSection {
-  name: string;
-  items: FooterLinkItem[];
-}
-
-export interface FooterBrand {
-  name: string;
-  image: string;
-  route: string;
-}
-
-export interface FooterSocial {
-  icon: ReactNode;
-  link: string;
-}
-
-export interface FooterContent {
-  brand: FooterBrand;
-  socials: FooterSocial[];
-  menus: FooterMenuSection[];
-  copyright: ReactNode;
-}
-
 export interface CompanyInfo {
   href: string;
   name: string;
