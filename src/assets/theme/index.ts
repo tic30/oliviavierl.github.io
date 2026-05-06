@@ -57,6 +57,14 @@ const theme = createTheme({
   boxShadows,
   borders,
   colors,
+  components: {
+    MuiContainer: {
+      defaultProps: { maxWidth: false },
+      styleOverrides: {
+        root: { maxWidth: 992 },
+      },
+    },
+  },
 });
 
 export default theme;

@@ -7,7 +7,6 @@ export {
   Card,
   CardMedia,
   Collapse,
-  Container,
   CssBaseline,
   Dialog,
   DialogTitle,
@@ -29,3 +28,4 @@ export {
   useTheme,
   Zoom,
 } from "./core";
+export { default as Container } from "@mui/material/Container";

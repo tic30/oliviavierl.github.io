@@ -3,6 +3,7 @@ import { Link as RouterLink } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Icon from "@mui/material/Icon";
 import IconButton from "@mui/material/IconButton";
@@ -141,13 +142,31 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
               ))}
             </Stack>
           ) : (
-            <IconButton
-              onClick={() => setDrawerOpen(true)}
-              aria-label="open menu"
-              sx={{ color: "text.primary" }}
-            >
-              <Icon>menu</Icon>
-            </IconButton>
+            <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+              <Button
+                component="a"
+                href={resumeUrl}
+                target="_blank"
+                rel="noreferrer"
+                sx={{
+                  color: "text.primary",
+                  textTransform: "lowercase",
+                  fontWeight: 600,
+                  px: 1.5,
+                  opacity: 0.7,
+                  "&:hover": { opacity: 1, backgroundColor: "transparent" },
+                }}
+              >
+                resume
+              </Button>
+              <IconButton
+                onClick={() => setDrawerOpen(true)}
+                aria-label="open menu"
+                sx={{ color: "text.primary" }}
+              >
+                <Icon>menu</Icon>
+              </IconButton>
+            </Stack>
           )}
         </Toolbar>
       </Container>
@@ -159,7 +178,11 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
         onScheduleClose={scheduleClose}
         onClose={closeMenu}
       />
-      <NavbarMobileDrawer items={items} open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <NavbarMobileDrawer
+        items={items.filter((it) => it.name !== "resume")}
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      />
     </AppBar>
   );
 }

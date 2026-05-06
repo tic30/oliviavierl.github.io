@@ -344,16 +344,6 @@ export const alpha = (color: string, value: number) => {
 
 export const Box = createPrimitive("div");
 
-export const Container = forwardRef<any, any>((props, ref) =>
-  renderPrimitive("div", props, ref, {
-    width: "100%",
-    maxWidth: "1200px",
-    marginInline: "auto",
-    paddingInline: "24px",
-    boxSizing: "border-box",
-  })
-);
-
 export const Typography = forwardRef<any, any>(
   ({ variant = "body1", gutterBottom, ...props }, ref) => {
     const theme = useTheme();
