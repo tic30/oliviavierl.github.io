@@ -1,9 +1,10 @@
+import Typography from "@mui/material/Typography";
+
 // @mui material components
 import { Container, useTheme } from "ui/system";
 
 // Material Kit 2 React components
 import { Box } from "ui/system";
-import { Typography } from "ui/system";
 
 import type { StyleObject } from "types/site";
 
@@ -26,7 +27,7 @@ function SectionHeader({ title, bgColor, sx = {}, ...props }: SectionHeaderProps
       {...props}
     >
       <Container>
-        <Typography variant="h2" color="common.white">
+        <Typography variant="h2" sx={{ color: "common.white" }}>
           {title}
         </Typography>
       </Container>

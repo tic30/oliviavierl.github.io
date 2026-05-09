@@ -1,6 +1,7 @@
+import Typography from "@mui/material/Typography";
+
 // Material Kit 2 React components
 import { Box } from "ui/system";
-import { Typography } from "ui/system";
 
 // Author page sections
 import bgImage from "assets/img/cover2.jpg";
@@ -26,7 +27,7 @@ function RustyShadow() {
           }}
         >
           <Typography variant="h1">RustyShadow</Typography>
-          <Typography variant="h5" mt={1}>
+          <Typography variant="h5" sx={{ mt: 1 }}>
             A Convenient, Full-featured Community for Urban Exploration Lovers
           </Typography>
         </Box>

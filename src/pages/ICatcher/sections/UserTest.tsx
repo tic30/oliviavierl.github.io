@@ -1,9 +1,10 @@
+import Typography from "@mui/material/Typography";
+
 // @mui material components
 import { Container, useTheme } from "ui/system";
 
 // Material Kit 2 React components
 import { Box } from "ui/system";
-import { Typography } from "ui/system";
 import SectionHeader from "components/SectionHeader";
 
 // Images
@@ -17,7 +18,7 @@ function UserTest() {
     <Box component="section">
       <SectionHeader
         title="User Test"
-        bgColor={`linear-gradient(160deg, ${theme.palette.showcase.grey}, ${theme.palette.common.black})`}
+        bgColor={`linear-gradient(160deg, ${theme.showcaseColors.grey}, ${theme.palette.common.black})`}
       />
       <Container sx={{ py: 12, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <Typography

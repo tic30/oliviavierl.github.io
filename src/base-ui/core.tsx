@@ -103,19 +103,6 @@ const SPACING_MAP: Record<string, string> = {
   bgColor: "backgroundColor",
 };
 
-const VARIANT_TAGS: Record<string, keyof React.JSX.IntrinsicElements> = {
-  h1: "h1",
-  h2: "h2",
-  h3: "h3",
-  h4: "h4",
-  h5: "h5",
-  h6: "h6",
-  body1: "p",
-  body2: "p",
-  caption: "span",
-  button: "span",
-};
-
 const toArray = (value: any) => (Array.isArray(value) ? value : [value]);
 
 const getValue = (obj: any, path: string) =>
@@ -166,10 +153,10 @@ const resolvePaletteValue = (theme: any, value: any) => {
   if (value === "error") return palette?.error?.main ?? "#ef4444";
   if (value === "dark") return palette?.dark?.main ?? "#111827";
   if (value.includes(".")) {
-    return getValue(palette, value) ?? getValue(theme.colors, value) ?? value;
+    return getValue(palette, value) ?? value;
   }
 
-  return getValue(palette, `${value}.main`) ?? getValue(theme.colors, `${value}.main`) ?? value;
+  return getValue(palette, `${value}.main`) ?? value;
 };
 
 const resolveShadow = (theme: any, value: any) => {
@@ -347,28 +334,6 @@ export const alpha = (color: string, value: number) => {
 
 export const Box = createPrimitive("div");
 
-export const Typography = forwardRef<any, any>(
-  ({ variant = "body1", gutterBottom, ...props }, ref) => {
-    const theme = useTheme();
-    const variantStyle = theme.typography?.[variant] ?? {};
-    const tag = props.component ?? VARIANT_TAGS[variant] ?? "p";
-
-    return renderPrimitive(
-      tag,
-      {
-        ...props,
-        style: {
-          margin: 0,
-          ...(gutterBottom ? { marginBottom: "0.35em" } : {}),
-          ...variantStyle,
-          ...props.style,
-        },
-      },
-      ref
-    );
-  }
-);
-
 export const Link = forwardRef<any, any>((props, ref) =>
   renderPrimitive("a", { ...props, href: props.href ?? props.to }, ref, {
     color: "inherit",
@@ -501,15 +466,6 @@ export const Avatar = forwardRef<any, any>(
       </MuiAvatar>
     );
   }
-);
-
-export const Icon = forwardRef<any, any>(({ children, ...props }, ref) =>
-  renderPrimitive(
-    "span",
-    { ...props, className: ["material-icons", props.className].filter(Boolean).join(" ") },
-    ref,
-    { lineHeight: 1, display: "inline-flex", alignItems: "center" }
-  )
 );
 
 export const IconButton = forwardRef<any, any>((props, ref) =>

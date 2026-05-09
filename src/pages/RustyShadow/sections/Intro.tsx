@@ -1,10 +1,11 @@
+import Typography from "@mui/material/Typography";
+
 // @mui material components
 import { Container } from "ui/system";
 import { Grid } from "ui/system";
 
 // Material Kit 2 React components
 import { Box } from "ui/system";
-import { Typography } from "ui/system";
 
 // Images
 import headImg from "assets/img/head.png";

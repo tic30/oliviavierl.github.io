@@ -14,7 +14,7 @@ function BrandGuidelines() {
     <Box component="section">
       <SectionHeader
         title="Branding"
-        bgColor={`linear-gradient(160deg, ${theme.palette.showcase.grey}, ${theme.palette.common.black})`}
+        bgColor={`linear-gradient(160deg, ${theme.showcaseColors.grey}, ${theme.palette.common.black})`}
       />
       <Container sx={{ py: 12 }}>
         <Box component="img" src={brandguidelines} alt="Brand Guidelines" width="100%" />

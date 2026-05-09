@@ -14,7 +14,6 @@ export {
   Fade,
   Grid,
   Grow,
-  Icon,
   IconButton,
   Link,
   Popper,
@@ -24,7 +23,6 @@ export {
   ToggleButton,
   ToggleButtonGroup,
   Tooltip,
-  Typography,
   useTheme,
   Zoom,
 } from "./core";

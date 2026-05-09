@@ -13,6 +13,8 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import Typography from "@mui/material/Typography";
+
 // @mui material components
 import { Container } from "ui/system";
 import { Grid } from "ui/system";
@@ -21,7 +23,6 @@ import { Stack } from "ui/system";
 
 // Material Kit 2 React components
 import { Box } from "ui/system";
-import { Typography } from "ui/system";
 
 function Footer() {
   return (
@@ -36,7 +37,7 @@ function Footer() {
             mr="auto"
             mb={{ xs: 3, lg: 0 }}
           >
-            <Typography variant="h6" textTransform="uppercase" mb={{ xs: 2, lg: 3 }}>
+            <Typography variant="h6" sx={{ textTransform: "uppercase", mb: { xs: 2, lg: 3 } }}>
               Material Design
             </Typography>
             <Stack
@@ -52,9 +53,8 @@ function Footer() {
               <Box component="li">
                 <Typography
                   variant="button"
-                  fontWeight="regular"
-                  opacity={0.8}
                   component={Link}
+                  sx={{ fontWeight: 400, opacity: 0.8 }}
                   href="https://www.creative-tim.com"
                   target="_blank"
                   rel="noreferrer"
@@ -65,9 +65,8 @@ function Footer() {
               <Box component="li">
                 <Typography
                   variant="button"
-                  fontWeight="regular"
-                  opacity={0.8}
                   component={Link}
+                  sx={{ fontWeight: 400, opacity: 0.8 }}
                   href="https://www.creative-tim.com/presentation"
                   target="_blank"
                   rel="noreferrer"
@@ -78,9 +77,8 @@ function Footer() {
               <Box component="li">
                 <Typography
                   variant="button"
-                  fontWeight="regular"
-                  opacity={0.8}
                   component={Link}
+                  sx={{ fontWeight: 400, opacity: 0.8 }}
                   href="https://www.creative-tim.com/blog"
                   target="_blank"
                   rel="noreferrer"
@@ -91,9 +89,8 @@ function Footer() {
               <Box component="li">
                 <Typography
                   variant="button"
-                  fontWeight="regular"
-                  opacity={0.8}
                   component={Link}
+                  sx={{ fontWeight: 400, opacity: 0.8 }}
                   href="https://www.creative-tim.com"
                   target="_blank"
                   rel="noreferrer"
@@ -102,13 +99,13 @@ function Footer() {
                 </Typography>
               </Box>
             </Stack>
-            <Typography variant="button" opacity={0.8}>
+            <Typography variant="button" sx={{ opacity: 0.8 }}>
               Copyright © <script>document.write(new Date().getFullYear())</script>2021 Material
               Design by Creative Tim.
             </Typography>
           </Grid>
           <Grid item xs={12} lg={6} ml="auto" textAlign={{ xs: "center", lg: "right" }}>
-            <Typography variant="body1" fontWeight="bold" mb={6} sx={{ fontSize: "1.125rem" }}>
+            <Typography variant="body1" sx={{ fontWeight: 700, mb: 6, fontSize: "1.125rem" }}>
               The reward for getting on the stage is fame. The price of fame is you can't get off
               the stage.
             </Typography>
@@ -118,9 +115,7 @@ function Footer() {
               target="_blank"
               rel="noreferrer"
               variant="body2"
-              color="dark"
-              opacity={0.5}
-              mr={3}
+              sx={{ color: "dark.main", opacity: 0.5, mr: 3 }}
             >
               <i className="fab fa-dribbble" />
             </Typography>
@@ -130,9 +125,7 @@ function Footer() {
               target="_blank"
               rel="noreferrer"
               variant="body2"
-              color="dark"
-              opacity={0.5}
-              mr={3}
+              sx={{ color: "dark.main", opacity: 0.5, mr: 3 }}
             >
               <i className="fab fa-twitter" />
             </Typography>
@@ -142,9 +135,7 @@ function Footer() {
               target="_blank"
               rel="noreferrer"
               variant="body2"
-              color="dark"
-              opacity={0.5}
-              mr={3}
+              sx={{ color: "dark.main", opacity: 0.5, mr: 3 }}
             >
               <i className="fab fa-pinterest" />
             </Typography>
@@ -154,8 +145,7 @@ function Footer() {
               target="_blank"
               rel="noreferrer"
               variant="body2"
-              color="dark"
-              opacity={0.5}
+              sx={{ color: "dark.main", opacity: 0.5 }}
             >
               <i className="fab fa-github" />
             </Typography>

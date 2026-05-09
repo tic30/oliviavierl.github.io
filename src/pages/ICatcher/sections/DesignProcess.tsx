@@ -1,8 +1,9 @@
+import Typography from "@mui/material/Typography";
+
 import { Card, CardMedia, Container, Grid, useTheme } from "ui/system";
 import PreviewableImg from "components/PreviewableImg";
 import Tabs from "components/Tabs";
 import { Box } from "ui/system";
-import { Typography } from "ui/system";
 import SectionHeader from "components/SectionHeader";
 import borders from "assets/theme/base/borders";
 
@@ -26,7 +27,7 @@ function DesignProcess() {
     <Box component="section">
       <SectionHeader
         title="Design Process"
-        bgColor={`linear-gradient(160deg, ${theme.palette.showcase.grey}, ${theme.palette.common.black})`}
+        bgColor={`linear-gradient(160deg, ${theme.showcaseColors.grey}, ${theme.palette.common.black})`}
       />
       <Container
         sx={{

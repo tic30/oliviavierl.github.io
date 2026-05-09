@@ -1,3 +1,5 @@
+import Typography from "@mui/material/Typography";
+
 // @mui material components
 import { Container } from "ui/system";
 import { Grid } from "ui/system";
@@ -8,7 +10,6 @@ import { LocationOn as LocationOnIcon } from "ui/icons";
 import { Box } from "ui/system";
 // import TextField from "@mui/material/TextField";
 // import Button from "@mui/material/Button";
-import { Typography } from "ui/system";
 
 import bgImage from "assets/img/me.jpeg";
 import { linkedinUrl } from "../../../constants";

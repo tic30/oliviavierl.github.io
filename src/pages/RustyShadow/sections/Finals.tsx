@@ -1,10 +1,11 @@
+import Typography from "@mui/material/Typography";
+
 // @mui material components
 import { Container, useTheme } from "ui/system";
 import { Grid } from "ui/system";
 
 // Material Kit 2 React components
 import { Box } from "ui/system";
-import { Typography } from "ui/system";
 import SectionHeader from "components/SectionHeader";
 
 // Images
@@ -39,7 +40,7 @@ function Finals() {
   const theme = useTheme();
   return (
     <Box component="section">
-      <SectionHeader title="Website" bgColor={theme.palette.showcase.dark} />
+      <SectionHeader title="Website" bgColor={theme.showcaseColors.dark} />
       <Container sx={{ py: 12 }}>
         <Grid
           container

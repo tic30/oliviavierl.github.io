@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
+import Typography from "@mui/material/Typography";
+
 import { Box, useTheme } from "ui/system";
-import { Typography } from "ui/system";
 import Parallax from "components/Parallax";
 
 // Author page sections
@@ -20,8 +21,8 @@ const HighlightedText = ({ children }: HighlightedTextProps) => {
   return (
     <span
       style={{
-        color: theme.palette.showcase.yellow,
-        borderColor: theme.palette.showcase.yellow,
+        color: theme.showcaseColors.yellow,
+        borderColor: theme.showcaseColors.yellow,
       }}
     >
       {children}
@@ -55,7 +56,7 @@ function MeetupRedesign() {
         <Typography variant="h1">
           <HighlightedText>Meetup</HighlightedText> App Redesign
         </Typography>
-        <Typography variant="h5" mt={1}>
+        <Typography variant="h5" sx={{ mt: 1 }}>
           A Better Way for Making Friends and Joining Gourps
         </Typography>
       </Box>

@@ -1,10 +1,11 @@
+import Typography from "@mui/material/Typography";
+
 // @mui material components
 import { Container } from "ui/system";
 import { Grid } from "ui/system";
 
 // Material Kit 2 React components
 import { Box } from "ui/system";
-import { Typography } from "ui/system";
 
 function Intro() {
   return (
@@ -31,17 +32,17 @@ function Intro() {
           }}
         >
           <Grid item xs={4}>
-            <Typography variant="body2" fontWeight="bold">
+            <Typography variant="body2" sx={{ fontWeight: 700 }}>
               MY ROLE
             </Typography>
           </Grid>
           <Grid item xs={4}>
-            <Typography variant="body2" fontWeight="bold">
+            <Typography variant="body2" sx={{ fontWeight: 700 }}>
               PROJECT TYPE
             </Typography>
           </Grid>
           <Grid item xs={4}>
-            <Typography variant="body2" fontWeight="bold">
+            <Typography variant="body2" sx={{ fontWeight: 700 }}>
               TIMELINE
             </Typography>
           </Grid>

@@ -22,8 +22,8 @@
 */
 
 // @mui material components
+import Icon from "@mui/material/Icon";
 import type { Theme } from "@mui/material/styles";
-import { Icon } from "ui/system";
 import type { NavigationRoute } from "types/site";
 
 // Pages

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Typography from "@mui/material/Typography";
+
 // @mui material components
 import { Container, Tooltip, Button, Zoom, Link } from "ui/system";
 import { Email as EmailIcon } from "ui/icons";
@@ -10,7 +12,6 @@ import { HistoryEdu as HistoryEduIcon } from "ui/icons";
 import { Box } from "ui/system";
 import { Avatar } from "ui/system";
 // import Button from "@mui/material/Button";
-import { Typography } from "ui/system";
 
 // Images
 import profilePicture from "assets/img/avatar.png";
@@ -70,7 +71,7 @@ function Profile() {
           <InstagramIcon />
         </Link>
       </Box>
-      <Typography variant="body1" fontWeight="light" mx={{ xs: 0, lg: 6 }}>
+      <Typography variant="body1" sx={{ fontWeight: 300, mx: { xs: 0, lg: 6 } }}>
         I'm a ux /ui designer who loves clean, simple & unique design. I also enjoy crafting brand
         identities, icons, & ilustration work. I'm good at communicating with people, glad to work
         as a team and collaborate with other teammates. I'm willing to learn new things and grow

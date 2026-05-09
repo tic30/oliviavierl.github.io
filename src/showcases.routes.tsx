@@ -17,7 +17,7 @@ const getShowcases = (theme: Theme): ShowcaseItem[] => [
   //   longDesc:
   //     "Redesign the Meetup app for better user experience. Gather lots of feedback from target users and polish both Ui and Ux design.",
   //   bgImg: cover1,
-  //   bgColor: theme.palette.showcase.yellow,
+  //   bgColor: theme.showcaseColors.yellow,
   // },
   {
     name: "iCatcher",
@@ -27,7 +27,7 @@ const getShowcases = (theme: Theme): ShowcaseItem[] => [
     longDesc:
       "An app that can gather all the app for catch inspirations together. To build an easy way for managing all the folders from different apps. And also a community that people can share interesting ideas and works to others and make friends.",
     bgImg: cover3,
-    bgColor: theme.palette.showcase.grey,
+    bgColor: theme.showcaseColors.grey,
   },
   {
     name: "Rusty Shadow",
@@ -37,7 +37,7 @@ const getShowcases = (theme: Theme): ShowcaseItem[] => [
     longDesc:
       "Build a website that not only a platform to buy all the equipments you need for the urban exploration activities, but also a community that people can meet friends, share interesting ideas and works to the world and invite more people to join this group.",
     bgImg: cover2,
-    bgColor: theme.palette.showcase.dark,
+    bgColor: theme.showcaseColors.dark,
   },
 ];
 

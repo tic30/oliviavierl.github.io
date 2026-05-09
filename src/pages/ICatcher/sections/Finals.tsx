@@ -1,4 +1,6 @@
-import { Box, Container, IconButton, Typography, useTheme } from "ui/system";
+import Typography from "@mui/material/Typography";
+
+import { Box, Container, IconButton, useTheme } from "ui/system";
 import SectionHeader from "components/SectionHeader";
 import f11 from "assets/img/f11.png";
 import f12 from "assets/img/f12.png";
@@ -41,7 +43,7 @@ function Finals() {
     <Box component="section">
       <SectionHeader
         title="Finalized Design"
-        bgColor={`linear-gradient(160deg, ${theme.palette.showcase.grey}, ${theme.palette.common.black})`}
+        bgColor={`linear-gradient(160deg, ${theme.showcaseColors.grey}, ${theme.palette.common.black})`}
         sx={{ mb: 6 }}
       />
       {sections.map((section, i) => (
@@ -82,7 +84,7 @@ function Finals() {
                     mx: 1,
                   }}
                 />
-                <Typography variant="body2" color="primary.main">
+                <Typography variant="body2" sx={{ color: "primary.main" }}>
                   Go to prototype
                 </Typography>
               </IconButton>

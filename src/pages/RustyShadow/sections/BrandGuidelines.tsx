@@ -19,7 +19,7 @@ function BrandGuidelines() {
   const theme = useTheme();
   return (
     <Box component="section">
-      <SectionHeader title="Brand Guidelines" bgColor={theme.palette.showcase.dark} />
+      <SectionHeader title="Brand Guidelines" bgColor={theme.showcaseColors.dark} />
       <Container sx={{ py: 12 }}>
         <>
           {imgs.map((img, i) => (

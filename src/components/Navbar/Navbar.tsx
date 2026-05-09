@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
@@ -30,7 +30,10 @@ interface NavbarProps {
 function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true }: NavbarProps) {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
-  const desktopNavRef = useRef<HTMLDivElement | null>(null);
+  const [desktopNavAnchorEl, setDesktopNavAnchorEl] = useState<HTMLDivElement | null>(null);
+  const handleDesktopNavRef = useCallback((node: HTMLDivElement | null) => {
+    setDesktopNavAnchorEl(node);
+  }, []);
 
   const items: NavItem[] = [
     { name: "home", route: "/" },
@@ -149,7 +152,7 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
           <Box sx={{ flexGrow: 1 }} />
 
           {isDesktop ? (
-            <Box ref={desktopNavRef} sx={{ position: "relative" }}>
+            <Box ref={handleDesktopNavRef} sx={{ position: "relative" }}>
               <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
                 {items.map((item) => (
                   <NavbarTrigger
@@ -161,7 +164,7 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
                 ))}
               </Stack>
               <NavbarDropdown
-                anchorEl={desktopNavRef.current}
+                anchorEl={desktopNavAnchorEl}
                 open={menuOpen}
                 item={items.find((it) => it.name === openName)}
                 onCancelClose={cancelClose}

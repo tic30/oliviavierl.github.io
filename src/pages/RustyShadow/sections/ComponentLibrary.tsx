@@ -1,9 +1,10 @@
+import Typography from "@mui/material/Typography";
+
 // @mui material components
 import { Container } from "ui/system";
 
 // Material Kit 2 React components
 import { Box } from "ui/system";
-import { Typography } from "ui/system";
 
 // Images
 import c0 from "assets/img/moodboard.png";

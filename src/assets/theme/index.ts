@@ -2,8 +2,10 @@ import { createTheme } from "@mui/material/styles";
 import borders from "./base/borders";
 import boxShadows from "./base/boxShadows";
 import breakpoints from "./base/breakpoints";
-import colors from "./base/colors";
 import typography from "./base/typography";
+
+const primaryMain = "#fb7e00";
+const darkMain = "#25271c";
 
 const greyScale = {
   100: "#f3f4f6",
@@ -17,10 +19,10 @@ const greyScale = {
   900: "#111827",
 };
 
-const showcasePalette = {
-  dark: colors.showcaseColors.dark,
-  grey: colors.showcaseColors.grey,
-  yellow: colors.showcaseColors.yellow,
+const showcaseColors = {
+  dark: "#0c222f",
+  grey: "#4c5053",
+  yellow: "#f4b740",
 };
 
 const theme = createTheme({
@@ -28,44 +30,30 @@ const theme = createTheme({
   colorSchemes: {
     light: {
       palette: {
-        primary: { main: colors.primary.main },
+        primary: { main: primaryMain },
         secondary: { main: "#6b7280" },
         text: {
           primary: "#344767",
           secondary: "#6b7280",
         },
-        common: {
-          white: colors.white.main,
-          black: colors.black.main,
-        },
         grey: greyScale,
-        background: {
-          default: colors.white.main,
-          paper: colors.white.main,
-        },
-        dark: { main: colors.dark.main },
-        showcase: showcasePalette,
+        dark: { main: darkMain },
       },
     },
     dark: {
       palette: {
-        primary: { main: colors.primary.main },
+        primary: { main: primaryMain },
         secondary: { main: "#9ca3af" },
         text: {
           primary: "#f3f4f6",
           secondary: "#9ca3af",
         },
-        common: {
-          white: colors.white.main,
-          black: colors.black.main,
-        },
         grey: greyScale,
-        background: {
-          default: "#111827",
-          paper: "#1f2937",
-        },
+        // background: {
+        //   default: "#111827",
+        //   paper: "#1f2937",
+        // },
         dark: { main: "#f3f4f6" },
-        showcase: showcasePalette,
       },
     },
   },
@@ -86,7 +74,7 @@ const theme = createTheme({
   },
   boxShadows,
   borders,
-  colors,
+  showcaseColors,
   components: {
     MuiContainer: {
       defaultProps: { maxWidth: false },

@@ -1,6 +1,7 @@
+import Typography from "@mui/material/Typography";
+
 // Material Kit 2 React components
 import { Box } from "ui/system";
-import { Typography } from "ui/system";
 
 // Author page sections
 import bgImage from "assets/img/cover3.jpg";
@@ -27,7 +28,7 @@ function ICatcher() {
           }}
         >
           <Typography variant="h1">iCatcher</Typography>
-          <Typography variant="h5" mt={1}>
+          <Typography variant="h5" sx={{ mt: 1 }}>
             Better Experience of Sharing Ideas and Manage Inspirations
           </Typography>
         </Box>

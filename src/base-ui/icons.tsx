@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { Icon } from "./core";
+import Icon from "@mui/material/Icon";
 
 const createIcon = (name: string) =>
   forwardRef<any, any>((props, ref) => (
