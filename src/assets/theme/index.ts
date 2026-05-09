@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material/styles";
+import type { TypographyVariantsOptions } from "@mui/material/styles";
 import borders from "./base/borders";
 import boxShadows from "./base/boxShadows";
 import breakpoints from "./base/breakpoints";
@@ -70,7 +71,7 @@ const theme = createTheme({
     h6: typography.h6,
     body1: typography.body1,
     body2: typography.body2,
-    button: typography.button as any,
+    button: typography.button as TypographyVariantsOptions["button"],
   },
   boxShadows,
   borders,

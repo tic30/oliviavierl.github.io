@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import type { ReactNode } from "react";
 
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
@@ -8,6 +9,7 @@ import theme from "assets/theme";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import getRoutes from "routes";
+import type { NavigationRoute } from "types/site";
 
 function AppRoutes() {
   const { pathname } = useLocation();
@@ -20,8 +22,8 @@ function AppRoutes() {
     }
   }, [pathname]);
 
-  const renderRoutes = (allRoutes) =>
-    allRoutes.map((route) => {
+  const renderRoutes = (allRoutes: NavigationRoute[]): ReactNode =>
+    allRoutes.map((route: NavigationRoute) => {
       if (route.collapse) {
         return renderRoutes(route.collapse);
       }
