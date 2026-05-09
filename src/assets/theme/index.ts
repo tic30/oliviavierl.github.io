@@ -50,10 +50,6 @@ const theme = createTheme({
           secondary: "#9ca3af",
         },
         grey: greyScale,
-        // background: {
-        //   default: "#111827",
-        //   paper: "#1f2937",
-        // },
         dark: { main: "#f3f4f6" },
       },
     },
@@ -76,6 +72,11 @@ const theme = createTheme({
   boxShadows,
   borders,
   showcaseColors,
+  unstable_sxConfig: {
+    borderRadius: {
+      themeKey: "borders",
+    },
+  },
   components: {
     MuiContainer: {
       defaultProps: { maxWidth: false },

@@ -1,16 +1,6 @@
 import React from "react";
 import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
-import borders from "assets/theme/base/borders";
 import type { StyleObject } from "types/site";
-// import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: colors.primary.main,
-//     },
-//   },
-// });
 
 interface TabsProps {
   items: React.ReactNode[];
@@ -37,8 +27,8 @@ const Tabs = ({ items, buttons, buttonSx = {}, sx = {} }: TabsProps) => {
             key={`tabs-${i}`}
             sx={{
               flexGrow: 1,
-              borderTopLeftRadius: borders.borderRadius.xl,
-              borderTopRightRadius: borders.borderRadius.xl,
+              borderTopLeftRadius: (theme) => theme.borders.borderRadius.xl,
+              borderTopRightRadius: (theme) => theme.borders.borderRadius.xl,
               borderBottomLeftRadius: 0,
               borderBottomRightRadius: 0,
               ...buttonSx,

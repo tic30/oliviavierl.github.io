@@ -34,7 +34,7 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
   const resumeButtonSx = {
     display: "block",
-    borderRadius: "0.5rem",
+    borderRadius: "borderRadius.md",
     backgroundImage: "linear-gradient(195deg, rgb(251, 126, 0), rgb(216, 27, 96))",
     backgroundSize: "150%",
     backgroundPositionX: "25%",

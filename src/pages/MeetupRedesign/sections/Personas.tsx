@@ -3,7 +3,6 @@ import { Box, Card, CardMedia, Container } from "@mui/material";
 
 import SectionHeader from "components/SectionHeader";
 import Tabs from "components/Tabs";
-import borders from "assets/theme/base/borders";
 
 // Images
 import p1 from "assets/img/p1.png";
@@ -36,8 +35,8 @@ function Personas() {
                 p: 3,
                 borderTopRightRadius: 0,
                 borderTopLeftRadius: 0,
-                borderBottomLeftRadius: borders.borderRadius.xl,
-                borderBottomRightRadius: borders.borderRadius.xl,
+                borderBottomLeftRadius: (theme) => theme.borders.borderRadius.xl,
+                borderBottomRightRadius: (theme) => theme.borders.borderRadius.xl,
               }}
             >
               {imgSection.map((img, j) => (

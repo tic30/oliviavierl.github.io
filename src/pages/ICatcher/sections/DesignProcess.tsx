@@ -5,7 +5,6 @@ import { useTheme } from "@mui/material/styles";
 import PreviewableImg from "components/PreviewableImg";
 import Tabs from "components/Tabs";
 import SectionHeader from "components/SectionHeader";
-import borders from "assets/theme/base/borders";
 
 // Images
 import dp1 from "assets/img/1.png";
@@ -252,8 +251,8 @@ function DesignProcess() {
                 p: 3,
                 borderTopRightRadius: 0,
                 borderTopLeftRadius: 0,
-                borderBottomLeftRadius: borders.borderRadius.xl,
-                borderBottomRightRadius: borders.borderRadius.xl,
+                borderBottomLeftRadius: (theme) => theme.borders.borderRadius.xl,
+                borderBottomRightRadius: (theme) => theme.borders.borderRadius.xl,
               }}
             >
               <CardMedia component="img" image={img} alt="persona image" />

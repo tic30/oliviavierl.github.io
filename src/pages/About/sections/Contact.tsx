@@ -38,7 +38,7 @@ function Contact() {
             sx={{
               width: "100%",
               bgcolor: "background.default",
-              borderRadius: 4,
+              borderRadius: "borderRadius.xl",
               boxShadow: 3,
               overflow: "hidden",
               mb: 6,

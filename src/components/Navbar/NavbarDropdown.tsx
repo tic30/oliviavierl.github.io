@@ -48,7 +48,7 @@ function NavbarDropdown({
       <Paper
         sx={{
           minWidth: 220,
-          borderRadius: 2,
+          borderRadius: "borderRadius.md",
           boxShadow: 3,
           overflow: "hidden",
         }}
