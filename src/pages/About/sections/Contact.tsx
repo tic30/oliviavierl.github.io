@@ -3,11 +3,9 @@ import { Box, Container, Grid } from "@mui/material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
-// import TextField from "@mui/material/TextField";
-// import Button from "@mui/material/Button";
-
 import bgImage from "assets/img/me.jpeg";
 import { linkedinUrl } from "../../../constants";
+import { useDarkMode } from "usehooks-ts";
 
 const hobbies = [
   {
@@ -30,6 +28,8 @@ const hobbies = [
 ];
 
 function Contact() {
+  const isDarkMode = useDarkMode();
+
   return (
     <Box component="section" sx={{ py: { xs: 0, lg: 6 } }}>
       <Container>
@@ -75,7 +75,7 @@ function Contact() {
                         sx={{
                           textTransform: "none",
                           textDecoration: "none",
-                          color: "background.default",
+                          color: isDarkMode ? "text.primary" : "background.default",
                           opacity: 0.8,
                           ml: 2,
                           fontWeight: 400,
@@ -98,7 +98,7 @@ function Contact() {
                         variant="button"
                         sx={{
                           textTransform: "capitalize",
-                          color: "background.default",
+                          color: isDarkMode ? "text.primary" : "background.default",
                           opacity: 0.8,
                           ml: 2,
                           fontWeight: 400,

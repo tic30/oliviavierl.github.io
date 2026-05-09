@@ -7,6 +7,7 @@ import Popper from "@mui/material/Popper";
 import Paper from "@mui/material/Paper";
 
 import type { NavItem } from "./types";
+import { useDarkMode } from "usehooks-ts";
 
 interface NavbarDropdownProps {
   anchorEl: HTMLElement | null;
@@ -25,6 +26,11 @@ function NavbarDropdown({
   onScheduleClose,
   onClose,
 }: NavbarDropdownProps) {
+  const { isDarkMode } = useDarkMode();
+  const listItemHoverSx = {
+    backgroundColor: isDarkMode ? "grey.500" : "grey.100",
+  };
+
   if (!item?.children?.length) return null;
 
   return (
@@ -64,7 +70,7 @@ function NavbarDropdown({
               sx={{
                 py: 1.25,
                 px: 2,
-                "&:hover": { backgroundColor: "grey.100", color: "background.default" },
+                "&:hover": listItemHoverSx,
               }}
             >
               <ListItemText

@@ -14,10 +14,10 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import MenuIcon from "@mui/icons-material/Menu";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import { useDarkMode } from "usehooks-ts";
 
 import favicon from "assets/img/header-logo.svg";
 import faviconDark from "assets/img/header-logo-dark.svg";
-import useDarkModeCheck from "hooks/useDarkModeCheck";
 import { resumeUrl } from "../../constants";
 import getShowcases from "showcases.routes";
 import NavbarDropdown from "./NavbarDropdown";
@@ -34,7 +34,7 @@ interface NavbarProps {
 function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true }: NavbarProps) {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
-  const isDarkMode = useDarkModeCheck();
+  const { isDarkMode } = useDarkMode();
   const logoSrc = isDarkMode ? faviconDark : favicon;
   const resumeButtonSx = {
     display: "block",
