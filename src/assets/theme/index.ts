@@ -55,7 +55,7 @@ const theme = createTheme({
         grey: greyScale,
         dark: { main: "#f3f4f6" },
         background: {
-          root: "#f3f4f6",
+          root: "#161B22",
         },
       },
     },
@@ -91,9 +91,9 @@ const theme = createTheme({
       },
     },
     MuiCssBaseline: {
-      styleOverrides: (themeParam) => ({
+      styleOverrides: () => ({
         body: {
-          backgroundColor: themeParam.palette.background.root,
+          backgroundColor: "var(--mui-palette-background-root)",
         },
       }),
     },

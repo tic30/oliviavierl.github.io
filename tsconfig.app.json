@@ -10,6 +10,7 @@
     "paths": {
       "assets/*": ["assets/*"],
       "components/*": ["components/*"],
+      "hooks/*": ["hooks/*"],
       "pages/*": ["pages/*"],
       "routes": ["routes.tsx"],
       "showcases.routes": ["showcases.routes.tsx"]

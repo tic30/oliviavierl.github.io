@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useIntersectionObserver } from "usehooks-ts";
 import { Box, Card, Link as MuiLink } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import useDarkModeCheck from "hooks/useDarkModeCheck";
 import getShowcases from "showcases.routes";
 import type { ShowcaseItem } from "types/site";
 import { Typography } from "@mui/material";
@@ -17,6 +18,8 @@ interface ShowCaseCardProps {
 }
 
 function ShowCaseCardContent({ item, isIntersecting }: ShowCaseCardContentProps) {
+  const isDarkMode = useDarkModeCheck();
+
   return (
     <Card
       sx={{
@@ -24,7 +27,7 @@ function ShowCaseCardContent({ item, isIntersecting }: ShowCaseCardContentProps)
         textTransform: "none",
         display: "block",
         overflow: "hidden",
-        color: "background.default",
+        color: isDarkMode ? "text.primary" : "background.default",
         borderRadius: "borderRadius.xl",
         backgroundColor: item.bgColor,
         boxShadow: ({ boxShadows: { colored } }) => colored.dark,

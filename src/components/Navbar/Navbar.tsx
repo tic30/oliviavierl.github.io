@@ -16,6 +16,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
 import favicon from "assets/img/header-logo.svg";
+import useDarkModeCheck from "hooks/useDarkModeCheck";
 import { resumeUrl } from "../../constants";
 import getShowcases from "showcases.routes";
 import NavbarDropdown from "./NavbarDropdown";
@@ -32,13 +33,14 @@ interface NavbarProps {
 function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true }: NavbarProps) {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
+  const isDarkMode = useDarkModeCheck();
   const resumeButtonSx = {
     display: "block",
     borderRadius: "borderRadius.md",
     backgroundImage: "linear-gradient(195deg, rgb(251, 126, 0), rgb(216, 27, 96))",
     backgroundSize: "150%",
     backgroundPositionX: "25%",
-    color: "background.default",
+    color: isDarkMode ? "text.primary" : "background.default",
     fontWeight: 400,
     px: "1rem",
     "&:hover": { opacity: 1, backgroundColor: "transparent" },

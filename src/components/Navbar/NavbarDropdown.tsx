@@ -64,7 +64,7 @@ function NavbarDropdown({
               sx={{
                 py: 1.25,
                 px: 2,
-                "&:hover": { backgroundColor: "grey.100" },
+                "&:hover": { backgroundColor: "grey.100", color: "background.default" },
               }}
             >
               <ListItemText
