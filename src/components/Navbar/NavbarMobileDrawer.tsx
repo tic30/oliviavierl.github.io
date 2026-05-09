@@ -5,12 +5,15 @@ import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import type { SxProps, Theme } from "@mui/material/styles";
 
 import type { NavItem } from "./types";
+import { navTriggerSx } from "./NavbarTrigger";
 
 interface NavbarMobileDrawerProps {
   items: NavItem[];
@@ -19,11 +22,11 @@ interface NavbarMobileDrawerProps {
 }
 
 const itemTextProps = {
-  primary: { sx: { textTransform: "lowercase" as const, fontWeight: 600 } },
+  primary: { sx: { textTransform: "capitalize", fontWeight: 400, fontSize: "0.875rem" } },
 };
 
 const childTextProps = {
-  primary: { sx: { textTransform: "capitalize" as const } },
+  primary: { sx: { textTransform: "none" } },
   secondary: {
     sx: {
       mt: 0.25,
@@ -33,18 +36,34 @@ const childTextProps = {
   },
 };
 
+const mobileItemButtonSx: SxProps<Theme> = [
+  navTriggerSx,
+  {
+    width: "100%",
+    justifyContent: "flex-start",
+    py: 1,
+    borderRadius: 0,
+  },
+];
+
+const itemIconSx = {
+  minWidth: 0,
+  mr: 1.5,
+  color: "inherit",
+  opacity: "inherit",
+};
+
 function NavbarMobileDrawer({ items, open, onClose }: NavbarMobileDrawerProps) {
   const [expanded, setExpanded] = useState<string | null>(null);
 
   return (
-    <Box sx={{ zIndex: 0 }}>
+    <Box sx={{ zIndex: 1 }}>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <Paper
           square
           elevation={0}
           sx={{
-            backgroundColor: "background.paper",
-            boxShadow: (theme) => theme.boxShadows.sm,
+            backgroundColor: "transparent",
           }}
         >
           <List sx={{ py: 0.5 }}>
@@ -53,9 +72,17 @@ function NavbarMobileDrawer({ items, open, onClose }: NavbarMobileDrawerProps) {
                 const isOpen = expanded === item.name;
                 return (
                   <Box key={item.name}>
-                    <ListItemButton onClick={() => setExpanded(isOpen ? null : item.name)}>
+                    <ListItemButton
+                      onClick={() => setExpanded(isOpen ? null : item.name)}
+                      sx={mobileItemButtonSx}
+                    >
+                      {item.icon ? <ListItemIcon sx={itemIconSx}>{item.icon}</ListItemIcon> : null}
                       <ListItemText primary={item.name} slotProps={itemTextProps} />
-                      {isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                      {isOpen ? (
+                        <ExpandLessIcon color="inherit" />
+                      ) : (
+                        <ExpandMoreIcon color="inherit" />
+                      )}
                     </ListItemButton>
                     <Collapse in={isOpen} unmountOnExit>
                       <List component="div" disablePadding>
@@ -92,7 +119,9 @@ function NavbarMobileDrawer({ items, open, onClose }: NavbarMobileDrawerProps) {
                     ? { component: RouterLink, to: item.route }
                     : { component: "a", href: item.href, target: "_blank", rel: "noreferrer" })}
                   onClick={onClose}
+                  sx={mobileItemButtonSx}
                 >
+                  {item.icon ? <ListItemIcon sx={itemIconSx}>{item.icon}</ListItemIcon> : null}
                   <ListItemText primary={item.name} slotProps={itemTextProps} />
                 </ListItemButton>
               );

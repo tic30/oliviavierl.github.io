@@ -124,6 +124,7 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
         boxShadow: (theme) => theme.boxShadows.sm,
         borderBottomLeftRadius: (theme) => theme.borders.borderRadius.xl,
         borderBottomRightRadius: (theme) => theme.borders.borderRadius.xl,
+        marginBlockEnd: "-0.5rem",
       }}
     >
       <Container
@@ -132,7 +133,6 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
           position: "relative",
           zIndex: 1,
           height: "6rem",
-          backgroundColor: "background.paper",
         }}
       >
         <Toolbar disableGutters sx={{ height: "100%", gap: 2 }}>

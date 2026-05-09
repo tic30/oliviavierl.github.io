@@ -37,7 +37,7 @@ function AppRoutes() {
 
   return (
     <>
-      <Navbar sticky />
+      <Navbar />
       <Routes>
         {renderRoutes(getRoutes(theme))}
         <Route path="*" element={<Navigate to="/" />} />

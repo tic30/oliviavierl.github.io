@@ -25,6 +25,7 @@ function ShowCaseCardContent({ item, isIntersecting }: ShowCaseCardContentProps)
         display: "block",
         overflow: "hidden",
         color: "background.default",
+        borderRadius: "borderRadius.xl",
         backgroundColor: item.bgColor,
         boxShadow: ({ boxShadows: { colored } }) => colored.dark,
         opacity: isIntersecting ? 1 : 0,

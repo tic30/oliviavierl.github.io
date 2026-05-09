@@ -72,7 +72,18 @@ function Contact() {
                       <Typography
                         component="a"
                         variant="button"
-                        sx={{ color: "common.white", opacity: 0.8, ml: 2, fontWeight: 400 }}
+                        sx={{
+                          textTransform: "none",
+                          textDecoration: "none",
+                          color: "background.default",
+                          opacity: 0.8,
+                          ml: 2,
+                          fontWeight: 400,
+                          "&:hover": {
+                            opacity: 1,
+                            textDecoration: "underline",
+                          },
+                        }}
                         href={linkedinUrl}
                         target="_blank"
                         rel="noreferrer"
@@ -85,7 +96,13 @@ function Contact() {
                       <Typography
                         component="span"
                         variant="button"
-                        sx={{ color: "common.white", opacity: 0.8, ml: 2, fontWeight: 400 }}
+                        sx={{
+                          textTransform: "capitalize",
+                          color: "background.default",
+                          opacity: 0.8,
+                          ml: 2,
+                          fontWeight: 400,
+                        }}
                       >
                         San Francisco, CA
                       </Typography>

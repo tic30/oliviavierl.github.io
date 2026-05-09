@@ -10,6 +10,9 @@ export interface ShowcaseColors {
 }
 
 declare module "@mui/material/styles" {
+  interface TypeBackground {
+    root: string;
+  }
   interface Palette {
     dark: Palette["primary"];
   }

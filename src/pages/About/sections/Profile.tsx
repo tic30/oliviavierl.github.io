@@ -6,11 +6,19 @@ import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
-// import Button from "@mui/material/Button";
+const iconColor: SxProps = {
+  color: "text.secondary",
+  "&:hover, &:active, &:focus": {
+    color: "text.primary",
+  },
+  width: "20px",
+  height: "20px",
+};
 
 // Images
 import profilePicture from "assets/img/avatar.png";
 import { linkedinUrl, email, instagramUrl, resumeUrl } from "../../../constants";
+import type { SxProps } from "@mui/material/styles";
 
 function Profile() {
   const [open, openSnackbar] = useState(false);
@@ -24,11 +32,11 @@ function Profile() {
       <Box sx={{ display: "flex", alignItems: "center", mt: 1, mb: 5 }}>
         <Tooltip title="Resume">
           <Link target="_blank" href={resumeUrl} sx={{ display: "flex", mr: 3 }}>
-            <HistoryEduIcon color="primary" />
+            <HistoryEduIcon />
           </Link>
         </Tooltip>
         <Link target="_blank" href={linkedinUrl} sx={{ display: "flex", mr: 3 }}>
-          <LinkedInIcon />
+          <LinkedInIcon sx={iconColor} />
         </Link>
         <Tooltip open={open} onClose={() => openSnackbar(false)} title="Email copied to clipboard">
           <Button
@@ -38,10 +46,6 @@ function Profile() {
               p: 0,
               minWidth: 0,
               minHeight: 0,
-              color: "dark.main",
-              "&:hover, &:active, &:focus": {
-                color: "dark.main",
-              },
             }}
             onClick={() => {
               navigator.clipboard.writeText(email).then(
@@ -54,14 +58,14 @@ function Profile() {
               );
             }}
           >
-            <EmailIcon sx={{ width: "20px", height: "20px" }} />
+            <EmailIcon sx={iconColor} />
           </Button>
         </Tooltip>
         <Link target="_blank" href={instagramUrl} sx={{ display: "flex" }}>
-          <InstagramIcon />
+          <InstagramIcon sx={iconColor} />
         </Link>
       </Box>
-      <Typography variant="body1" sx={{ fontWeight: 300, mx: { xs: 0, lg: 6 } }}>
+      <Typography sx={{ fontSize: "1.25rem", fontWeight: 300, mx: { xs: 0, lg: 5 } }}>
         I'm a ux /ui designer who loves clean, simple & unique design. I also enjoy crafting brand
         identities, icons, & ilustration work. I'm good at communicating with people, glad to work
         as a team and collaborate with other teammates. I'm willing to learn new things and grow

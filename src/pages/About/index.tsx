@@ -30,6 +30,7 @@ function About() {
             backgroundColor: "rgba(var(--mui-palette-background-paperChannel) / 0.8)",
             backdropFilter: "saturate(200%) blur(30px)",
             boxShadow: "none",
+            borderRadius: "borderRadius.xl",
             overflow: "visible",
           }}
         >

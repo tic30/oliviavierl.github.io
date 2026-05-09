@@ -39,6 +39,9 @@ const theme = createTheme({
         },
         grey: greyScale,
         dark: { main: darkMain },
+        background: {
+          root: "#f0f2f5",
+        },
       },
     },
     dark: {
@@ -51,6 +54,9 @@ const theme = createTheme({
         },
         grey: greyScale,
         dark: { main: "#f3f4f6" },
+        background: {
+          root: "#f3f4f6",
+        },
       },
     },
   },
@@ -83,6 +89,13 @@ const theme = createTheme({
       styleOverrides: {
         root: { maxWidth: 992 },
       },
+    },
+    MuiCssBaseline: {
+      styleOverrides: (themeParam) => ({
+        body: {
+          backgroundColor: themeParam.palette.background.root,
+        },
+      }),
     },
   },
 });

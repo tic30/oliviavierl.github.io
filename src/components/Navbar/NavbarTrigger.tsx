@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import type { NavItem } from "./types";
-import type { SxProps } from "@mui/material/styles";
 
 interface NavbarTriggerProps {
   item: NavItem;
@@ -12,9 +11,9 @@ interface NavbarTriggerProps {
   onScheduleClose: () => void;
 }
 
-const linkSx: SxProps = {
+export const navTriggerSx = {
   color: "text.primary",
-  textTransform: "capitalize" as const,
+  textTransform: "capitalize",
   fontWeight: 400,
   fontSize: "0.875rem",
   opacity: 0.6,
@@ -34,7 +33,7 @@ function NavbarTrigger({ item, onOpen, onScheduleClose }: NavbarTriggerProps) {
         onMouseLeave={onScheduleClose}
         startIcon={startIcon}
         endIcon={<KeyboardArrowDownIcon />}
-        sx={linkSx}
+        sx={navTriggerSx}
       >
         {item.name}
       </Button>
@@ -42,7 +41,7 @@ function NavbarTrigger({ item, onOpen, onScheduleClose }: NavbarTriggerProps) {
   }
   if (item.route) {
     return (
-      <Button component={RouterLink} to={item.route} startIcon={startIcon} sx={linkSx}>
+      <Button component={RouterLink} to={item.route} startIcon={startIcon} sx={navTriggerSx}>
         {item.name}
       </Button>
     );
@@ -54,7 +53,7 @@ function NavbarTrigger({ item, onOpen, onScheduleClose }: NavbarTriggerProps) {
       target="_blank"
       rel="noreferrer"
       startIcon={startIcon}
-      sx={linkSx}
+      sx={navTriggerSx}
     >
       {item.name}
     </Button>
