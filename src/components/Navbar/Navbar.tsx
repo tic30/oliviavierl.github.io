@@ -66,15 +66,24 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
   // Hide the bar on scroll-down, reveal on scroll-up.
   const lastScrollTop = useRef(0);
   const [hidden, setHidden] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
   useEffect(() => {
     const onScroll = () => {
       const st = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (drawerOpen) {
+        setHidden(false);
+        lastScrollTop.current = st <= 0 ? 0 : st;
+        return;
+      }
+
       setHidden(st > lastScrollTop.current && st > 80);
       lastScrollTop.current = st <= 0 ? 0 : st;
     };
     document.addEventListener("scroll", onScroll, false);
     return () => document.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [drawerOpen]);
 
   // Hover-driven dropdown for the projects menu, with a small grace period
   // so the mouse can travel from the trigger to the menu panel.
@@ -104,7 +113,6 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
   useEffect(() => () => cancelClose(), []);
 
   // Drawer for mobile (also auto-closes when crossing into desktop layout).
-  const [drawerOpen, setDrawerOpen] = useState(false);
   useEffect(() => {
     if (isDesktop) setDrawerOpen(false);
   }, [isDesktop]);
