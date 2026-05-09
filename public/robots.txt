@@ -1,3 +1,8 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+
+# Keep important site assets crawlable.
+Allow: /favicon.svg
+Allow: /favicon-dark.svg
+Allow: /manifest.json
