@@ -1,10 +1,8 @@
 import Typography from "@mui/material/Typography";
+import { Box, Container } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 // @mui material components
-import { Container, useTheme } from "ui/system";
-
-// Material Kit 2 React components
-import { Box } from "ui/system";
 import SectionHeader from "components/SectionHeader";
 
 // Images

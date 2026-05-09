@@ -1,12 +1,7 @@
 import Typography from "@mui/material/Typography";
+import { Box, Container, Grid } from "@mui/material";
 
 // @mui material components
-import { Container } from "ui/system";
-import { Grid } from "ui/system";
-
-// Material Kit 2 React components
-import { Box } from "ui/system";
-
 function Intro() {
   return (
     <Box component="section">
@@ -31,28 +26,28 @@ function Intro() {
             borderColor: "primary.main",
           }}
         >
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2" sx={{ fontWeight: 700 }}>
               MY ROLE
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2" sx={{ fontWeight: 700 }}>
               PROJECT TYPE
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2" sx={{ fontWeight: 700 }}>
               TIMELINE
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">UI/UX Designer</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">Individual Project</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">15 Weeks</Typography>
           </Grid>
         </Grid>

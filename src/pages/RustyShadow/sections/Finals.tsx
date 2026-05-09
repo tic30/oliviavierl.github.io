@@ -1,11 +1,8 @@
 import Typography from "@mui/material/Typography";
+import { Box, Container, Grid } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 // @mui material components
-import { Container, useTheme } from "ui/system";
-import { Grid } from "ui/system";
-
-// Material Kit 2 React components
-import { Box } from "ui/system";
 import SectionHeader from "components/SectionHeader";
 
 // Images
@@ -52,12 +49,12 @@ function Finals() {
           }}
         >
           {sections.map((section, i) => (
-            <Grid item xs={3} key={`finals-title-${i}`}>
+            <Grid size={3} key={`finals-title-${i}`}>
               <Typography variant="body1">{section.title}</Typography>
             </Grid>
           ))}
           {sections.map((section, i) => (
-            <Grid item xs={3} key={`finals-title-${i}`}>
+            <Grid size={3} key={`finals-title-${i}`}>
               {section.imgs.map((img, j) => (
                 <PreviewableImg
                   src={img}

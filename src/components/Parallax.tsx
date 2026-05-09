@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from "react";
-import { Box } from "ui/system";
+import { Box } from "@mui/material";
 import type { StyleObject } from "types/site";
 
 const parallaxLayer = {

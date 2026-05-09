@@ -1,8 +1,6 @@
 // @mui material components
-import { Card } from "ui/system";
+import { Box, Card } from "@mui/material";
 
-// Material Kit 2 React components
-import { Box } from "ui/system";
 // Images
 import bgImage from "assets/img/about_bg.jpeg";
 
@@ -17,9 +15,9 @@ function About() {
     <>
       <Box sx={{ bgcolor: "background.default" }}>
         <Box
-          minHeight="25rem"
-          width="100%"
           sx={{
+            minHeight: "25rem",
+            width: "100%",
             backgroundImage: `linear-gradient(180deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.1)), url(${bgImage})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -36,6 +34,7 @@ function About() {
             backgroundColor: "rgba(var(--mui-palette-background-paperChannel) / 0.8)",
             backdropFilter: "saturate(200%) blur(30px)",
             boxShadow: "none",
+            overflow: "visible",
           }}
         >
           <Profile />

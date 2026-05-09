@@ -1,10 +1,7 @@
 import Typography from "@mui/material/Typography";
+import { Box, Card, CardMedia, Container } from "@mui/material";
 
 // @mui material components
-import { Card, CardMedia, Container } from "ui/system";
-
-// Material Kit 2 React components
-import { Box } from "ui/system";
 import Tabs from "components/Tabs";
 import borders from "assets/theme/base/borders";
 

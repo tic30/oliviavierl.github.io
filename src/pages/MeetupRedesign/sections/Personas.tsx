@@ -1,8 +1,6 @@
 // @mui material components
-import { Card, CardMedia, Container } from "ui/system";
+import { Box, Card, CardMedia, Container } from "@mui/material";
 
-// Material Kit 2 React components
-import { Box } from "ui/system";
 import SectionHeader from "components/SectionHeader";
 import Tabs from "components/Tabs";
 import borders from "assets/theme/base/borders";

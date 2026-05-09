@@ -1,12 +1,7 @@
 import Typography from "@mui/material/Typography";
+import { Box, Container, Grid } from "@mui/material";
 
 // @mui material components
-import { Container } from "ui/system";
-import { Grid } from "ui/system";
-
-// Material Kit 2 React components
-import { Box } from "ui/system";
-
 // Images
 import fbLogo from "assets/img/fb.png";
 import eventBriteLogo from "assets/img/eb.png";
@@ -39,28 +34,28 @@ function Intro() {
             borderColor: "primary.main",
           }}
         >
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2" sx={{ fontWeight: 700 }}>
               MY ROLE
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2" sx={{ fontWeight: 700 }}>
               PROJECT TYPE
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2" sx={{ fontWeight: 700 }}>
               TIMELINE
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">UI/UX Designer</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">Individual Project</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">15 Weeks</Typography>
           </Grid>
         </Grid>
@@ -106,27 +101,27 @@ function Intro() {
             textAlign: "center",
           }}
         >
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Box component="img" src={fbLogo} alt="logo" width="100%" />
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Box component="img" src={eventBriteLogo} alt="logo" width="100%" />
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Box component="img" src={alleventsLogo} alt="logo" width="100%" />
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">
               Facebook has more functions including post photos in personal page, chat with friends
               and add new friends. It’s more for building relationship with other people.
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">
               Eventbrite provides official activities and events.
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">
               Allevents stands as the right alternative to meetup. It is the largest and the oldest
               player in the event discovery space which takes care of the needs of the event

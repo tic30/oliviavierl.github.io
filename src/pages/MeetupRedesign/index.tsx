@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import Typography from "@mui/material/Typography";
+import { Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
-import { Box, useTheme } from "ui/system";
 import Parallax from "components/Parallax";
 
 // Author page sections

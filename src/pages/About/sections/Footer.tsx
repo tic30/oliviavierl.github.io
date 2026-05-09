@@ -14,28 +14,17 @@ Coded by www.creative-tim.com
 */
 
 import Typography from "@mui/material/Typography";
+import { Box, Container, Grid, Link, Stack } from "@mui/material";
 
 // @mui material components
-import { Container } from "ui/system";
-import { Grid } from "ui/system";
-import { Link } from "ui/system";
-import { Stack } from "ui/system";
-
-// Material Kit 2 React components
-import { Box } from "ui/system";
-
 function Footer() {
   return (
-    <Box component="footer" py={6}>
+    <Box component="footer" sx={{ py: 6 }}>
       <Container>
         <Grid container>
           <Grid
-            item
-            xs={12}
-            lg={4}
-            textAlign={{ xs: "center", lg: "left" }}
-            mr="auto"
-            mb={{ xs: 3, lg: 0 }}
+            size={{ xs: 12, lg: 4 }}
+            sx={{ textAlign: { xs: "center", lg: "left" }, mr: "auto", mb: { xs: 3, lg: 0 } }}
           >
             <Typography variant="h6" sx={{ textTransform: "uppercase", mb: { xs: 2, lg: 3 } }}>
               Material Design
@@ -43,12 +32,14 @@ function Footer() {
             <Stack
               component="ul"
               direction="row"
-              flexWrap="wrap"
               spacing={3}
-              justifyContent={{ xs: "center", lg: "flex-start" }}
-              pl={0}
-              mb={3}
-              sx={{ listStyle: "none" }}
+              sx={{
+                flexWrap: "wrap",
+                justifyContent: { xs: "center", lg: "flex-start" },
+                pl: 0,
+                mb: 3,
+                listStyle: "none",
+              }}
             >
               <Box component="li">
                 <Typography
@@ -104,7 +95,10 @@ function Footer() {
               Design by Creative Tim.
             </Typography>
           </Grid>
-          <Grid item xs={12} lg={6} ml="auto" textAlign={{ xs: "center", lg: "right" }}>
+          <Grid
+            size={{ xs: 12, lg: 6 }}
+            sx={{ ml: "auto", textAlign: { xs: "center", lg: "right" } }}
+          >
             <Typography variant="body1" sx={{ fontWeight: 700, mb: 6, fontSize: "1.125rem" }}>
               The reward for getting on the stage is fame. The price of fame is you can't get off
               the stage.

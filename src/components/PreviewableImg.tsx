@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Dialog, DialogTitle, IconButton } from "ui/system";
+import { Box, Dialog, DialogTitle, IconButton } from "@mui/material";
 import { Close as CloseIcon } from "ui/icons";
 
 interface SimpleDialogProps {
@@ -21,7 +21,7 @@ function SimpleDialog({ open, onClose, src, alt }: SimpleDialogProps) {
       fullScreen
       onClose={onClose}
       open={open}
-      PaperProps={{ sx: { backgroundColor: "transparent !important" } }}
+      slotProps={{ paper: { sx: { backgroundColor: "transparent !important" } } }}
     >
       <DialogTitle sx={{ height: "50px" }}>
         {" "}

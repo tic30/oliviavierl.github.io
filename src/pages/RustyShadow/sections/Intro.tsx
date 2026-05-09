@@ -1,12 +1,7 @@
 import Typography from "@mui/material/Typography";
+import { Box, Container, Grid } from "@mui/material";
 
 // @mui material components
-import { Container } from "ui/system";
-import { Grid } from "ui/system";
-
-// Material Kit 2 React components
-import { Box } from "ui/system";
-
 // Images
 import headImg from "assets/img/head.png";
 import mindmapImg from "assets/img/mindmap.png";
@@ -96,28 +91,28 @@ function Intro() {
             textAlign: "center",
           }}
         >
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body1">✦ E-commerce website</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body1">✦ Community for Sharing</Typography>{" "}
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body1">✦ Journal & Blog</Typography>{" "}
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">
               Store that sell the eqiupments and kits for the urban explorers.
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">
               Users can write and publish articles for sharing experiences and exlent works like
               photographs. Aslo in this community, you can follow other people you like and make
               friends.
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">
               Personal page can write journals and upload photo as a record of life.
             </Typography>

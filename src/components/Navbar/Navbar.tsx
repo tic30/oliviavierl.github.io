@@ -110,7 +110,6 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
         boxShadow: (theme) => theme.boxShadows.sm,
         borderBottomLeftRadius: (theme) => theme.borders.borderRadius.xl,
         borderBottomRightRadius: (theme) => theme.borders.borderRadius.xl,
-        overflow: "hidden",
       }}
     >
       <Container

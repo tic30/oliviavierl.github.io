@@ -1,4 +1,4 @@
-import { Box } from "ui/system";
+import { Box } from "@mui/material";
 import Greeting from "./sections/Greeting";
 import Showcases from "./sections/Showcases";
 

@@ -1,16 +1,13 @@
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
+import { Avatar, Box, Button, Container, Link, Tooltip } from "@mui/material";
 
 // @mui material components
-import { Container, Tooltip, Button, Zoom, Link } from "ui/system";
 import { Email as EmailIcon } from "ui/icons";
 import { LinkedIn as LinkedInIcon } from "ui/icons";
 import { Instagram as InstagramIcon } from "ui/icons";
 import { HistoryEdu as HistoryEduIcon } from "ui/icons";
 
-// Material Kit 2 React components
-import { Box } from "ui/system";
-import { Avatar } from "ui/system";
 // import Button from "@mui/material/Button";
 
 // Images
@@ -23,24 +20,19 @@ function Profile() {
   return (
     <Container sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
       <Box sx={{ mt: -8, mb: 5 }}>
-        <Avatar src={profilePicture} alt="Burce Mars" size="xxl" shadow="xl" />
+        <Avatar src={profilePicture} alt="Burce Mars" sx={{ width: 120, height: 120 }} />
       </Box>
       <Typography variant="h3">Yifan Li</Typography>
       <Box sx={{ display: "flex", alignItems: "center", mt: 1, mb: 5 }}>
-        <Tooltip title="Resume" TransitionComponent={Zoom}>
-          <Link target="_blank" href={resumeUrl} mr={3} sx={{ display: "flex" }}>
+        <Tooltip title="Resume">
+          <Link target="_blank" href={resumeUrl} sx={{ display: "flex", mr: 3 }}>
             <HistoryEduIcon color="primary" />
           </Link>
         </Tooltip>
-        <Link target="_blank" href={linkedinUrl} mr={3} sx={{ display: "flex" }}>
+        <Link target="_blank" href={linkedinUrl} sx={{ display: "flex", mr: 3 }}>
           <LinkedInIcon />
         </Link>
-        <Tooltip
-          TransitionComponent={Zoom}
-          open={open}
-          onClose={() => openSnackbar(false)}
-          title="Email copied to clipboard"
-        >
+        <Tooltip open={open} onClose={() => openSnackbar(false)} title="Email copied to clipboard">
           <Button
             variant="text"
             sx={{

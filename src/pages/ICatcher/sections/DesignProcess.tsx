@@ -1,9 +1,9 @@
 import Typography from "@mui/material/Typography";
+import { Box, Card, CardMedia, Container, Grid } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
-import { Card, CardMedia, Container, Grid, useTheme } from "ui/system";
 import PreviewableImg from "components/PreviewableImg";
 import Tabs from "components/Tabs";
-import { Box } from "ui/system";
 import SectionHeader from "components/SectionHeader";
 import borders from "assets/theme/base/borders";
 
@@ -83,10 +83,8 @@ function DesignProcess() {
         </Typography>
         <Grid container columnSpacing={8} rowSpacing={3}>
           <Grid
-            item
             container
-            xs={12}
-            lg={4}
+            size={{ xs: 12, lg: 4 }}
             sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}
           >
             <Box
@@ -104,8 +102,8 @@ function DesignProcess() {
               Pinterest
             </Typography>
           </Grid>
-          <Grid item container xs={12} lg={4} rowSpacing={3}>
-            <Grid item xs={12}>
+          <Grid container size={{ xs: 12, lg: 4 }} rowSpacing={3}>
+            <Grid size={12}>
               <Typography
                 variant="body1"
                 sx={{
@@ -116,7 +114,7 @@ function DesignProcess() {
                 Adventages
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <Typography variant="body2" sx={{ mb: 3 }}>
                 1. Pinterest have tags for classifing the pinstures and folders.
               </Typography>
@@ -125,8 +123,8 @@ function DesignProcess() {
               </Typography>
             </Grid>
           </Grid>
-          <Grid item container xs={12} lg={4} rowSpacing={3}>
-            <Grid item xs={12}>
+          <Grid container size={{ xs: 12, lg: 4 }} rowSpacing={3}>
+            <Grid size={12}>
               <Typography
                 variant="body1"
                 sx={{
@@ -137,7 +135,7 @@ function DesignProcess() {
                 Disadventages
               </Typography>
             </Grid>
-            <Grid item xs={12} sx={{ height: "100%" }}>
+            <Grid size={12} sx={{ height: "100%" }}>
               <Typography variant="body2">
                 Some app or website needs too many steps for saving pictures, like Pinterest. It's
                 hard to manage and move pictures to diferrent folders.
@@ -175,7 +173,7 @@ function DesignProcess() {
             textAlign: "center",
           }}
         >
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography
               variant="body1"
               sx={{
@@ -185,7 +183,7 @@ function DesignProcess() {
               Save inspirations of different forms
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography
               variant="body1"
               sx={{
@@ -195,7 +193,7 @@ function DesignProcess() {
               Community for sharing works and make friends
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography
               variant="body1"
               sx={{
@@ -205,19 +203,19 @@ function DesignProcess() {
               Manage folders of other apps
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">
               Create a new work of variable forms, like photo editing, add text and stickers,
               drawing, and picture collage, etc. Save them to the local folders.
             </Typography>{" "}
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">
               Post works for sharing to other people and get comments. View other people's works to
               get new ideas. Also follow the people you like and make friends.
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={4}>
             <Typography variant="body2">
               By link to other app, you can manage all the folders easier through using only one
               app.

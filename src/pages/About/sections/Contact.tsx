@@ -1,13 +1,10 @@
 import Typography from "@mui/material/Typography";
+import { Box, Container, Grid } from "@mui/material";
 
 // @mui material components
-import { Container } from "ui/system";
-import { Grid } from "ui/system";
 import { LinkedIn as LinkedInIcon } from "ui/icons";
 import { LocationOn as LocationOnIcon } from "ui/icons";
 
-// Material Kit 2 React components
-import { Box } from "ui/system";
 // import TextField from "@mui/material/TextField";
 // import Button from "@mui/material/Button";
 
@@ -36,43 +33,43 @@ const hobbies = [
 
 function Contact() {
   return (
-    <Box component="section" py={{ xs: 0, lg: 6 }}>
+    <Box component="section" sx={{ py: { xs: 0, lg: 6 } }}>
       <Container>
-        <Grid container item>
+        <Grid container>
           <Box
-            width="100%"
             sx={{
+              width: "100%",
               bgcolor: "background.default",
               borderRadius: 4,
               boxShadow: 3,
               overflow: "hidden",
+              mb: 6,
             }}
-            mb={6}
           >
             <Grid container spacing={2}>
               <Grid
-                item
-                xs={12}
-                lg={5}
-                position="relative"
-                px={0}
+                size={{ xs: 12, lg: 5 }}
                 sx={{
+                  position: "relative",
+                  px: 0,
                   backgroundImage: `linear-gradient(160deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url(${bgImage})`,
                   backgroundSize: "cover",
                 }}
               >
                 <Box
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  width="100%"
-                  height="100%"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
                 >
-                  <Box py={6} pr={6} pl={{ xs: 6, sm: 12 }} my="auto">
+                  <Box sx={{ py: 6, pr: 6, pl: { xs: 6, sm: 12 }, my: "auto" }}>
                     <Typography variant="body1" sx={{ color: "common.white", opacity: 0.8, mb: 3 }}>
                       Reach out if you would like to chat about work opportunities
                     </Typography>
-                    <Box display="flex" color="white" p={1}>
+                    <Box sx={{ display: "flex", color: "white", p: 1 }}>
                       <LinkedInIcon />
                       <Typography
                         component="a"
@@ -85,7 +82,7 @@ function Contact() {
                         {linkedinUrl}
                       </Typography>
                     </Box>
-                    <Box display="flex" color="white" p={1}>
+                    <Box sx={{ display: "flex", color: "white", p: 1 }}>
                       <LocationOnIcon />
                       <Typography
                         component="span"
@@ -98,9 +95,9 @@ function Contact() {
                   </Box>
                 </Box>
               </Grid>
-              <Grid item xs={12} lg={7}>
-                <Box component="form" p={2} method="post" py={{ xs: 2, sm: 6 }}>
-                  <Box px={3}>
+              <Grid size={{ xs: 12, lg: 7 }}>
+                <Box component="form" method="post" sx={{ p: 2, py: { xs: 2, sm: 6 } }}>
+                  <Box sx={{ px: 3 }}>
                     <Typography variant="h2">Say Hi!</Typography>
                     <Typography variant="body2" sx={{ color: "text.primary", mb: 6 }}>
                       Chat with me about...
@@ -167,7 +164,7 @@ function Contact() {
                     </Grid>
                   </Box> */}
                   {hobbies.map((hobby) => (
-                    <Box key={hobby.title} px={3} sx={{ display: "flex", mb: 4 }}>
+                    <Box key={hobby.title} sx={{ px: 3, display: "flex", mb: 4 }}>
                       <Typography variant="h5" sx={{ mr: 2 }}>
                         {hobby.icon}
                       </Typography>

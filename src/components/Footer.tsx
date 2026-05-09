@@ -1,10 +1,7 @@
 // @mui material components
-import { Container } from "ui/system";
+import { Box, Container } from "@mui/material";
 
 // Material Kit 2 React components
-import { Box } from "ui/system";
-
-// Material Kit 2 React base styles
 import typography from "assets/theme/base/typography";
 
 function SimpleFooter() {
@@ -13,18 +10,22 @@ function SimpleFooter() {
   return (
     <Container sx={{ my: 1, py: 0 }}>
       <Box
-        width="100%"
-        display="flex"
-        flexDirection={{ xs: "column", lg: "row" }}
-        justifyContent="space-between"
-        alignItems="center"
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: { xs: "column", lg: "row" },
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
         <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          flexWrap="wrap"
-          fontSize={size.sm}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+            fontSize: size.sm,
+          }}
         >
           &copy; {new Date().getFullYear()}, design and coded by Yifan Li
         </Box>

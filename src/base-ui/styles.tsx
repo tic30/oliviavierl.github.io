@@ -1,1 +1,0 @@
-export { ThemeProvider, alpha } from "./core";

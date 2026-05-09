@@ -1,6 +1,7 @@
 import Typography from "@mui/material/Typography";
+import { Box, Container } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
-import { Box, Container, useTheme } from "ui/system";
 import SectionHeader from "components/SectionHeader";
 import change11 from "assets/img/change11.png";
 import change12 from "assets/img/change12.png";
@@ -62,7 +63,6 @@ function Modifications() {
             {section.rows.map((row, j) => (
               <Box
                 key={`designUpdates-img-${i}-${j}`}
-                alt="Finalized Design"
                 sx={{
                   display: "flex",
                   flexDirection: ["column", j % 2 ? "row-reverse" : "row"],
