@@ -6,7 +6,16 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores([
+    'dist',
+    'build',
+    'coverage',
+    'stats',
+    '.jest-cache',
+    'node_modules',
+    'package-lock.json',
+    'src/i18n',
+  ]),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -19,7 +28,7 @@ export default defineConfig([
       globals: globals.browser,
     },
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
       'react-refresh/only-export-components': 'off',
       'react-hooks/set-state-in-effect': 'off'
     },
