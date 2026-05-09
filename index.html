@@ -2,7 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link id="favicon" rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      (() => {
+        const favicon = document.getElementById("favicon");
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+        const updateFavicon = (event) => {
+          if (favicon instanceof HTMLLinkElement) {
+            favicon.href = event.matches ? "/favicon-dark.svg" : "/favicon.svg";
+          }
+        };
+
+        updateFavicon(mediaQuery);
+
+        if (typeof mediaQuery.addEventListener === "function") {
+          mediaQuery.addEventListener("change", updateFavicon);
+        } else {
+          mediaQuery.addListener(updateFavicon);
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

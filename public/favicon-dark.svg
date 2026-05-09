@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 106.6 106.6" xml:space="preserve">
+  <style type="text/css">
+    .st0{fill:#111827;}
+    .st1{fill:none;stroke:#F3F4F6;stroke-width:5;stroke-miterlimit:10;}
+    .st2{fill:#D1D5DB;}
+    .st3{fill:#FB7E00;}
+  </style>
+  <rect class="st0" width="106.6" height="106.6"/>
+  <g>
+    <rect x="29.8" y="36.4" class="st1" width="14.6" height="40.4"/>
+    <polygon class="st1" points="62.7,58.6 62.7,76.8 44.4,76.8 44.4,91.4 62.7,91.4 77.3,91.4 77.3,76.8 77.3,58.6"/>
+    <path class="st2" d="M37.8,27.8h-1.4c-4.1,0-7.4-3.3-7.4-7.4V19c0-4.1,3.3-7.4,7.4-7.4h1.4c4.1,0,7.4,3.3,7.4,7.4v1.4C45.2,24.5,41.9,27.8,37.8,27.8z"/>
+    <path class="st3" d="M70.6,49.9h-1.4c-4.1,0-7.4-3.3-7.4-7.4v-1.4c0-4.1,3.3-7.4,7.4-7.4h1.4c4.1,0,7.4,3.3,7.4,7.4v1.4C78,46.6,74.7,49.9,70.6,49.9z"/>
+  </g>
+</svg>

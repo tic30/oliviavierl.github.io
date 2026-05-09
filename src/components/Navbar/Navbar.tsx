@@ -16,6 +16,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
 import favicon from "assets/img/header-logo.svg";
+import faviconDark from "assets/img/header-logo-dark.svg";
 import useDarkModeCheck from "hooks/useDarkModeCheck";
 import { resumeUrl } from "../../constants";
 import getShowcases from "showcases.routes";
@@ -34,6 +35,7 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
   const isDarkMode = useDarkModeCheck();
+  const logoSrc = isDarkMode ? faviconDark : favicon;
   const resumeButtonSx = {
     display: "block",
     borderRadius: "borderRadius.md",
@@ -123,12 +125,16 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
     <AppBar
       position={sticky ? "sticky" : "static"}
       elevation={0}
+      color="transparent"
+      enableColorOnDark
       sx={{
         minHeight: "6rem",
         top: hidden ? "-6rem" : 0,
         transition: "top 200ms ease",
         overflow: { xs: "hidden", lg: "visible" },
-        backgroundColor: "rgba(var(--mui-palette-background-defaultChannel) / 0.85)",
+        backgroundColor: isDarkMode
+          ? theme.palette.grey[900]
+          : "rgba(var(--mui-palette-background-defaultChannel) / 0.85)",
         backdropFilter: "saturate(200%) blur(30px)",
         color: "text.primary",
         boxShadow: (theme) => theme.boxShadows.sm,
@@ -159,7 +165,7 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
           >
             <Box
               component="img"
-              src={favicon}
+              src={logoSrc}
               alt={brand}
               sx={{ width: 32, height: 32, mr: 1.5 }}
             />
