@@ -32,6 +32,17 @@ interface NavbarProps {
 function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true }: NavbarProps) {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
+  const resumeButtonSx = {
+    display: "block",
+    borderRadius: "0.5rem",
+    backgroundImage: "linear-gradient(195deg, rgb(251, 126, 0), rgb(216, 27, 96))",
+    backgroundSize: "150%",
+    backgroundPositionX: "25%",
+    color: "background.default",
+    fontWeight: 400,
+    px: "1rem",
+    "&:hover": { opacity: 1, backgroundColor: "transparent" },
+  };
   const [desktopNavAnchorEl, setDesktopNavAnchorEl] = useState<HTMLDivElement | null>(null);
   const handleDesktopNavRef = useCallback((node: HTMLDivElement | null) => {
     setDesktopNavAnchorEl(node);
@@ -106,6 +117,7 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
         minHeight: "6rem",
         top: hidden ? "-6rem" : 0,
         transition: "top 200ms ease",
+        overflow: { xs: "hidden", lg: "visible" },
         backgroundColor: "rgba(var(--mui-palette-background-defaultChannel) / 0.85)",
         backdropFilter: "saturate(200%) blur(30px)",
         color: "text.primary",
@@ -155,14 +167,28 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
           {isDesktop ? (
             <Box ref={handleDesktopNavRef} sx={{ position: "relative" }}>
               <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
-                {items.map((item) => (
-                  <NavbarTrigger
-                    key={item.name}
-                    item={item}
-                    onOpen={openMenu}
-                    onScheduleClose={scheduleClose}
-                  />
-                ))}
+                {items.map((item) =>
+                  item.name === "resume" && item.href ? (
+                    <Button
+                      key={item.name}
+                      component="a"
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      sx={resumeButtonSx}
+                      size="small"
+                    >
+                      {item.name}
+                    </Button>
+                  ) : (
+                    <NavbarTrigger
+                      key={item.name}
+                      item={item}
+                      onOpen={openMenu}
+                      onScheduleClose={scheduleClose}
+                    />
+                  )
+                )}
               </Stack>
               <NavbarDropdown
                 anchorEl={desktopNavAnchorEl}
@@ -180,17 +206,7 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
                 href={resumeUrl}
                 target="_blank"
                 rel="noreferrer"
-                sx={{
-                  display: "block",
-                  borderRadius: "0.5rem",
-                  backgroundImage: "linear-gradient(195deg, rgb(251, 126, 0), rgb(216, 27, 96))",
-                  backgroundSize: "150%",
-                  backgroundPositionX: "25%",
-                  color: "background.default",
-                  fontWeight: 400,
-                  px: "1rem",
-                  "&:hover": { opacity: 1, backgroundColor: "transparent" },
-                }}
+                sx={resumeButtonSx}
                 size="small"
               >
                 resume
