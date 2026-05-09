@@ -31,7 +31,7 @@ const theme = createTheme({
         primary: { main: colors.primary.main },
         secondary: { main: "#6b7280" },
         text: {
-          primary: colors.dark.main,
+          primary: "#344767",
           secondary: "#6b7280",
         },
         common: {

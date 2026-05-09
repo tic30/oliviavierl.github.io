@@ -24,6 +24,8 @@ function ShowCaseCardContent({ item, target }: ShowCaseCardContentProps) {
     <Fade in={isElementInViewport} timeout={1000}>
       <Card
         sx={{
+          textDecoration: "none",
+          display: "block",
           overflow: "hidden",
           backgroundColor: item.bgColor,
           boxShadow: ({ boxShadows: { colored } }) => colored.dark,

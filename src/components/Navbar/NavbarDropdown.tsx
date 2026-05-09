@@ -3,12 +3,14 @@ import { Link as RouterLink } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import Popover from "@mui/material/Popover";
+import Popper from "@mui/material/Popper";
+import Paper from "@mui/material/Paper";
 
 import type { NavItem } from "./types";
 
 interface NavbarDropdownProps {
-  anchor: HTMLElement | null;
+  anchorEl: HTMLElement | null;
+  open: boolean;
   item: NavItem | undefined;
   onCancelClose: () => void;
   onScheduleClose: () => void;
@@ -16,65 +18,74 @@ interface NavbarDropdownProps {
 }
 
 function NavbarDropdown({
-  anchor,
+  anchorEl,
+  open,
   item,
   onCancelClose,
   onScheduleClose,
   onClose,
 }: NavbarDropdownProps) {
-  const open = Boolean(anchor) && Boolean(item?.children?.length);
+  if (!item?.children?.length) return null;
+
   return (
-    <Popover
-      anchorEl={anchor}
+    <Popper
       open={open}
-      onClose={onClose}
-      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      transformOrigin={{ vertical: "top", horizontal: "center" }}
-      disableAutoFocus
-      disableEnforceFocus
-      disableRestoreFocus
-      disableScrollLock
-      hideBackdrop
-      sx={{ pointerEvents: "none" }}
-      slotProps={{
-        paper: {
-          onMouseEnter: onCancelClose,
-          onMouseLeave: onScheduleClose,
-          sx: {
-            pointerEvents: "auto",
-            mt: 1,
-            minWidth: 220,
-            borderRadius: 2,
-            boxShadow: 3,
-            overflow: "hidden",
-          },
+      anchorEl={anchorEl}
+      placement="bottom-end"
+      disablePortal
+      modifiers={[
+        {
+          name: "offset",
+          options: { offset: [0, 8] },
         },
+      ]}
+      onMouseEnter={onCancelClose}
+      onMouseLeave={onScheduleClose}
+      sx={{
+        zIndex: 1,
       }}
     >
-      <List dense disablePadding>
-        {item?.children?.map((child) => (
-          <ListItemButton
-            key={child.name}
-            {...(child.route
-              ? { component: RouterLink, to: child.route }
-              : { component: "a", href: child.href, target: "_blank", rel: "noreferrer" })}
-            onClick={onClose}
-            sx={{
-              py: 1.25,
-              px: 2,
-              "&:hover": { backgroundColor: "grey.100" },
-            }}
-          >
-            <ListItemText
-              primary={child.name}
-              slotProps={{
-                primary: { sx: { fontWeight: 500, textTransform: "capitalize" } },
+      <Paper
+        sx={{
+          minWidth: 220,
+          borderRadius: 2,
+          boxShadow: 3,
+          overflow: "hidden",
+        }}
+      >
+        <List dense disablePadding>
+          {item.children.map((child) => (
+            <ListItemButton
+              key={child.name}
+              {...(child.route
+                ? { component: RouterLink, to: child.route }
+                : { component: "a", href: child.href, target: "_blank", rel: "noreferrer" })}
+              onClick={onClose}
+              sx={{
+                py: 1.25,
+                px: 2,
+                "&:hover": { backgroundColor: "grey.100" },
               }}
-            />
-          </ListItemButton>
-        ))}
-      </List>
-    </Popover>
+            >
+              <ListItemText
+                primary={child.name}
+                secondary={child.description}
+                slotProps={{
+                  primary: { sx: { fontWeight: 500, textTransform: "capitalize" } },
+                  secondary: {
+                    sx: {
+                      mt: 0.25,
+                      color: "text.secondary",
+                      lineHeight: 1.4,
+                    },
+                  },
+                }}
+              />
+            </ListItemButton>
+          ))}
+        </List>
+      </Paper>
+    </Popper>
   );
 }
 
