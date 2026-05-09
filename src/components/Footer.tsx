@@ -1,7 +1,4 @@
-// @mui material components
 import { Box, Container } from "@mui/material";
-
-// Material Kit 2 React components
 import typography from "assets/theme/base/typography";
 
 function SimpleFooter() {

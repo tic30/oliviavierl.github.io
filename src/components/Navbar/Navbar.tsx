@@ -5,11 +5,13 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import Icon from "@mui/material/Icon";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import CloseIcon from "@mui/icons-material/Close";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import MenuIcon from "@mui/icons-material/Menu";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
@@ -39,7 +41,7 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
     { name: "home", route: "/" },
     {
       name: "projects",
-      icon: "dashboard",
+      icon: <DashboardIcon fontSize="small" />,
       children: getShowcases(theme).map((s) => ({
         name: s.name,
         description: s.description,
@@ -198,7 +200,7 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
                 aria-label={drawerOpen ? "close menu" : "open menu"}
                 sx={{ color: "text.primary" }}
               >
-                <Icon>{drawerOpen ? "close" : "menu"}</Icon>
+                {drawerOpen ? <CloseIcon /> : <MenuIcon />}
               </IconButton>
             </Stack>
           )}

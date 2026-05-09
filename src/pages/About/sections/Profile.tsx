@@ -1,12 +1,10 @@
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import { Avatar, Box, Button, Container, Link, Tooltip } from "@mui/material";
-
-// @mui material components
-import { Email as EmailIcon } from "ui/icons";
-import { LinkedIn as LinkedInIcon } from "ui/icons";
-import { Instagram as InstagramIcon } from "ui/icons";
-import { HistoryEdu as HistoryEduIcon } from "ui/icons";
+import EmailIcon from "@mui/icons-material/Email";
+import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 // import Button from "@mui/material/Button";
 

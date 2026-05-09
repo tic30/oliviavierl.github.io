@@ -3,11 +3,12 @@ import { Link as RouterLink } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
-import Icon from "@mui/material/Icon";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import type { NavItem } from "./types";
 
@@ -54,7 +55,7 @@ function NavbarMobileDrawer({ items, open, onClose }: NavbarMobileDrawerProps) {
                   <Box key={item.name}>
                     <ListItemButton onClick={() => setExpanded(isOpen ? null : item.name)}>
                       <ListItemText primary={item.name} slotProps={itemTextProps} />
-                      <Icon>{isOpen ? "expand_less" : "expand_more"}</Icon>
+                      {isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                     </ListItemButton>
                     <Collapse in={isOpen} unmountOnExit>
                       <List component="div" disablePadding>

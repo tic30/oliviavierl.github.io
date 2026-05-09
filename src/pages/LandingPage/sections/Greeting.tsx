@@ -2,9 +2,8 @@ import type { ReactNode } from "react";
 import { keyframes } from "@emotion/react";
 import Typography from "@mui/material/Typography";
 import { Box, Container } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTheme } from "@mui/material/styles";
-// @mui material components
-import { KeyboardArrowDown as KeyboardArrowDownIcon } from "ui/icons";
 import wave from "assets/img/wave.svg";
 
 interface HighlightedTextProps {

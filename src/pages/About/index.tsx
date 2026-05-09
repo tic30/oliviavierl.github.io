@@ -1,10 +1,6 @@
-// @mui material components
 import { Box, Card } from "@mui/material";
 
-// Images
 import bgImage from "assets/img/about_bg.jpeg";
-
-// Author page sections
 import Profile from "./sections/Profile";
 // import Posts from "./sections/Posts";
 import Contact from "./sections/Contact";

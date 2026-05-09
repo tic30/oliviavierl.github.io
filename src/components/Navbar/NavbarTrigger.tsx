@@ -1,7 +1,7 @@
 import { Link as RouterLink } from "react-router-dom";
 
 import Button from "@mui/material/Button";
-import Icon from "@mui/material/Icon";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import type { NavItem } from "./types";
 import type { SxProps } from "@mui/material/styles";
@@ -26,16 +26,14 @@ const linkSx: SxProps = {
 };
 
 function NavbarTrigger({ item, onOpen, onScheduleClose }: NavbarTriggerProps) {
-  const startIcon = item.icon ? (
-    <Icon sx={{ width: "1rem", height: "1rem" }}>{item.icon}</Icon>
-  ) : undefined;
+  const startIcon = item.icon;
   if (item.children) {
     return (
       <Button
         onMouseEnter={() => onOpen(item)}
         onMouseLeave={onScheduleClose}
         startIcon={startIcon}
-        endIcon={<Icon>keyboard_arrow_down</Icon>}
+        endIcon={<KeyboardArrowDownIcon />}
         sx={linkSx}
       >
         {item.name}

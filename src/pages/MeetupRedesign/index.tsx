@@ -4,8 +4,6 @@ import { Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 import Parallax from "components/Parallax";
-
-// Author page sections
 import bgImage from "assets/img/cover1.jpg";
 import Intro from "./sections/Intro";
 import Research from "./sections/Research";

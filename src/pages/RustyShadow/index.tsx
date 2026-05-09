@@ -1,7 +1,6 @@
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 
-// Author page sections
 import bgImage from "assets/img/cover2.jpg";
 import Intro from "./sections/Intro";
 import BrandGuidelines from "./sections/BrandGuidelines";

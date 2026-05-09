@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, Dialog, DialogTitle, IconButton } from "@mui/material";
-import { Close as CloseIcon } from "ui/icons";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface SimpleDialogProps {
   open: boolean;

@@ -1,9 +1,7 @@
 import Typography from "@mui/material/Typography";
 import { Box, Container, Grid } from "@mui/material";
-
-// @mui material components
-import { LinkedIn as LinkedInIcon } from "ui/icons";
-import { LocationOn as LocationOnIcon } from "ui/icons";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 // import TextField from "@mui/material/TextField";
 // import Button from "@mui/material/Button";

@@ -8,16 +8,11 @@
     "skipLibCheck": true,
     "baseUrl": "src",
     "paths": {
-      "ui/*": ["ui/*"],
       "assets/*": ["assets/*"],
       "components/*": ["components/*"],
       "pages/*": ["pages/*"],
-      "hooks/*": ["hooks/*"],
-      "examples/*": ["examples/*"],
-      "footer.routes": ["footer.routes.tsx"],
       "routes": ["routes.tsx"],
-      "showcases.routes": ["showcases.routes.tsx"],
-      "App": ["App.tsx"]
+      "showcases.routes": ["showcases.routes.tsx"]
     },
     "ignoreDeprecations": "6.0",
     "noImplicitAny": false,
