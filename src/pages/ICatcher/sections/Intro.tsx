@@ -79,10 +79,9 @@ function Intro() {
             Goal
           </Typography>
           <Typography variant="body2">
-            My goal is to create an app that can gather all the app for catch inspirations
-            together. To build an esay way for managing all the folders from different apps. And
-            also a community that people can share interesting ideas and works to others and make
-            friends.
+            My goal is to create an app that can gather all the app for catch inspirations together.
+            To build an esay way for managing all the folders from different apps. And also a
+            community that people can share interesting ideas and works to others and make friends.
           </Typography>
         </Box>
       </Container>

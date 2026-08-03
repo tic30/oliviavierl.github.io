@@ -1,14 +1,7 @@
 import type { ReactNode } from "react";
 
 export type ThemeColor =
-  | "primary"
-  | "secondary"
-  | "info"
-  | "success"
-  | "warning"
-  | "error"
-  | "light"
-  | "dark";
+  "primary" | "secondary" | "info" | "success" | "warning" | "error" | "light" | "dark";
 
 export type AccentColor = ThemeColor | "inherit" | "text" | "transparent" | "default" | "white";
 export type SurfaceColor = ThemeColor | "transparent";

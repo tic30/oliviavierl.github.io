@@ -284,9 +284,9 @@ function DesignProcess() {
             Brainstorming & Concept Sketching
           </Typography>
           <Typography variant="body2">
-            As I start brainstorming, I define the vision, mision and goals of my app idea. I
-            choose one goal and write down the features that will fit for this goal. Then I draw
-            some sketches of wireframe.
+            As I start brainstorming, I define the vision, mision and goals of my app idea. I choose
+            one goal and write down the features that will fit for this goal. Then I draw some
+            sketches of wireframe.
           </Typography>
           <Box component="img" src={sticker} alt="Concept" width="100%" sx={{ mt: 8, mb: 15 }} />
         </Box>
@@ -302,8 +302,8 @@ function DesignProcess() {
           </Typography>
           <Typography variant="body2">
             Based on the research and preparation before, I created the frame works. And here are
-            the first version of my design show as below. later I will use these for user test.
-            Then modify and polish it to the better version.
+            the first version of my design show as below. later I will use these for user test. Then
+            modify and polish it to the better version.
           </Typography>
           <PreviewableImg src={first1} alt="Concept" width="100%" sx={{ mt: 8, mb: 15 }} />
         </Box>
