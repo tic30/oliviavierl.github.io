@@ -1,7 +1,9 @@
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
+import { motion } from "motion/react";
 
 import bgImage from "assets/img/cover2.jpg";
+import { fadeSlideDown, fadeSlideUp } from "components/motionPresets";
 import Intro from "./sections/Intro";
 import BrandGuidelines from "./sections/BrandGuidelines";
 import Personas from "./sections/Personas";
@@ -13,6 +15,8 @@ function RustyShadow() {
     <>
       <Box sx={{ bgcolor: "background.default" }}>
         <Box
+          component={motion.div}
+          {...fadeSlideDown()}
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -28,7 +32,7 @@ function RustyShadow() {
             A Convenient, Full-featured Community for Urban Exploration Lovers
           </Typography>
         </Box>
-        <Box component="img" src={bgImage} alt="logo" width="100%" />
+        <Box component={motion.img} {...fadeSlideUp()} src={bgImage} alt="logo" width="100%" />
         <Intro />
         <BrandGuidelines />
         <ComponentLibrary />

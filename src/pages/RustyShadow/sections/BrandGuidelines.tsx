@@ -1,7 +1,9 @@
 // @mui material components
 import { Box, Container } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { motion } from "motion/react";
 
+import { fadeSlideFromLeft } from "components/motionPresets";
 import SectionHeader from "components/SectionHeader";
 
 // Images
@@ -19,7 +21,7 @@ function BrandGuidelines() {
   return (
     <Box component="section">
       <SectionHeader title="Brand Guidelines" bgColor={theme.showcaseColors.dark} />
-      <Container sx={{ py: 12 }}>
+      <Container component={motion.div} {...fadeSlideFromLeft()} sx={{ py: 12 }}>
         <>
           {imgs.map((img, i) => (
             <Box

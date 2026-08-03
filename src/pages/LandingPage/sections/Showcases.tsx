@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom";
-import { useDarkMode, useIntersectionObserver } from "usehooks-ts";
-import { Box, Card, Link as MuiLink } from "@mui/material";
+import { useDarkMode } from "usehooks-ts";
+import { Box, Card, Link as MuiLink, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { motion } from "motion/react";
+
 import getShowcases from "showcases.routes";
 import type { ShowcaseItem } from "types/site";
-import { Typography } from "@mui/material";
+import { fadeSlideUp } from "components/motionPresets";
+
+const MotionRouterLink = motion.create(Link);
+const MotionMuiLink = motion.create(MuiLink);
 
 interface ShowCaseCardContentProps {
   item: ShowcaseItem;
-  isIntersecting: boolean;
 }
 
 interface ShowCaseCardProps {
@@ -16,11 +20,18 @@ interface ShowCaseCardProps {
   [key: string]: unknown;
 }
 
-function ShowCaseCardContent({ item, isIntersecting }: ShowCaseCardContentProps) {
+function ShowCaseCardContent({ item }: ShowCaseCardContentProps) {
   const { isDarkMode } = useDarkMode();
 
   return (
     <Card
+      component={item.route ? MotionRouterLink : MotionMuiLink}
+      whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+      {...fadeSlideUp()}
+      to={item.route ? item.route : ""}
+      href={item.href ? item.href : ""}
+      target={item.href ? "_blank" : ""}
+      rel="noreferrer"
       sx={{
         textDecoration: "none",
         textTransform: "none",
@@ -30,16 +41,7 @@ function ShowCaseCardContent({ item, isIntersecting }: ShowCaseCardContentProps)
         borderRadius: "borderRadius.xl",
         backgroundColor: item.bgColor,
         boxShadow: ({ boxShadows: { colored } }) => colored.dark,
-        opacity: isIntersecting ? 1 : 0,
-        transform: isIntersecting ? "translateY(0)" : "translateY(32px)",
-        transition: "opacity 800ms ease, transform 800ms ease",
-        willChange: "opacity, transform",
       }}
-      component={item.route ? Link : MuiLink}
-      to={item.route ? item.route : ""}
-      href={item.href ? item.href : ""}
-      target={item.href ? "_blank" : ""}
-      rel={item.href ? "noreferrer" : "noreferrer"}
     >
       <Box component="img" src={item.bgImg} alt="" sx={{ width: "100%" }} />
       <Box
@@ -61,8 +63,6 @@ function ShowCaseCardContent({ item, isIntersecting }: ShowCaseCardContentProps)
 }
 
 function ShowCaseCard({ item, ...props }: ShowCaseCardProps) {
-  const { ref, isIntersecting } = useIntersectionObserver({ freezeOnceVisible: true });
-
   return (
     <Box
       sx={{
@@ -72,10 +72,9 @@ function ShowCaseCard({ item, ...props }: ShowCaseCardProps) {
         px: { xs: 2, sm: 3 },
         mb: [10, 30],
       }}
-      ref={ref}
       {...props}
     >
-      <ShowCaseCardContent item={item} isIntersecting={isIntersecting} />
+      <ShowCaseCardContent item={item} />
     </Box>
   );
 }

@@ -1,5 +1,6 @@
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
+import { motion } from "motion/react";
 
 import bgImage from "assets/img/cover3.jpg";
 import Intro from "./sections/Intro";
@@ -14,6 +15,11 @@ function ICatcher() {
     <>
       <Box sx={{ bgcolor: "background.default" }}>
         <Box
+          component={motion.div}
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -29,7 +35,16 @@ function ICatcher() {
             Better Experience of Sharing Ideas and Manage Inspirations
           </Typography>
         </Box>
-        <Box component="img" src={bgImage} alt="logo" width="100%" />
+        <Box
+          component={motion.img}
+          src={bgImage}
+          alt="iCatcher Illustration"
+          width="100%"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        />
         <Intro />
         <DesignProcess />
         <BrandGuidelines />

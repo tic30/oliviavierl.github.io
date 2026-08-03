@@ -15,6 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useDarkMode } from "usehooks-ts";
+import { motion } from "motion/react";
 
 import favicon from "assets/img/header-logo.svg";
 import faviconDark from "assets/img/header-logo-dark.svg";
@@ -45,7 +46,8 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
     color: isDarkMode ? "text.primary" : "background.default",
     fontWeight: 400,
     px: "1rem",
-    "&:hover": { opacity: 1, backgroundColor: "transparent" },
+    opacity: 0.8,
+    "&:hover, &:focus": { opacity: 1 },
   };
   const [desktopNavAnchorEl, setDesktopNavAnchorEl] = useState<HTMLDivElement | null>(null);
   const handleDesktopNavRef = useCallback((node: HTMLDivElement | null) => {
@@ -127,13 +129,17 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
       elevation={0}
       color="transparent"
       enableColorOnDark
+      component={motion.header}
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       sx={{
         minHeight: "6rem",
         top: hidden ? "-6rem" : 0,
         transition: "top 200ms ease",
         overflow: { xs: "hidden", lg: "visible" },
         backgroundColor: isDarkMode
-          ? theme.palette.grey[900]
+          ? "background.default"
           : "rgba(var(--mui-palette-background-defaultChannel) / 0.85)",
         backdropFilter: "saturate(200%) blur(30px)",
         color: "text.primary",
@@ -160,7 +166,7 @@ function Navbar({ brand = "Yifan Li", title = "Product Designer", sticky = true 
               alignItems: "center",
               textDecoration: "none",
               color: "inherit",
-              "&:hover .navbar-tagline": { opacity: 1 },
+              "&:hover .navbar-tagline, &:focus .navbar-tagline": { opacity: 1 },
             }}
           >
             <Box

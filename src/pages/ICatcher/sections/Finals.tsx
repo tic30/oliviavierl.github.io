@@ -1,7 +1,9 @@
 import Typography from "@mui/material/Typography";
 import { Box, Container, IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { motion } from "motion/react";
 
+import { fadeSlideFromLeft, fadeSlideFromRight } from "components/motionPresets";
 import SectionHeader from "components/SectionHeader";
 import f11 from "assets/img/f11.png";
 import f12 from "assets/img/f12.png";
@@ -48,7 +50,12 @@ function Finals() {
         sx={{ mb: 6 }}
       />
       {sections.map((section, i) => (
-        <Box key={`finals-title-${i}`} sx={{ py: 6 }}>
+        <Box
+          key={`finals-title-${i}`}
+          component={motion.div}
+          {...(i % 2 === 0 ? fadeSlideFromLeft() : fadeSlideFromRight())}
+          sx={{ py: 6 }}
+        >
           <Container sx={{ pb: 3, display: "flex", alignItems: "center" }}>
             <Typography variant="body1">{section.title}</Typography>
           </Container>

@@ -1,18 +1,18 @@
-import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import { Avatar, Box, Button, Container, Link, Tooltip } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { useSnackbar } from "components/SnackbarProvider";
 
 const iconColor: SxProps = {
   color: "text.secondary",
   "&:hover, &:active, &:focus": {
     color: "text.primary",
   },
-  width: "20px",
-  height: "20px",
+  width: "24px",
+  height: "24px",
 };
 
 // Images
@@ -21,12 +21,21 @@ import { linkedinUrl, email, instagramUrl, resumeUrl } from "../../../constants"
 import type { SxProps } from "@mui/material/styles";
 
 function Profile() {
-  const [open, openSnackbar] = useState(false);
+  const { showSnackbar } = useSnackbar();
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(email).then(
+      () => showSnackbar("Email copied to clipboard"),
+      () => {
+        window.location.href = `mailto:${email}`;
+      }
+    );
+  };
 
   return (
     <Container sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
       <Box sx={{ mt: -8, mb: 5 }}>
-        <Avatar src={profilePicture} alt="Burce Mars" sx={{ width: 120, height: 120 }} />
+        <Avatar src={profilePicture} alt="Avatar" sx={{ width: 120, height: 120 }} />
       </Box>
       <Typography variant="h3">Yifan Li</Typography>
       <Box sx={{ display: "flex", alignItems: "center", mt: 1, mb: 5 }}>
@@ -38,25 +47,17 @@ function Profile() {
         <Link target="_blank" href={linkedinUrl} sx={{ display: "flex", mr: 3 }}>
           <LinkedInIcon sx={iconColor} />
         </Link>
-        <Tooltip open={open} onClose={() => openSnackbar(false)} title="Email copied to clipboard">
+        <Tooltip title="Copy email to clipboard">
           <Button
             variant="text"
+            aria-label="Copy email to clipboard"
             sx={{
               mr: 3,
               p: 0,
               minWidth: 0,
               minHeight: 0,
             }}
-            onClick={() => {
-              navigator.clipboard.writeText(email).then(
-                () => {
-                  openSnackbar(true);
-                },
-                () => {
-                  window.location.href = `mailto:${email}`;
-                }
-              );
-            }}
+            onClick={handleCopyEmail}
           >
             <EmailIcon sx={iconColor} />
           </Button>

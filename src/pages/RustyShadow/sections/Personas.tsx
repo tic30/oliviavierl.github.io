@@ -1,7 +1,9 @@
 import Typography from "@mui/material/Typography";
 import { Box, Card, CardMedia, Container } from "@mui/material";
+import { motion } from "motion/react";
 
 // @mui material components
+import { fadeSlideFromLeft } from "components/motionPresets";
 import Tabs from "components/Tabs";
 
 // Images
@@ -21,7 +23,11 @@ const imgs = [
 function Personas() {
   return (
     <Box component="section">
-      <Container sx={{ py: 12, display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <Container
+        component={motion.div}
+        {...fadeSlideFromLeft()}
+        sx={{ py: 12, display: "flex", flexDirection: "column", alignItems: "center" }}
+      >
         <Typography
           variant="h3"
           sx={{

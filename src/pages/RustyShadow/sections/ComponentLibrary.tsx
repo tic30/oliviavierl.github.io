@@ -1,5 +1,8 @@
 import Typography from "@mui/material/Typography";
 import { Box, Container } from "@mui/material";
+import { motion } from "motion/react";
+
+import { fadeSlideUp } from "components/motionPresets";
 
 // @mui material components
 // Images
@@ -12,7 +15,7 @@ const imgs = [c0, c1, c2, c3];
 
 function ComponentLibrary() {
   return (
-    <Box component="section" sx={{ backgroundColor: "showcase.dark" }}>
+    <Box component="section" sx={{ backgroundColor: (theme) => theme.showcaseColors.dark }}>
       <Container sx={{ py: 12, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <Typography
           variant="h3"
@@ -36,7 +39,8 @@ function ComponentLibrary() {
         </Typography>
         {imgs.map((img, i) => (
           <Box
-            component="img"
+            component={motion.img}
+            {...fadeSlideUp()}
             src={img}
             key={`ComponentLibrary-img-${i}`}
             alt="Design Updates"

@@ -1,11 +1,14 @@
 import Typography from "@mui/material/Typography";
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Grid, IconButton, Tooltip } from "@mui/material";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import { motion } from "motion/react";
 
 import bgImage from "assets/img/me.jpeg";
-import { linkedinUrl } from "../../../constants";
-import { useDarkMode } from "usehooks-ts";
+import { linkedinId, linkedinUrl } from "../../../constants";
+import { useSnackbar } from "components/SnackbarProvider";
 
 const hobbies = [
   {
@@ -28,7 +31,13 @@ const hobbies = [
 ];
 
 function Contact() {
-  const isDarkMode = useDarkMode();
+  const { showSnackbar } = useSnackbar();
+
+  const handleCopyLinkedIn = () => {
+    navigator.clipboard
+      .writeText(linkedinUrl)
+      .then(() => showSnackbar("LinkedIn URL copied to clipboard"));
+  };
 
   return (
     <Box component="section" sx={{ py: { xs: 0, lg: 6 } }}>
@@ -64,41 +73,92 @@ function Contact() {
                   }}
                 >
                   <Box sx={{ py: 6, pr: 6, pl: { xs: 6, sm: 12 }, my: "auto" }}>
-                    <Typography variant="body1" sx={{ color: "common.white", opacity: 0.8, mb: 3 }}>
+                    <Typography
+                      variant="body1"
+                      component={motion.div}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      sx={{ color: "common.white", opacity: 0.8, mb: 3 }}
+                    >
                       Reach out if you would like to chat about work opportunities
                     </Typography>
-                    <Box sx={{ display: "flex", color: "white", p: 1 }}>
+                    <Box
+                      component={motion.div}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        color: "white",
+                        p: 1,
+                        "&:hover .linkedin-link, &:focus-within .linkedin-link": {
+                          opacity: 1,
+                          textDecoration: "underline",
+                        },
+                        "&:hover .linkedin-copy, &:focus-within .linkedin-copy": {
+                          opacity: 1,
+                        },
+                      }}
+                    >
                       <LinkedInIcon />
                       <Typography
+                        className="linkedin-link"
                         component="a"
                         variant="button"
                         sx={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 0.5,
                           textTransform: "none",
                           textDecoration: "none",
-                          color: isDarkMode ? "text.primary" : "background.default",
+                          color: "inherit",
                           opacity: 0.8,
                           ml: 2,
                           fontWeight: 400,
-                          "&:hover": {
-                            opacity: 1,
-                            textDecoration: "underline",
-                          },
                         }}
                         href={linkedinUrl}
                         target="_blank"
                         rel="noreferrer"
                       >
-                        {linkedinUrl}
+                        {linkedinId}
+                        <OpenInNewIcon fontSize="inherit" />
                       </Typography>
+                      <Tooltip title="Copy LinkedIn URL">
+                        <IconButton
+                          className="linkedin-copy"
+                          onClick={handleCopyLinkedIn}
+                          aria-label="Copy LinkedIn URL"
+                          size="small"
+                          sx={{
+                            ml: "auto",
+                            color: "inherit",
+                            opacity: 0,
+                            transition: "opacity 150ms ease",
+                            "&:focus-visible": { opacity: 1 },
+                          }}
+                        >
+                          <ContentCopyIcon fontSize="inherit" />
+                        </IconButton>
+                      </Tooltip>
                     </Box>
-                    <Box sx={{ display: "flex", color: "white", p: 1 }}>
+                    <Box
+                      component={motion.div}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+                      sx={{ display: "flex", color: "white", p: 1 }}
+                    >
                       <LocationOnIcon />
                       <Typography
                         component="span"
                         variant="button"
                         sx={{
                           textTransform: "capitalize",
-                          color: isDarkMode ? "text.primary" : "background.default",
                           opacity: 0.8,
                           ml: 2,
                           fontWeight: 400,
@@ -118,68 +178,16 @@ function Contact() {
                       Chat with me about...
                     </Typography>
                   </Box>
-                  {/* <Box pt={0.5} pb={3} px={3}>
-                    <Grid container>
-                      <Grid item xs={12} pr={1} mb={6}>
-                        <TextField
-                          name="author"
-                          variant="standard"
-                          label="My name is"
-                          placeholder=""
-                          InputLabelProps={{ shrink: true }}
-                          fullWidth
-                          value={author}
-                          onChange={(e) => setAuthor(e.target.value)}
-                        />
-                      </Grid>
-                      <Grid item xs={12} pr={1} mb={6}>
-                        <TextField
-                          name="title"
-                          variant="standard"
-                          label="I'd like to talk about"
-                          placeholder="A job opportunity..."
-                          InputLabelProps={{ shrink: true }}
-                          fullWidth
-                          value={title}
-                          onChange={(e) => setTitle(e.target.value)}
-                        />
-                      </Grid>
-                      <Grid item xs={12} pr={1} mb={6}>
-                        <TextField
-                          name="content"
-                          variant="standard"
-                          label="Tell me more"
-                          placeholder="About yourself, your company or what you'd like to know about me..."
-                          InputLabelProps={{ shrink: true }}
-                          fullWidth
-                          multiline
-                          rows={6}
-                          value={content}
-                          onChange={(e) => setContent(e.target.value)}
-                        />
-                      </Grid>
-                    </Grid>
-                    <Grid
-                      container
-                      item
-                      xs={12}
-                      md={6}
-                      justifyContent="flex-end"
-                      textAlign="right"
-                      ml="auto"
+                  {hobbies.map((hobby, index) => (
+                    <Box
+                      key={hobby.title}
+                      component={motion.div}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.5, delay: 0.4 + index * 0.2, ease: "easeOut" }}
+                      sx={{ px: 3, display: "flex", mb: 4 }}
                     >
-                      <Button
-                        variant="gradient"
-                        component="a"
-                        color="info"
-                        href={`mailto:${email}subject=${title}&body=Hi Yifan,%0AThis is ${author}. ${content}`}
-                      >
-                        Send Email
-                      </Button>
-                    </Grid>
-                  </Box> */}
-                  {hobbies.map((hobby) => (
-                    <Box key={hobby.title} sx={{ px: 3, display: "flex", mb: 4 }}>
                       <Typography variant="h5" sx={{ mr: 2 }}>
                         {hobby.icon}
                       </Typography>

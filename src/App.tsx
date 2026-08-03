@@ -8,6 +8,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "assets/theme";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
+import { SnackbarProvider } from "components/SnackbarProvider";
 import getRoutes from "routes";
 import type { NavigationRoute } from "types/site";
 
@@ -51,7 +52,9 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppRoutes />
+      <SnackbarProvider>
+        <AppRoutes />
+      </SnackbarProvider>
     </ThemeProvider>
   );
 }

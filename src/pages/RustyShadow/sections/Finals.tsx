@@ -1,8 +1,10 @@
 import Typography from "@mui/material/Typography";
 import { Box, Container, Grid } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { motion } from "motion/react";
 
 // @mui material components
+import { fadeSlideFromRight } from "components/motionPresets";
 import SectionHeader from "components/SectionHeader";
 
 // Images
@@ -38,7 +40,7 @@ function Finals() {
   return (
     <Box component="section">
       <SectionHeader title="Website" bgColor={theme.showcaseColors.dark} />
-      <Container sx={{ py: 12 }}>
+      <Container component={motion.div} {...fadeSlideFromRight()} sx={{ py: 12 }}>
         <Grid
           container
           columnSpacing={8}

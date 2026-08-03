@@ -1,4 +1,6 @@
-export const linkedinUrl = "https://www.linkedin.com/in/yifan-li-design/";
+export const linkedinId = "/in/yifan-li-design";
+
+export const linkedinUrl = `https://www.linkedin.com/${linkedinId}`;
 
 export const email = "oliviavierl0305@gmail.com";
 

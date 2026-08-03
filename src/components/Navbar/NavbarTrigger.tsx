@@ -1,4 +1,4 @@
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 import Button from "@mui/material/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -18,14 +18,16 @@ export const navTriggerSx = {
   fontSize: "0.875rem",
   opacity: 0.6,
   px: 1.5,
-  "&:hover": {
+  "&:hover, &:focus": {
     opacity: 1,
-    backgroundColor: "transparent",
   },
 };
 
 function NavbarTrigger({ item, onOpen, onScheduleClose }: NavbarTriggerProps) {
+  const { pathname } = useLocation();
   const startIcon = item.icon;
+  const isActive = item.route === pathname;
+  const sx = isActive ? { ...navTriggerSx, opacity: 1 } : navTriggerSx;
   if (item.children) {
     return (
       <Button
@@ -33,7 +35,7 @@ function NavbarTrigger({ item, onOpen, onScheduleClose }: NavbarTriggerProps) {
         onMouseLeave={onScheduleClose}
         startIcon={startIcon}
         endIcon={<KeyboardArrowDownIcon />}
-        sx={navTriggerSx}
+        sx={sx}
       >
         {item.name}
       </Button>
@@ -41,7 +43,7 @@ function NavbarTrigger({ item, onOpen, onScheduleClose }: NavbarTriggerProps) {
   }
   if (item.route) {
     return (
-      <Button component={RouterLink} to={item.route} startIcon={startIcon} sx={navTriggerSx}>
+      <Button component={RouterLink} to={item.route} startIcon={startIcon} sx={sx}>
         {item.name}
       </Button>
     );
@@ -53,7 +55,7 @@ function NavbarTrigger({ item, onOpen, onScheduleClose }: NavbarTriggerProps) {
       target="_blank"
       rel="noreferrer"
       startIcon={startIcon}
-      sx={navTriggerSx}
+      sx={sx}
     >
       {item.name}
     </Button>

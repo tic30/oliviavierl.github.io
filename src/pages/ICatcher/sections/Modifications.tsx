@@ -1,7 +1,9 @@
 import Typography from "@mui/material/Typography";
 import { Box, Container } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { motion } from "motion/react";
 
+import { fadeSlideFromLeft, fadeSlideFromRight } from "components/motionPresets";
 import SectionHeader from "components/SectionHeader";
 import change11 from "assets/img/change11.png";
 import change12 from "assets/img/change12.png";
@@ -58,7 +60,11 @@ function Modifications() {
       />
       {sections.map((section, i) => (
         <Box key={`finals-title-${i}`} sx={{ py: 6 }}>
-          <Container sx={{ pb: 3 }}>
+          <Container
+            component={motion.div}
+            {...(i % 2 === 0 ? fadeSlideFromLeft() : fadeSlideFromRight())}
+            sx={{ pb: 3 }}
+          >
             <Typography variant="body1">{section.title}</Typography>
             {section.rows.map((row, j) => (
               <Box

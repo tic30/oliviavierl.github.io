@@ -1,34 +1,36 @@
 import { Box, Container } from "@mui/material";
 import typography from "assets/theme/base/typography";
 
-function SimpleFooter() {
+function Footer() {
   const { size } = typography;
 
   return (
-    <Container sx={{ my: 1, py: 0 }}>
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          flexDirection: { xs: "column", lg: "row" },
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+    <Box sx={{ backgroundColor: "background.root", overflow: "hidden" }}>
+      <Container sx={{ my: 1, py: 0 }}>
         <Box
           sx={{
+            width: "100%",
             display: "flex",
-            justifyContent: "center",
+            flexDirection: { xs: "column", lg: "row" },
+            justifyContent: "space-between",
             alignItems: "center",
-            flexWrap: "wrap",
-            fontSize: size.sm,
           }}
         >
-          &copy; {new Date().getFullYear()}, design and coded by Yifan Li
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexWrap: "wrap",
+              fontSize: size.sm,
+            }}
+          >
+            &copy; {new Date().getFullYear()}, design and coded by Yifan Li
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 }
 
-export default SimpleFooter;
+export default Footer;

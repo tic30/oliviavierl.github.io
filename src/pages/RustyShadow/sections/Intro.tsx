@@ -1,5 +1,8 @@
 import Typography from "@mui/material/Typography";
 import { Box, Container, Grid } from "@mui/material";
+import { motion } from "motion/react";
+
+import { fadeSlideFromLeft, fadeSlideFromRight, fadeSlideUp } from "components/motionPresets";
 
 // @mui material components
 // Images
@@ -15,6 +18,8 @@ function Intro() {
   return (
     <Box component="section">
       <Container
+        component={motion.div}
+        {...fadeSlideFromLeft()}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -40,32 +45,38 @@ function Intro() {
       </Container>
       <Box
         sx={{
-          backgroundColor: "showcase.dark",
+          backgroundColor: (theme) => theme.showcaseColors.dark,
           py: 10,
         }}
       >
         <Container>
-          <Typography variant="h4" sx={sectionTextSx}>
-            ► What is Urban Exploration?
-          </Typography>
-          <Typography variant="body2" sx={{ ...sectionTextSx, mb: 8 }}>
-            Urban exploration is the exploration of manmade structures, usually abandoned ruins or
-            hidden components of the manmade environment. Photography and historical
-            interest/documentation are heavily featured in the hobby.
-          </Typography>
-          <Typography variant="h4" sx={sectionTextSx}>
-            ► Target Audience & Niche Market Opportunity
-          </Typography>
-          <Typography variant="body2" sx={{ ...sectionTextSx, mb: 1 }}>
-            - Target audience are Urban exploration lovers.
-          </Typography>
-          <Typography variant="body2" sx={sectionTextSx}>
-            - This activity is different from normal exploration events. It may presents various
-            risks, including both physical danger.
-          </Typography>
+          <Box component={motion.div} {...fadeSlideUp()}>
+            <Typography variant="h4" sx={sectionTextSx}>
+              ► What is Urban Exploration?
+            </Typography>
+            <Typography variant="body2" sx={{ ...sectionTextSx, mb: 8 }}>
+              Urban exploration is the exploration of manmade structures, usually abandoned ruins or
+              hidden components of the manmade environment. Photography and historical
+              interest/documentation are heavily featured in the hobby.
+            </Typography>
+          </Box>
+          <Box component={motion.div} {...fadeSlideUp()}>
+            <Typography variant="h4" sx={sectionTextSx}>
+              ► Target Audience & Niche Market Opportunity
+            </Typography>
+            <Typography variant="body2" sx={{ ...sectionTextSx, mb: 1 }}>
+              - Target audience are Urban exploration lovers.
+            </Typography>
+            <Typography variant="body2" sx={sectionTextSx}>
+              - This activity is different from normal exploration events. It may presents various
+              risks, including both physical danger.
+            </Typography>
+          </Box>
         </Container>
       </Box>
       <Container
+        component={motion.div}
+        {...fadeSlideFromRight()}
         sx={{
           display: "flex",
           flexDirection: "column",

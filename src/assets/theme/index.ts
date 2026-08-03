@@ -90,13 +90,6 @@ const theme = createTheme({
         root: { maxWidth: 992 },
       },
     },
-    MuiCssBaseline: {
-      styleOverrides: () => ({
-        body: {
-          backgroundColor: "var(--mui-palette-background-root)",
-        },
-      }),
-    },
   },
 });
 
